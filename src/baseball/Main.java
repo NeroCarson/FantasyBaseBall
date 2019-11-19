@@ -6,23 +6,14 @@ import java.util.List;
 public class Main {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
 		loadData.openFile("stats.csv");
 		System.out.println();
 		loadData.openFile("stats_pitcher.csv");
-=======
-		
-		 loadData.read("stats.csv"); System.out.println();
-		 loadData.read("stats_pitcher.csv");
-		
-		  
->>>>>>> refs/remotes/origin/master
-
 	}
-<<<<<<< HEAD
+
 
 	public class player {
-=======
+
 	//methods
 //	ODRAFT
 	private static void odraft() {
