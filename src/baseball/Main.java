@@ -1,18 +1,20 @@
 package baseball;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		 loadData.read("stats.csv"); System.out.println();
-		 loadData.read("stats_pitcher.csv");
-		
+		loadData.openFile("stats.csv");
+		System.out.println();
+		loadData.openFile("stats_pitcher.csv");
 
 	}
-	
-	public class player{
+
+	public class player {
 		String Name;
 		String Team;
 		String Pos;
@@ -37,9 +39,9 @@ public class Main {
 		boolean Selected;
 
 	}
-	
-	public class pitcher{
-		//Pitcher
+
+	public class pitcher {
+		// Pitcher
 		String name;
 		String Team;
 		int W;
@@ -62,32 +64,32 @@ public class Main {
 		boolean Selected;
 
 	}
-	
+
 	public class Team {
-		//Team
-		player C; //catcher
-		player firstB; //first base
-		player secondB; //second base
-		player thirdB; //thirdbase
-		player SS; //short stop
-		player LF; //left field
-		player CF; //Center field
-		player RF; //right field
-		pitcher P1; //pitcher 1
-		pitcher P2; //pitcher 2
-		pitcher P3; //pitcher 3
-		pitcher P4; //pitcher 4
-		pitcher P5; //pitcher 5
+		// Team
+		player C; // catcher
+		player firstB; // first base
+		player secondB; // second base
+		player thirdB; // thirdbase
+		player SS; // short stop
+		player LF; // left field
+		player CF; // Center field
+		player RF; // right field
+		pitcher P1; // pitcher 1
+		pitcher P2; // pitcher 2
+		pitcher P3; // pitcher 3
+		pitcher P4; // pitcher 4
+		pitcher P5; // pitcher 5
 
 	}
-	
-	public class LeagueMember{
+
+	public class LeagueMember {
 		String Name; // (A, B, C, D)
 		Team Team;
 	}
-	
-	public class League{
-		//League
+
+	public class League {
+		// League
 		LeagueMember memberA;
 		LeagueMember memberB;
 		LeagueMember memberC;

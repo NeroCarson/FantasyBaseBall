@@ -1,32 +1,45 @@
 package baseball;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class loadData {
-	public static final String delimiter = ",";
-
-	public static void read(String csvFile) {
+	
+	public static void openFile(String fileName) {
+		BufferedReader br = null;
 		try {
-			File file = new File(csvFile);
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
-			String line = "";
-			String[] tempArr;
+			String line;
+			br = new BufferedReader(new FileReader(fileName));
+			// read line by line 
 			while ((line = br.readLine()) != null) {
-				tempArr = line.split(delimiter);
-				for (String tempStr : tempArr) {
-					System.out.print(tempStr + " ");
-				}
-				System.out.println();
+				System.out.println( cvsToArrayList(line));
 			}
-			br.close();
-
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-
+		
+	}
+	
+	// converts csv to array list using split
+	public static ArrayList<Object> cvsToArrayList(String line) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		if (line != null) {
+			String[] tempArr = line.split(",");
+			for (int i = 0; i < tempArr.length; i++) {
+				if (!(tempArr[i] == null) || !(tempArr[i].length() == 0)) {
+					list.add(tempArr[i].trim());
+				}
+			}
+		}
+		return list;
 	}
 }
