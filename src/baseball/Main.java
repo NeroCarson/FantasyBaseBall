@@ -9,9 +9,71 @@ public class Main {
 		 loadData.read("stats.csv"); System.out.println();
 		 loadData.read("stats_pitcher.csv");
 		
+		  
 
 	}
+	//methods
+//	ODRAFT
+	private static void odraft() {
+		// TODO Auto-generated method stub
+		
+	}
+//	IDRAFT
+	private static void idraft() {
+		// TODO Auto-generated method stub
+		
+	}
+//	OVERALL
+	private static void overall() {
+		// TODO Auto-generated method stub
+		
+	}
+//	POVERALL
+	private static void poverall() {
+		// TODO Auto-generated method stub
+		
+	}
+//	TEAM
+	private static void team() {
+		// TODO Auto-generated method stub
+		
+	}
+//	STARS
+	private static void stars() {
+		// TODO Auto-generated method stub
+		
+	}
+//	SAVE
+	private static void save() {
+		// TODO Auto-generated method stub
+		
+	}
+//	QUIT
+	private static void quit() {
+		// TODO Auto-generated method stub
+		
+	}
+//	RESTORE
+	private static void restore() {
+		// TODO Auto-generated method stub
+		
+	}
+//	EVALFUN
+	private static void evalfun() {
+		// TODO Auto-generated method stub
+		
+	}
+//	PEVALFUN
+	private static void pevalfun() {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	
+	
+	
+	
+//objects
 	public class player{
 		String Name;
 		String Team;
