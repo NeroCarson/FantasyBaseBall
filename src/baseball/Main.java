@@ -3,7 +3,10 @@ package baseball;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		 loadData.read("stats.csv"); System.out.println();
+		 loadData.read("stats_pitcher.csv");
+		
 
 	}
 
