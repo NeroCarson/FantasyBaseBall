@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class loadData {
 	
@@ -43,10 +42,4 @@ public class loadData {
 		}
 		return list;
 	}
-
-	// create empty rosters 
-	public static void createRosters() {
-		
-	 }
-		 
-	}
+}
