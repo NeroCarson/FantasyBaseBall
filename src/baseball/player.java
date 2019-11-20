@@ -29,7 +29,9 @@ public class player {
 	//methods
 //	ODRAFT
 	private static void odraft() {
-		// TODO Auto-generated method stub
+		
+		
+		
 		
 	}
 //	IDRAFT
