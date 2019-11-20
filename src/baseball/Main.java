@@ -1,11 +1,21 @@
 package baseball;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
+	
+	static Scanner sc = new Scanner(System.in);
 
+	public static ArrayList<String> roster1 = new ArrayList<String>(); 
+	public static ArrayList<String> roster2 = new ArrayList<String>(); 
+	public static ArrayList<String> roster3 = new ArrayList<String>(); 
+	public static ArrayList<String> roster4 = new ArrayList<String>(); 
+	
 	public static void main(String[] args) {
+<<<<<<< HEAD
 
 		
 		// loadData.read("stats.csv"); 
@@ -109,67 +119,16 @@ public class Main {
 		double OPS;
 		double Rank;
 		boolean Selected;
-
+=======
+		loadData.openFile("stats.csv");
+		System.out.println();
+		loadData.openFile("stats_pitcher.csv");
+		loadData.createRosters();
+		
 	}
+>>>>>>> 2c57df2f90c6cf5514f192f7aab13d0d3c9535ca
 
-	public class pitcher {
-		// Pitcher
-		String name;
-		String Team;
-		int W;
-		int L;
-		double ERA;
-		int G;
-		int GS;
-		int SV;
-		int SVO;
-		double IP;
-		int H;
-		int R;
-		int ER;
-		int HR;
-		int BB;
-		int SO;
-		double AVG;
-		double WHIP;
-		double Rank;
-		boolean Selected;
 
-	}
 
-	public class Team {
-		// Team
-		player C; // catcher
-		player firstB; // first base
-		player secondB; // second base
-		player thirdB; // thirdbase
-		player SS; // short stop
-		player LF; // left field
-		player CF; // Center field
-		player RF; // right field
-		pitcher P1; // pitcher 1
-		pitcher P2; // pitcher 2
-		pitcher P3; // pitcher 3
-		pitcher P4; // pitcher 4
-		pitcher P5; // pitcher 5
-
-	}
-
-	public class LeagueMember {
-		String Name; // (A, B, C, D)
-		Team Team;
-	}
-
-	public class League {
-		// League
-		LeagueMember memberA;
-		LeagueMember memberB;
-		LeagueMember memberC;
-		LeagueMember memberD;
-
-		List<player> players;
-		List<pitcher> pitchers;
-
-	}
 
 }
