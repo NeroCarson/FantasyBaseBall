@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import models.Pitcher;
 
-public class TestPeval {
+public class TestPevalFun {
 	ArrayList<Pitcher> pitchers;
 	
 	@Before

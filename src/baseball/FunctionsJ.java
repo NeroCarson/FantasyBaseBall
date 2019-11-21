@@ -18,19 +18,19 @@ public class FunctionsJ {
 	}
 	
 	// OVERALL
-	static void overall() {
+	static void overall(ArrayList<Player> players) {
 		// TODO Auto-generated method stub
-
+		System.out.println("Test");
 	}
 
 	// POVERALL
-	static void poverall() {
+	static void poverall(ArrayList<Pitcher> pitchers) {
 		// TODO Auto-generated method stub
 
 	}
 	
 	
-	private static void main(String[] args) {
+	public static void test() {
 		ArrayList<Player> players = new ArrayList<>();
 		Player bob = new Player("Bob", "Test", "C");
 		bob.avg = 5.5;
