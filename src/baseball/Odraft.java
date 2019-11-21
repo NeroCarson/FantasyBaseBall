@@ -13,21 +13,70 @@ public class Odraft extends loadData {
 	public static ArrayList<String> roster4 = new ArrayList<String>();
 
 	public static void chooseRosters() {
-		// name to test--> "Anderson,T",CWS,SS,123,498,81,167,32,0,18,56,15,109,17,5,0.335,0.357,0.508,0.865
-		System.out.println("Enter name: ");
-		String name = sc.next();
-		
-		for (int i = 0; i < list.size(); i++) {
-			if (name.equals(list.get(i))) {
-				roster1.add(name);
-			} 
+		int i = 0;
+		// name to test--> Anderson,T
+
+		// populates roster 1
+		while (i < 2) {
+			System.out.println("Enter names for roster 1: ");
+			String name = sc.next();
+			for (int j = 0; j < list.size(); j++) {
+				if (list.get(j).contains('"' + name + '"')) {
+					roster1.add(list.get(j));
+				}
+			}
+			i++;
 		}
+		for (String element : roster1) {
+			System.out.println(element);
+		}
+
+		i = 0;
+		// populates roster 2
+		while (i < 2) {
+			System.out.println("Enter names for roster 2: ");
+			String name = sc.next();
+			for (int j = 0; j < list.size(); j++) {
+				if (list.get(j).contains('"' + name + '"')) {
+					roster2.add(list.get(j));
+				}
+			}
+			i++;
+		}
+		for (String element : roster2) {
+			System.out.println(element);
+		}
+		i = 0;
+		// populates roster 3
+		while (i < 2) {
+			System.out.println("Enter names for roster 3: ");
+			String name = sc.next();
+			for (int j = 0; j < list.size(); j++) {
+				if (list.get(j).contains('"' + name + '"')) {
+					roster3.add(list.get(j));
+				}
+			}
+			i++;
+		}
+		for (String element : roster3) {
+			System.out.println(element);
+		}
+		i = 0;
+		// populates roster 4
+		while (i < 2) {
+			System.out.println("Enter names for roster 4: ");
+			String name = sc.next();
+			for (int j = 0; j < list.size(); j++) {
+				if (list.get(j).contains('"' + name + '"')) {
+					roster4.add(list.get(j));
+				}
+			}
+			i++;
+		}
+		for (String element : roster4) {
+			System.out.println(element);
+		}
+
 	}
 
-	public static void printRoster1() {
-		for (int i = 0; i < roster1.size(); i++) {
-			System.out.println(roster1.get(i));
-		}
-
-	}
 }

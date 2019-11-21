@@ -10,7 +10,7 @@ public class Main {
 		loadData.openFile("stats.csv");
 		loadData.openFile("stats_pitcher.csv");
 		Odraft.chooseRosters();
-		Odraft.printList();
+	
 
 	}
 
