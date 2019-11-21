@@ -11,8 +11,8 @@ public class Main {
 	public static void main(String[] args) {
 		loadData.openFile("stats.csv");
 		loadData.openFile("stats_pitcher.csv");
-		loadData.printList();
 		Odraft.chooseRosters();
+		Odraft.printList();
 
 	}
 
