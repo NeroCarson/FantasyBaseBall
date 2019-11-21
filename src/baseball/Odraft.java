@@ -13,14 +13,16 @@ public class Odraft extends loadData {
 	public static ArrayList<String> roster4 = new ArrayList<String>();
 
 	public static void chooseRosters() {
-		int i = 0;
-		// name to test--> Anderson,T
 
+		// name to test--> Anderson,T
+		int i = 0;
 		// populates roster 1
 		while (i < 2) {
 			System.out.println("Enter names for roster 1: ");
 			String name = sc.next();
-			for (int j = 0; j < list.size(); j++) {
+			for (int j = 0 ; j < list.size(); j++) {
+//				if(roster1.contains(name))
+//					System.out.println("Player already drafted");
 				if (list.get(j).contains('"' + name + '"')) {
 					roster1.add(list.get(j));
 				}
@@ -31,7 +33,7 @@ public class Odraft extends loadData {
 			System.out.println(element);
 		}
 
-		i = 0;
+		 i = 0;
 		// populates roster 2
 		while (i < 2) {
 			System.out.println("Enter names for roster 2: ");
@@ -46,6 +48,7 @@ public class Odraft extends loadData {
 		for (String element : roster2) {
 			System.out.println(element);
 		}
+
 		i = 0;
 		// populates roster 3
 		while (i < 2) {
@@ -61,6 +64,7 @@ public class Odraft extends loadData {
 		for (String element : roster3) {
 			System.out.println(element);
 		}
+
 		i = 0;
 		// populates roster 4
 		while (i < 2) {

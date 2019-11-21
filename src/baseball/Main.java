@@ -8,8 +8,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		loadData.openFile("stats.csv");
-		loadData.openFile("stats_pitcher.csv");
-		Odraft.chooseRosters();
+	//	loadData.openFile("stats_pitcher.csv");
+		
+		
+	
 	
 
 	}
