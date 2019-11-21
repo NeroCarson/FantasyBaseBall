@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import models.Player; 
+import models.Pitcher;
+import models.Player;
 
 public class loadData {
 
@@ -19,12 +20,20 @@ public class loadData {
 			br = new BufferedReader(new FileReader(fileName));
 			// read line by line
 			while ((line = br.readLine()) != null) {
-				// CREATE PLAYER OBJECT
-				String name = parseName(line);
-				String team = parseTeam(line);
-				String pos = parsePOS(line);
-				Player player = new Player(name, team, pos);
-				
+				if (fileName.equals("stats.csv")) {
+					// CREATE PLAYER OBJECT
+					String playerName = parseName(line);
+					String playerTeam = parseTeam(line);
+					String playerPOS = parsePOS(line);
+					Player player = new Player(playerName, playerTeam, playerPOS);
+				} else if (fileName.equals("stats_pitcher.csv")) {
+					// CREATE PITCHER OBJECT
+					String pitcherName = parseName(line);
+					String pitcherTeam = parseTeam(line);
+					Pitcher pitcher = new Pitcher(pitcherName, pitcherTeam);
+				} else {
+					System.out.println("err");
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -41,7 +50,7 @@ public class loadData {
 
 	public static String parseName(String line) {
 		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-        return tokens[0];
+		return tokens[0];
 	}
 
 	public static String parseTeam(String line) {
@@ -51,7 +60,7 @@ public class loadData {
 
 	public static String parsePOS(String line) {
 		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-		return tokens[2];	
+		return tokens[2];
 	}
 
 //	// converts csv to array list using split
