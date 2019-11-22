@@ -3,6 +3,8 @@ package baseball;
 import java.io.IOException;
 import java.util.Scanner;
 
+import models.League;
+
 public class Main {
 
 	static Scanner sc = new Scanner(System.in);
@@ -10,7 +12,10 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		loadData.openFile("stats.csv");
 		loadData.openFile("stats_pitcher.csv");
-		Odraft.chooseRosters();
+		//League.printPlayer();
+		//League.printPitcher();
+		Odraft.chooseRoster();
+	
 	
 	while(true) {
 		System.out.println("Please choos an option by typeing the corresponding number:");

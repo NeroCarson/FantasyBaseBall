@@ -29,4 +29,8 @@ public class Player {
 		this.team = team;
 		this.pos = pos;
 	}
+	@Override
+    public String toString() {
+       return "player: " + this.name + " team: " + this.team + " pos: " + this.pos;
+    }
 }
