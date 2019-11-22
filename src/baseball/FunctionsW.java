@@ -2,7 +2,7 @@ package baseball;
 
 public class FunctionsW {
 	// ODRAFT
-		private static void odraft() {
+		static void odraft() {
 
 		}
 
@@ -24,15 +24,7 @@ public class FunctionsW {
 
 		}
 
-		// QUIT
-		private static void quit() {
-			// TODO Auto-generated method stub
+		
 
-		}
-
-		// RESTORE
-		private static void restore() {
-			// TODO Auto-generated method stub
-
-		}
+		
 }
