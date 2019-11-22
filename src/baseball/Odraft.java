@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class Odraft extends loadData {
 
+	
+	
 	public static Scanner sc = new Scanner(System.in);
 
 	public static ArrayList<String> roster1 = new ArrayList<String>();

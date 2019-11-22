@@ -27,4 +27,8 @@ public class Pitcher {
 		this.name = name;
 		this.team = team;
 	}
+	@Override
+    public String toString() {
+       return "player: " + this.name + " team: " + this.team;
+    }
 }

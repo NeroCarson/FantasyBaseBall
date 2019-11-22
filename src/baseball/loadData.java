@@ -4,14 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import models.League;
 import models.Pitcher;
 import models.Player;
 
 public class loadData {
-
-	public static ArrayList<String> list = new ArrayList<String>();
 
 	public static void openFile(String fileName) {
 		BufferedReader br = null;
@@ -26,11 +24,13 @@ public class loadData {
 					String playerTeam = parseTeam(line);
 					String playerPOS = parsePOS(line);
 					Player player = new Player(playerName, playerTeam, playerPOS);
+					League.players.add(player);
 				} else if (fileName.equals("stats_pitcher.csv")) {
 					// CREATE PITCHER OBJECT
 					String pitcherName = parseName(line);
 					String pitcherTeam = parseTeam(line);
 					Pitcher pitcher = new Pitcher(pitcherName, pitcherTeam);
+					League.pitchers.add(pitcher);
 				} else {
 					System.out.println("err");
 				}
