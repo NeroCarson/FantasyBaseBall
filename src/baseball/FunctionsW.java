@@ -30,9 +30,5 @@ public class FunctionsW {
 
 		}
 
-		// RESTORE
-		private static void restore() {
-			// TODO Auto-generated method stub
-
-		}
+		
 }
