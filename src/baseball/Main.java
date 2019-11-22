@@ -13,6 +13,7 @@ public class Main {
 		loadData.openFile("stats_pitcher.csv");
 		//League.printPlayer();
 		//League.printPitcher();
+		Odraft.chooseRoster();
 	
 	
 
