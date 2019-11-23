@@ -1,10 +1,12 @@
 package baseball;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Stack;
 
+import models.LeagueMember;
 import models.Person;
 import models.Pitcher;
 import models.Player;
@@ -23,19 +25,25 @@ public class FunctionsJ {
 			player.rank = evaluate(player, postfix);
 
 		sort(players);
+		System.out.println("Players sorted by function: " + function);
 	}
 	
 	// RANK PITCHERS BY FUNCTION
 	static void pevalfun(ArrayList<Pitcher> pitchers, String function) {
-
+		System.out.println("Method not implemented");
 	}
 
 	// PRINT PLAYERS BY RANK
-	static void overall(ArrayList<Player> players) {
-		System.out.println();
-		for (Player player : players) {
-			System.out.println("Name: " + player.name + " Team: " + player.team + " Position: " + player.pos + " Rank: "
-					+ player.rank);
+	static void overall(ArrayList<Player> players, LeagueMember member, String position) {
+		if (position.isEmpty()) {
+			String[] openPositions = member.team.getOpenPositions();
+			players.stream().filter(p -> Arrays.stream(openPositions).anyMatch(q -> q.equalsIgnoreCase(p.pos))).forEach(System.out::println);
+		} else {
+			if (member.team.isPositionFilled(position)) {
+				System.out.println("You have already filled the position: '" + position +"' or this position does not exist.");
+			} else {
+				players.stream().filter(p -> position.equals(p.pos)).forEach(System.out::println);
+			}
 		}
 	}
 
@@ -43,8 +51,7 @@ public class FunctionsJ {
 	static void poverall(ArrayList<Pitcher> pitchers) {
 		System.out.println();
 		for (Pitcher pitcher : pitchers) {
-			System.out.println("Name: " + pitcher.name + " Team: " + pitcher.team + " Position: P Rank: "
-					+ pitcher.rank);
+			System.out.println(pitcher);
 		}
 	}
 	

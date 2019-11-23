@@ -24,6 +24,6 @@ public class Pitcher extends Person {
 	}
 	@Override
     public String toString() {
-       return "player: " + this.name + " team: " + this.team;
+	       return "player: " + this.name + " team: " + this.team + " rank: " + this.rank;
     }
 }

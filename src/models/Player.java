@@ -27,6 +27,6 @@ public class Player extends Person {
 	}
 	@Override
     public String toString() {
-       return "player: " + this.name + " team: " + this.team + " pos: " + this.pos;
+       return "player: " + this.name + " team: " + this.team + " pos: " + this.pos + " rank: " + this.rank;
     }
 }
