@@ -1,8 +1,6 @@
 package models;
 
-public class Player {
-	public String name;
-	public String team;
+public class Player extends Person {
 	public String pos;
 	public int g;
 	public int ab;
@@ -21,8 +19,6 @@ public class Player {
 	public double obp;
 	public double slg;
 	public double ops;
-	public double rank;
-	public boolean selected;
 	
 	public Player(String name, String team, String pos) {
 		this.name = name;
