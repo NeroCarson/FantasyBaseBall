@@ -2,170 +2,111 @@ package baseball;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 import java.util.Stack;
 
+import models.Person;
 import models.Pitcher;
 import models.Player;
 
 public class FunctionsJ {
 
+	// RANK NON-PITCHERS BY FUNCTION
 	static void evalfun(ArrayList<Player> players, String function) {
-		
-	}
-	
-	static void pevalfun(ArrayList<Pitcher> pitchers, String function) {
-		
-	}
-	
-	// OVERALL
-	static void overall(ArrayList<Player> players) {
-		// TODO Auto-generated method stub
-		System.out.println("Test");
-	}
+		String[] inputArray = function.split("\\s");
+		String[] postfix = infixToPostfix(inputArray);
 
-	// POVERALL
-	static void poverall(ArrayList<Pitcher> pitchers) {
-		// TODO Auto-generated method stub
+		for (String element : postfix)
+			System.out.print(element + " ");
 
-	}
-	
-	
-	public static void test() {
-		ArrayList<Player> players = new ArrayList<>();
-		Player bob = new Player("Bob", "Test", "C");
-		bob.avg = 5.5;
-		bob.obp = 1.5;
-		players.add(bob);
-		
-		Player joe = new Player("Joe", "Test", "P");
-		joe.avg = 5;
-		joe.obp = 5.5;
-		players.add(joe);
-		
-		Player jane = new Player("Jane", "Test", "1B");
-		jane.avg = 4.5;
-		jane.obp = 3;
-		players.add(jane);
-		
-		Player sue = new Player("Sue", "Test", "SS");
-		sue.avg = 3.5;
-		sue.obp = 4;
-		players.add(sue);
-
-		String input = "avg + 5";
-		String[] inputArray = input.split("\\s");
-
-		for (Player player : players) {
-			Stack<String> postfix = createTree(inputArray);
-			player.rank = evaluateExpression(player, postfix);
-		}
+		for (Player player : players)
+			player.rank = evaluate(player, postfix);
 
 		sort(players);
+	}
+	
+	// RANK PITCHERS BY FUNCTION
+	static void pevalfun(ArrayList<Pitcher> pitchers, String function) {
 
 	}
 
+	// PRINT PLAYERS BY RANK
+	static void overall(ArrayList<Player> players) {
+		System.out.println();
+		for (Player player : players) {
+			System.out.println("Name: " + player.name + " Team: " + player.team + " Position: " + player.pos + " Rank: "
+					+ player.rank);
+		}
+	}
 
-	static Stack<String> createTree(String[] args) {
-		Stack<String> stack = new Stack<>();
-		Stack<String> postfix = new Stack<String>();
+	// PRINT PITCHERS BY RANK
+	static void poverall(ArrayList<Pitcher> pitchers) {
+		System.out.println();
+		for (Pitcher pitcher : pitchers) {
+			System.out.println("Name: " + pitcher.name + " Team: " + pitcher.team + " Position: P Rank: "
+					+ pitcher.rank);
+		}
+	}
+	
 
-		for (String arg : args) {
-			if (isOperator(arg)) {
-				if (stack.empty()) {
-					stack.push(arg);
-				} else if (("+".equals(arg) || "-".equals(arg))
-						&& ("*".equals(stack.peek()) || "/".equals(stack.peek()))) {
-					while ("*".equals(stack.peek()) || "/".equals(stack.peek())) {
-						String operator = stack.pop();
-						postfix.add(operator);
-					}
-					stack.push(arg);
+	// CONVERT INFIX EXPRESSION TO POSTFIX
+	static String[] infixToPostfix(String[] infix) {
+		Stack<String> operators = new Stack<>();
+		String[] postfix = new String[infix.length];
+		int index = 0;
+
+		for (String element : infix) {
+			if (isOperator(element)) {
+				if (operators.empty() || compareOperator(element, operators.peek()) > -1) {
+					operators.push(element);
 				} else {
-					stack.push(arg);
+					postfix[index] = operators.pop();
+					operators.push(element);
+					index++;
 				}
 			} else {
-				postfix.add(arg);
+				postfix[index] = element;
+				index++;
 			}
 		}
 
-		while (!stack.empty())
-			postfix.add(stack.pop());
-
-		Stack<String> reversed = new Stack<String>();
-		while (!postfix.empty()) {
-			reversed.push(postfix.pop());
+		while (!operators.empty()) {
+			postfix[index] = operators.pop();
+			index++;
 		}
-
-		return reversed;
+		return postfix;
 	}
 
-	
-	// TODO ADD SUPPORT FOR LONGER EXPRESSIONS
-	public static double evaluateExpression(Player player, Stack<String> postfix) {
-		char operator;
-		String operand1, operand2;
-		Stack<String> expression = new Stack<>();
+	// EVALUATE POST FIX EXPRESSION
+	public static double evaluate(Player player, String[] postfix) {
+		Stack<String> operands = new Stack<>();
 		double answer = 0;
 
-		while (!postfix.empty()) {
-			while (!isOperator(postfix.peek())) {
-				expression.push(postfix.pop());
+		for (String element : postfix) {
+			if (isOperator(element)) {
+				answer = calculate(player, element, operands.pop(), operands.pop());
+				operands.push(String.valueOf(answer));
+			} else {
+				operands.push(element);
 			}
 
-			operator = postfix.pop().toCharArray()[0];
-			operand1 = expression.pop();
-			operand2 = expression.pop();
-			answer = evaluate(player, operator, operand1, operand2);
 		}
 		return answer;
 	}
 
-	public static boolean isOperator(String item) {
-		return "+".equals(item) || "-".equals(item) || "*".equals(item) || "/".equals(item);
-	}
-
-	public static <T> void printArrayList(ArrayList<T> items) {
-		for (T item : items) {
-			System.out.println(item);
-		}
-	}
-
-	public static double evaluate(Player player, char operator, String strOperand1, String strOperand2) {
-		double operand1 = 0, operand2 = 0;
-		try {
-			operand1 = Double.parseDouble(strOperand1);
-		} catch (Exception e) {
-			switch (strOperand1) {
-			case "avg":
-				operand1 = player.avg;
-				break;
-			case "obp":
-				operand1 = player.obp;
-				break;
-			}
-		}
-
-		try {
-			operand2 = Double.parseDouble(strOperand2);
-		} catch (Exception e) {
-			switch (strOperand2) {
-			case "avg":
-				operand2 = player.avg;
-				break;
-			case "obp":
-				operand2 = player.obp;
-				break;
-			}
-		}
+	// CALCULATE BINARY EXPRESSION
+	public static double calculate(Player player, String operator, String strOperand1, String strOperand2) {
+		double operand1 = convertOperand(player, strOperand1);
+		double operand2 = convertOperand(player, strOperand2);	
 
 		switch (operator) {
-		case '+':
+		case "+":
 			return operand1 + operand2;
-		case '-':
+		case "-":
 			return operand1 - operand2;
-		case '*':
+		case "*":
 			return operand1 * operand2;
-		case '/':
+		case "/":
 			if (operand2 == 0) {
 				return 0;
 			}
@@ -175,24 +116,85 @@ public class FunctionsJ {
 		}
 	}
 
-	public static void sort(ArrayList<Player> players) {
+	// CONVERT OPERAND FROM STRING/STATISTIC TO DOUBLE
+	public static double convertOperand(Player player, String operand) {
+		try {
+			return Double.parseDouble(operand);
+		} catch (Exception e) {
+			switch (operand) {
+			case "avg":
+				return player.avg;
+			case "obp":
+				return player.obp;
+			}
+		}
+		return 0;
+	}
 
-		players.sort(new Comparator<Player>() {
-			public int compare(Player player1, Player player2) {
+	// SORT PLAYERS BY RANK
+	public static <T extends Person> void sort(ArrayList<T> people) {
 
-				if (player1.rank > player2.rank) {
+		people.sort(new Comparator<T>() {
+			public int compare(T person1, T person2) {
+
+				if (person1.rank > person2.rank) {
 					return 1;
-				} else if (player1.rank < player2.rank) {
+				} else if (person1.rank < person2.rank) {
 					return -1;
 				} else {
 					return 0;
 				}
 			}
 		});
+	}
 
-		printArrayList(players);
+	// DETERMINE IF A STRING IS AN OPERATOR
+	public static boolean isOperator(String item) {
+		return "+".equals(item) || "-".equals(item) || "*".equals(item) || "/".equals(item);
+	}
 
+	// COMPARES TWO OPERATORS BY ORDER OF OPERATION
+	public static int compareOperator(String op1, String op2) {
+		if (("+".equals(op1) || "-".equals(op1)) && ("*".equals(op2) || "/".equals(op2))) {
+			return -1;
+		}
+		if (("*".equals(op1) || "/".equals(op1)) && ("+".equals(op2) || "-".equals(op2))) {
+			return 1;
+		}
+		return 0;
 	}
 	
-	
+	// FOR TESTING ONLY
+//	public static void main(String[] args) {
+//		ArrayList<Player> players = new ArrayList<>();
+//		Player bob = new Player("Bob", "Test", "C");
+//		bob.avg = 5.5;
+//		bob.obp = 1.5;
+//		players.add(bob);
+//
+//		Player joe = new Player("Joe", "Test", "P");
+//		joe.avg = 5;
+//		joe.obp = 5.5;
+//		players.add(joe);
+//
+//		Player jane = new Player("Jane", "Test", "1B");
+//		jane.avg = 4.5;
+//		jane.obp = 3;
+//		players.add(jane);
+//
+//		Player sue = new Player("Sue", "Test", "SS");
+//		sue.avg = 3.5;
+//		sue.obp = 4;
+//		players.add(sue);
+//
+//		String function;
+//		try (Scanner scanner = new Scanner(System.in)) {
+//			System.out.print("Enter function: ");
+//			function = scanner.nextLine();
+//		}
+//
+//		evalfun(players, function);
+//		overall(players);
+//
+//	}
 }
