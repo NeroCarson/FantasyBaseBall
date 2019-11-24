@@ -1,9 +1,6 @@
 package models;
 
-public class Pitcher {
-	
-	public String name;
-	public String team;
+public class Pitcher extends Person {
 	public int w;
 	public int l;
 	public double era;
@@ -20,8 +17,6 @@ public class Pitcher {
 	public int so;
 	public double avg;
 	public double whip;
-	public double rank;
-	public boolean selected;
 	
 	public Pitcher(String name, String team) {
 		this.name = name;
@@ -29,6 +24,6 @@ public class Pitcher {
 	}
 	@Override
     public String toString() {
-       return "player: " + this.name + " team: " + this.team;
+	       return "player: " + this.name + " team: " + this.team + " rank: " + this.rank;
     }
 }
