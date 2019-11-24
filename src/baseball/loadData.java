@@ -51,6 +51,23 @@ public class loadData {
 					Pitcher pitcher = new Pitcher(pitcherName, pitcherTeam);
 					League.pitchers.add(pitcher);
 					// add the various statistics
+					pitcher.w = Integer.parseInt(parseWins(line));
+
+					pitcher.l = Integer.parseInt(parseLosses(line));
+					pitcher.era = Double.parseDouble(parseERA(line));
+					pitcher.g = Integer.parseInt(parseG_pitcher(line));
+					pitcher.gs = Integer.parseInt(parseGS(line));
+					pitcher.sv = Integer.parseInt(parseSV(line));
+					pitcher.svo = Integer.parseInt(parseSVO(line));
+					pitcher.ip = Double.parseDouble(parseIP(line));
+					pitcher.h = Integer.parseInt(parseH_pitcher(line));
+					pitcher.r = Integer.parseInt(parseR_pitcher(line));
+					pitcher.er = Integer.parseInt(parseER(line));
+					pitcher.hr = Integer.parseInt(parseHR_pitcher(line));
+					pitcher.bb = Integer.parseInt(parseBB_pitcher(line));
+					pitcher.so = Integer.parseInt(parseSO_pitcher(line));
+					pitcher.avg = Double.parseDouble(parseAVG_pitcher(line));
+					pitcher.whip = Double.parseDouble(parseWHIP(line));
 
 				} else {
 					System.out.println("~~~Error~~~");
@@ -67,6 +84,86 @@ public class loadData {
 			}
 		}
 
+	}
+
+	public static String parseWHIP(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[17];
+	}
+
+	public static String parseAVG_pitcher(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[16];
+	}
+
+	public static String parseSO_pitcher(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[15];
+	}
+
+	public static String parseBB_pitcher(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[14];
+	}
+
+	public static String parseHR_pitcher(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[13];
+	}
+
+	public static String parseER(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[12];
+	}
+
+	public static String parseR_pitcher(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[11];
+	}
+
+	public static String parseH_pitcher(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[10];
+	}
+
+	public static String parseIP(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[9];
+	}
+
+	public static String parseSVO(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[8];
+	}
+
+	public static String parseSV(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[7];
+	}
+
+	public static String parseGS(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[6];
+	}
+
+	public static String parseG_pitcher(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[5];
+	}
+
+	public static String parseERA(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[4];
+	}
+
+	public static String parseLosses(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[3];
+	}
+
+	public static String parseWins(String line) {
+		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		return tokens[2];
 	}
 
 	public static String parseName(String line) {
@@ -177,34 +274,4 @@ public class loadData {
 		return tokens[18];
 
 	}
-	// // converts csv to array list using split
-//	public static ArrayList<String> cvsToArrayList(String line) {
-//		if (line != null) {
-//			String[] tempArr = line.split("/n");
-//			for (int i = 0; i < tempArr.length; i++) {
-//				if (!(tempArr[i] == null) || !(tempArr[i].length() == 0)) {
-//					list.add(tempArr[i].trim());
-//				}
-//			}
-//		}
-//		return list;
-//	}
-
-//	public static void printList() {
-//		for (int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i));
-//		}
-//		System.out.println(list.get(0));
-//	}
-//	//MUST CREATE PLAYER OBJECTS
-//	
-//	public static void createPlayers() {
-//		
-//		String name = list.get(0).split(" ");
-//		
-//	
-//		Player(name, team, pos);
-//		
-//	}
-
 }
