@@ -10,9 +10,11 @@ import models.League;
 import models.Pitcher;
 import models.Player;
 
-public class loadData{
+public class loadData {
 
-	public static void openFile(String fileName) {
+	public static League openFile(String fileName) {
+		// create league
+		League league = new League();
 		BufferedReader br = null;
 		try {
 			String line;
@@ -20,12 +22,15 @@ public class loadData{
 			// read line by line
 			while ((line = br.readLine()) != null) {
 				if (fileName.equals("stats.csv")) {
-					// create the player object
+
+					// create the player objects
 					String playerName = parseName(line);
 					String playerTeam = parseTeam(line);
 					String playerPOS = parsePOS(line);
 					Player player = new Player(playerName, playerTeam, playerPOS);
-					League.players.add(player);
+
+//					Player player = new Player(playerName, playerTeam, playerPOS);
+//					League.players.add(player);
 					// add the various statistics
 					player.g = Integer.parseInt(parseG(line));
 					player.ab = Integer.parseInt(parseAB(line));
@@ -43,16 +48,17 @@ public class loadData{
 					player.obp = Double.parseDouble(parseOBP(line));
 					player.slg = Double.parseDouble(parseSLG(line));
 					player.ops = Double.parseDouble(parseOPS(line));
-
+					// add the players to the league
+					League.players.add(player);
 				} else if (fileName.equals("stats_pitcher.csv")) {
-					// create the pitcher object
+					// create the pitcher objects
 					String pitcherName = parseName(line);
 					String pitcherTeam = parseTeam(line);
 					Pitcher pitcher = new Pitcher(pitcherName, pitcherTeam);
+					// add pitchers to the league
 					League.pitchers.add(pitcher);
 					// add the various statistics
 					pitcher.w = Integer.parseInt(parseWins(line));
-
 					pitcher.l = Integer.parseInt(parseLosses(line));
 					pitcher.era = Double.parseDouble(parseERA(line));
 					pitcher.g = Integer.parseInt(parseG_pitcher(line));
@@ -73,6 +79,7 @@ public class loadData{
 					System.out.println("~~~Error~~~");
 				}
 			}
+			return league;
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -83,10 +90,10 @@ public class loadData{
 				e.printStackTrace();
 			}
 		}
+		return null;
 
 	}
 
-	
 	public static String parseWHIP(String line) {
 		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 		return tokens[17];
