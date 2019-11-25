@@ -32,7 +32,7 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
-				FunctionsW.odraft();
+				FunctionsW.odraft(); //needs work
 			} else if (option.equalsIgnoreCase("2")) {
 				// call idraft
 			} else if (option.equalsIgnoreCase("3")) {
