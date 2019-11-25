@@ -8,7 +8,9 @@ import models.League;
 public class Main {
 
 	static Scanner sc = new Scanner(System.in);
-
+	//Our League object that should be used to pass into load data to input all the information.
+	static League temp = new League();
+	
 	public static void main(String[] args) throws IOException {
 		loadData.openFile("stats.csv");
 		loadData.openFile("stats_pitcher.csv");
