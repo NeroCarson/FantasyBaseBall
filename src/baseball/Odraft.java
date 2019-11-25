@@ -9,26 +9,11 @@ import models.Player;
 
 public class Odraft extends League {
 
-	public static Scanner sc = new Scanner(System.in);
 
-	public static void chooseRoster() {
-
-		System.out.println("choose name: ");
-		String playerName = sc.next();
-// p.getClass().getName() != null && p.getClass().getName().contains(playerName)
-		int i = 0;
-		int index = 0;
-		for (i = 0; i < players.size(); i++) {
-			if (players.getClass().getName() != null && players.getClass().getName().contains(playerName)) {
-				index = i;
-				break;
-
-			}
-
-		}
-		System.out.println(players.get(index));
-
-	}
+	@Override
+    public String toString() {
+       return "player: " + this.playerName + " team: " + this.team + " pos: " + this.pos + " rank: " + this.rank;
+    }
 
 	// players list
 	// pitchers list
