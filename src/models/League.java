@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import baseball.loadData;
 
-public class League extends loadData {
+public class League {
 
 	public LeagueMember memberA;
 	public LeagueMember memberB;

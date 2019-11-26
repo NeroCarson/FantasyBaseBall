@@ -2,60 +2,68 @@ package baseball;
 
 import java.util.Scanner;
 import models.League;
+import models.Player;
+import models.Team;
 
 public class FunctionsW extends League {
-	// ODRAFT
 	public static Scanner sc = new Scanner(System.in);
 
-	
-	// figure out how to add specific players to roster!!
+	// ODRAFT
 	static void odraft() {
-		System.out.println("enter name: ");
-		String playerName = sc.next();
+		Team firstTeam = new Team();
+		Team secondTeam = new Team();
+		Team thirdTeam = new Team();
+		Team fourthTeam = new Team();
 
-		
-		
-		int index = 0;
-		@SuppressWarnings("unlikely-arg-type")
-		boolean isFound = players.contains(playerName);
-		for (int i = 0; i < players.size(); i++) {
-			if (players.getClass().getName() != null && players.getClass().getName().contains(playerName)) {
-				
-				break;
-				
+		int i = 0;
+		while (i < 12) {
+			int index = 0;
+			System.out.println("Enter names for team 1: ");
+			String playerName = sc.nextLine();
+			// find specified player
+			for (int j = 0; j < players.size(); j++) {
+				if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
+					break;
+				}
+				index = j + 1;
 			}
-			index = i;
-			
+			//System.out.println(players.get(index));
+			String theLine = players.get(index).toString();
+			String position = findPOS(theLine);
+			switch (position) {
+			case "C":
+				firstTeam.c = players.get(index);
+				break;
+			case "1B": 
+				firstTeam.b1 = players.get(index);
+				break;
+			case "2B":
+				firstTeam.b2 = players.get(index);
+				break;
+			case "3B":
+				firstTeam.b3 = players.get(index);
+				break;
+			case "SS":
+				firstTeam.ss = players.get(index);
+				break;
+			case "LF":
+				firstTeam.lf = players.get(index);
+				break;
+			case "CF":
+				firstTeam.cf = players.get(index);
+				break;
+			case "RF":
+				firstTeam.rf = players.get(index);
+				break;
+			case "P":
+				firstTeam.p1 = pitchers.get(index);
+				break;
+			default:
+				break;
+			}
+
 		}
-
-		System.out.println(players.get(index));
-		// "Alberto, H"
-		// while (i < 2) {
-//			
-//
-//			// System.out.println(
-//			// "Draft 13 players(a catcher, a first, second and third baseman, a shortshop,
-//			// a left, right and center fieldman, and 5 pitchers : ");
-//			System.out.println("choose player ");
-//		
-//			String playerName = sc.next();
-//			int index = 0;
-//
-//			int j = 0;
-//
-//			// finds selected player
-//			for (j = 0; j < players.size(); j++) {
-//				if (players.getClass().getName() != null && players.getClass().getName().contains(playerName)) {
-//					index = j;
-//					break;
-//				}
-//
-//			}
-//			i++;
-//			System.out.println(players.get(index));
-
 	}
-	// System.out.println("Team--> " + players.get(index) );
 
 	// IDRAFT
 	private static void idraft() {
@@ -73,6 +81,11 @@ public class FunctionsW extends League {
 	private static void stars() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static String findPOS(String line) {
+		String[] tokens = line.split("(\\S*(?:(['\"`]).*?\\2)\\S*)\\s?|\\s");
+		return tokens[2];
 	}
 
 }

@@ -36,6 +36,7 @@ public class loadData {
 					player.ab = Integer.parseInt(parseAB(line));
 					player.r = Integer.parseInt(parseR(line));
 					player.h = Integer.parseInt(parseH(line));
+					// b1????
 					player.b2 = Integer.parseInt(parseB2(line));
 					player.b3 = Integer.parseInt(parseB3(line));
 					player.hr = Integer.parseInt(parseHR(line));

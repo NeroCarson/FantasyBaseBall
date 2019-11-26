@@ -6,7 +6,7 @@ public class Player extends Person {
 	public int ab;
 	public int r;
 	public int h;
-	public int b1;
+	public int b1; // do we need this?
 	public int b2;
 	public int b3;
 	public int hr;
