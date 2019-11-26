@@ -2,6 +2,7 @@ package baseball;
 
 import java.util.Scanner;
 import models.League;
+import models.LeagueMember;
 import models.Player;
 import models.Team;
 
@@ -10,10 +11,15 @@ public class FunctionsW extends League {
 
 	// ODRAFT
 	static void odraft() {
-		Team firstTeam = new Team();
-		Team secondTeam = new Team();
-		Team thirdTeam = new Team();
-		Team fourthTeam = new Team();
+		LeagueMember A = new LeagueMember();
+		LeagueMember B = new LeagueMember();
+		LeagueMember C = new LeagueMember();
+		LeagueMember D = new LeagueMember();
+
+		Team a = new Team();
+		Team b = new Team();
+		Team c = new Team();
+		Team d = new Team();
 
 		int i = 0;
 		while (i < 12) {
@@ -32,31 +38,31 @@ public class FunctionsW extends League {
 			String position = findPOS(theLine);
 			switch (position) {
 			case "C":
-				firstTeam.c = players.get(index);
+				a.c = players.get(index);
 				break;
 			case "1B": 
-				firstTeam.b1 = players.get(index);
+				a.b1 = players.get(index);
 				break;
 			case "2B":
-				firstTeam.b2 = players.get(index);
+				a.b2 = players.get(index);
 				break;
 			case "3B":
-				firstTeam.b3 = players.get(index);
+				a.b3 = players.get(index);
 				break;
 			case "SS":
-				firstTeam.ss = players.get(index);
+				a.ss = players.get(index);
 				break;
 			case "LF":
-				firstTeam.lf = players.get(index);
+				a.lf = players.get(index);
 				break;
 			case "CF":
-				firstTeam.cf = players.get(index);
+				a.cf = players.get(index);
 				break;
 			case "RF":
-				firstTeam.rf = players.get(index);
+				a.rf = players.get(index);
 				break;
 			case "P":
-				firstTeam.p1 = pitchers.get(index);
+				a.p1 = pitchers.get(index);
 				break;
 			default:
 				break;
@@ -64,6 +70,7 @@ public class FunctionsW extends League {
 
 		}
 	}
+	
 
 	// IDRAFT
 	private static void idraft() {
