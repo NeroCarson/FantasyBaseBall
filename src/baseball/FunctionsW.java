@@ -8,7 +8,10 @@ import models.Team;
 
 public class FunctionsW extends League {
 	public static Scanner sc = new Scanner(System.in);
+	
 	public static League theLeague = new League();
+	
+	public static Team theTeam = new Team();
 
 	static void odraft(String playerName, String member) {
 		int team = 0;
@@ -35,37 +38,45 @@ public class FunctionsW extends League {
 			// Player thePlayer = theLine;
 			switch (position) {
 			case "C":
-				for(int i = 0; i < theLeague.players; i++) {
-					if(LeagueMember.team.contains(playerName)) {
-						System.out.println("player already drafted");
-					}
-				}
-				
-				LeagueMember.team.c = playerObject; // add player to the team
+//				for(int i = 0; i < theLeague.team; i++) {
+//					if(League.players.contains(playerName)) {
+//						System.out.println("player already drafted");
+//					}
+//				}
+				theTeam.c = playerObject; // add player to the team
+				theTeam =LeagueMember.team; // player is assigned to leagueMember
 				break;
 			case "1B":
-				LeagueMember.team.b1 = playerObject;
+				theTeam.b1 = playerObject;
+				theTeam =LeagueMember.team;
 				break;
 			case "2B":
-				LeagueMember.team.b2 = playerObject;
+				theTeam.b2 = playerObject;
+				theTeam =LeagueMember.team;
 				break;
 			case "3B":
-				LeagueMember.team.b3 = playerObject;
+				theTeam.b3 = playerObject;
+				theTeam =LeagueMember.team;
 				break;
 			case "SS":
-				LeagueMember.team.ss = playerObject;
+				theTeam.ss = playerObject;
+				theTeam =LeagueMember.team;
 				break;
 			case "LF":
-				LeagueMember.team.lf = playerObject;
+				theTeam.lf = playerObject;
+				theTeam =LeagueMember.team;
 				break;
 			case "CF":
-				LeagueMember.team.cf = playerObject;
+				theTeam.cf = playerObject;
+				theTeam =LeagueMember.team;
 				break;
 			case "RF":
-				LeagueMember.team.rf = playerObject;
+				theTeam.rf = playerObject;
+				theTeam =LeagueMember.team;
 				break;
 			case "P":
-				LeagueMember.team.p1 = pitcherObject;
+				theTeam.p1 = pitcherObject;
+				theTeam =LeagueMember.team;
 				break;
 			default:
 				break;
