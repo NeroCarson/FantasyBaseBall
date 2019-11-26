@@ -17,13 +17,16 @@ public class Pitcher extends Person {
 	public int so;
 	public double avg;
 	public double whip;
-	
+
 	public Pitcher(String name, String team) {
 		this.name = name;
 		this.team = team;
 	}
+
 	@Override
-    public String toString() {
-	       return "player: " + this.name + " team: " + this.team + " rank: " + this.rank;
-    }
+	public String toString() {
+		return this.name + " " + this.team + " " + this.w + " " + this.l + " " + this.era + " " + this.g + " " + this.gs
+				+ " " + this.sv + " " + this.svo + " " + this.ip + " " + this.h + " " + this.er + " " + this.hr + " "
+				+ this.bb + " " + this.so + " " + this.avg + " " + this.whip;
+	}
 }

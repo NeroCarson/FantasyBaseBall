@@ -10,7 +10,7 @@ import models.League;
 import models.Pitcher;
 import models.Player;
 
-public class loadData {
+public class loadData{
 
 	public static void openFile(String fileName) {
 		BufferedReader br = null;
@@ -86,6 +86,7 @@ public class loadData {
 
 	}
 
+	
 	public static String parseWHIP(String line) {
 		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 		return tokens[17];

@@ -19,14 +19,18 @@ public class Player extends Person {
 	public double obp;
 	public double slg;
 	public double ops;
-	
+
 	public Player(String name, String team, String pos) {
 		this.name = name;
 		this.team = team;
 		this.pos = pos;
 	}
+
 	@Override
-    public String toString() {
-       return "player: " + this.name + " team: " + this.team + " pos: " + this.pos + " rank: " + this.rank;
-    }
+	public String toString() {
+		return this.name + " " + this.team + " " + this.pos + " " + this.g + " " + this.ab + " " + this.r + " "
+				+ this.h + " " + this.b2 + " " + this.b3 + " " + this.hr + " " + this.rbi + " " + this.bb + " "
+				+ this.so + " " + this.sb + " " + this.sb + " " + this.cs + " " + this.avg + " " + this.obp + " "
+				+ this.slg + " " + this.ops;
+	}
 }
