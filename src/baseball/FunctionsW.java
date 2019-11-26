@@ -8,17 +8,19 @@ import models.Team;
 
 public class FunctionsW extends League {
 	public static Scanner sc = new Scanner(System.in);
-	
+
 	public static League theLeague = new League();
-	
+
 	public static Team theTeam = new Team();
 
 	static void odraft(String playerName, String member) {
-		int team = 0;
-		while (team < 3) {
+		
+		LeagueMember.name = member;
+		
 			// find specified player object
 			int index = 0;
 			for (int j = 0; j < players.size(); j++) {
+				// seperate loop for the pitchers???
 				if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
 					break;
 				}
@@ -33,56 +35,87 @@ public class FunctionsW extends League {
 			String position = findPOS(theLine);
 			System.out.println("Position--> " + position);
 
-			LeagueMember.name = member; 
-			
-			// Player thePlayer = theLine;
 			switch (position) {
 			case "C":
-//				for(int i = 0; i < theLeague.team; i++) {
-//					if(League.players.contains(playerName)) {
-//						System.out.println("player already drafted");
-//					}
-//				}
+
+				if (theTeam.isPositionFilled(position)) {
+					System.out.println("Position filled");
+					break;
+				}
+
 				theTeam.c = playerObject; // add player to the team
-				theTeam =LeagueMember.team; // player is assigned to leagueMember
+				theTeam = LeagueMember.team; // team is assigned to leagueMember
 				break;
 			case "1B":
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
 				theTeam.b1 = playerObject;
-				theTeam =LeagueMember.team;
+				theTeam = LeagueMember.team;
 				break;
 			case "2B":
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
 				theTeam.b2 = playerObject;
-				theTeam =LeagueMember.team;
+				theTeam = LeagueMember.team;
 				break;
 			case "3B":
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
 				theTeam.b3 = playerObject;
-				theTeam =LeagueMember.team;
+				theTeam = LeagueMember.team;
 				break;
 			case "SS":
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
 				theTeam.ss = playerObject;
-				theTeam =LeagueMember.team;
+				theTeam = LeagueMember.team;
 				break;
 			case "LF":
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
 				theTeam.lf = playerObject;
-				theTeam =LeagueMember.team;
+				theTeam = LeagueMember.team;
 				break;
 			case "CF":
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
 				theTeam.cf = playerObject;
-				theTeam =LeagueMember.team;
+				theTeam = LeagueMember.team;
 				break;
 			case "RF":
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
 				theTeam.rf = playerObject;
-				theTeam =LeagueMember.team;
+				theTeam = LeagueMember.team;
 				break;
 			case "P":
-				theTeam.p1 = pitcherObject;
-				theTeam =LeagueMember.team;
-				break;
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+				// theTeam.p1 = pitcherObject;
+				// theTeam =LeagueMember.team;
+				// break;
 			default:
 				break;
 			}
-			team++;
-		}
+			
+	
+		System.out.println("Player " + playerName + " has been chosen");
 
 	}
 
