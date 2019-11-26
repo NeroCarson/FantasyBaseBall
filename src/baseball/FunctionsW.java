@@ -8,64 +8,72 @@ import models.Team;
 
 public class FunctionsW extends League {
 	public static Scanner sc = new Scanner(System.in);
+	public static League theLeague = new League();
 
-	// ODRAFT
-	static void odraft() {
-		LeagueMember a = new LeagueMember();
-		LeagueMember b = new LeagueMember();
-		LeagueMember c = new LeagueMember();
-		LeagueMember d = new LeagueMember();
-		
-		int i = 0;
-		while (i < 12) {
+	static void odraft(String playerName, String member) {
+		int team = 0;
+		while (team < 3) {
+			// find specified player object
 			int index = 0;
-			System.out.println("Enter names for team 1: ");
-			String playerName = sc.nextLine();
-			// find specified player
 			for (int j = 0; j < players.size(); j++) {
 				if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
 					break;
 				}
 				index = j + 1;
 			}
-			//System.out.println(players.get(index));
+			System.out.println("String-->" + players.get(index));
+			// convert the player string to player object
+			Player playerObject = players.get(index);
+			System.out.println("Object--> " + playerObject.toString());
 			String theLine = players.get(index).toString();
+			// extract the position
 			String position = findPOS(theLine);
+			System.out.println("Position--> " + position);
+
+			LeagueMember.name = member; 
+			
+			// Player thePlayer = theLine;
 			switch (position) {
 			case "C":
-				a.team.c = players.get(index);
+				for(int i = 0; i < theLeague.players; i++) {
+					if(LeagueMember.team.contains(playerName)) {
+						System.out.println("player already drafted");
+					}
+				}
+				
+				LeagueMember.team.c = playerObject; // add player to the team
 				break;
-			case "1B": 
-				a.team.b1 = players.get(index);
+			case "1B":
+				LeagueMember.team.b1 = playerObject;
 				break;
 			case "2B":
-				a.team.b2 = players.get(index);
+				LeagueMember.team.b2 = playerObject;
 				break;
 			case "3B":
-				a.team.b3 = players.get(index);
+				LeagueMember.team.b3 = playerObject;
 				break;
 			case "SS":
-				a.team.ss = players.get(index);
+				LeagueMember.team.ss = playerObject;
 				break;
 			case "LF":
-				a.team.lf = players.get(index);
+				LeagueMember.team.lf = playerObject;
 				break;
 			case "CF":
-				a.team.cf = players.get(index);
+				LeagueMember.team.cf = playerObject;
 				break;
 			case "RF":
-				a.team.rf = players.get(index);
+				LeagueMember.team.rf = playerObject;
 				break;
 			case "P":
-				a.team.p1 = pitchers.get(index);
+				LeagueMember.team.p1 = pitcherObject;
 				break;
 			default:
 				break;
 			}
-
+			team++;
 		}
+
 	}
-	
 
 	// IDRAFT
 	private static void idraft() {

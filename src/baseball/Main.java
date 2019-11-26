@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import models.League;
+import models.LeagueMember;
 
 public class Main {
 
@@ -34,7 +35,7 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
-				FunctionsW.odraft(); //needs work
+				FunctionsW.odraft("Ramos, W",  "A"); //needs work
 			} else if (option.equalsIgnoreCase("2")) {
 				// call idraft
 			} else if (option.equalsIgnoreCase("3")) {
