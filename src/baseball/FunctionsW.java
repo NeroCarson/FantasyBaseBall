@@ -11,16 +11,11 @@ public class FunctionsW extends League {
 
 	// ODRAFT
 	static void odraft() {
-		LeagueMember A = new LeagueMember();
-		LeagueMember B = new LeagueMember();
-		LeagueMember C = new LeagueMember();
-		LeagueMember D = new LeagueMember();
-
-		Team a = new Team();
-		Team b = new Team();
-		Team c = new Team();
-		Team d = new Team();
-
+		LeagueMember a = new LeagueMember();
+		LeagueMember b = new LeagueMember();
+		LeagueMember c = new LeagueMember();
+		LeagueMember d = new LeagueMember();
+		
 		int i = 0;
 		while (i < 12) {
 			int index = 0;
@@ -38,31 +33,31 @@ public class FunctionsW extends League {
 			String position = findPOS(theLine);
 			switch (position) {
 			case "C":
-				a.c = players.get(index);
+				a.team.c = players.get(index);
 				break;
 			case "1B": 
-				a.b1 = players.get(index);
+				a.team.b1 = players.get(index);
 				break;
 			case "2B":
-				a.b2 = players.get(index);
+				a.team.b2 = players.get(index);
 				break;
 			case "3B":
-				a.b3 = players.get(index);
+				a.team.b3 = players.get(index);
 				break;
 			case "SS":
-				a.ss = players.get(index);
+				a.team.ss = players.get(index);
 				break;
 			case "LF":
-				a.lf = players.get(index);
+				a.team.lf = players.get(index);
 				break;
 			case "CF":
-				a.cf = players.get(index);
+				a.team.cf = players.get(index);
 				break;
 			case "RF":
-				a.rf = players.get(index);
+				a.team.rf = players.get(index);
 				break;
 			case "P":
-				a.p1 = pitchers.get(index);
+				a.team.p1 = pitchers.get(index);
 				break;
 			default:
 				break;
