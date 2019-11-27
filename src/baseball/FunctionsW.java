@@ -16,6 +16,10 @@ public class FunctionsW extends League {
 	
 
 	static void odraft(String playerName, String member) {
+		if(member.equals("A")||member.contentEquals("B")||member.equals("C")||member.equals(("D")){
+			System.out.println("LeagueMember was ommited/incorrect, no player was drafted");
+			System.exit(0);
+		}
 		LeagueMember.name = member;
 
 		if (findPitchers(playerName)) {
