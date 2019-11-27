@@ -19,6 +19,7 @@ public class Main {
 		// System.out.println();
 		// League.printPitcher();
 
+	
 		while (true) {
 			System.out.println("Please choose an option by typing the corresponding number:");
 			System.out.println("1:  ODRAFT");
