@@ -36,8 +36,8 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
-				FunctionsW.odraft("Ramos, W",  "A"); //needs work
-				FunctionsW.odraft("Anderson, T",  "A");
+				FunctionsW.odraft("Ramos, W", "A"); //needs work
+				FunctionsW.odraft("Anderson, T", "A");
 			} else if (option.equalsIgnoreCase("2")) {
 				// call idraft
 			} else if (option.equalsIgnoreCase("3")) {
