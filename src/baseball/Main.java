@@ -40,6 +40,8 @@ public class Main {
 				FunctionsW.odraft("Anderson, T", "A");
 				FunctionsW.odraft("Anderson, B", "A");
 				FunctionsW.odraft("Ryu, H", "A");
+				FunctionsW.odraft("Hudson, D",  "A");
+				FunctionsW.odraft("Nola, A", "A");
 			} else if (option.equalsIgnoreCase("2")) {
 				// call idraft
 			} else if (option.equalsIgnoreCase("3")) {
