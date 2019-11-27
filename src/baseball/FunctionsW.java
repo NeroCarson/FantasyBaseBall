@@ -13,10 +13,8 @@ public class FunctionsW extends League {
 	public static League theLeague = new League();
 	public static Team theTeam = new Team();
 
-	
-
 	static void odraft(String playerName, String member) {
-		if(member.equals("A")||member.contentEquals("B")||member.equals("C")||member.equals(("D")){
+		if (!(member.equals("A") || member.contentEquals("B") || member.equals("C") || member.equals(("D")))) {
 			System.out.println("LeagueMember was ommited/incorrect, no player was drafted");
 			System.exit(0);
 		}
@@ -163,28 +161,36 @@ public class FunctionsW extends League {
 		// TODO Auto-generated method stub
 
 	}
+
 	public static boolean findPitchers(String playerName) {
 		// find specified pitcher
+		int found = -1;
 		for (int i = 0; i < pitchers.size(); i++) {
 			if (pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase())) {
-				return true;
-
+				found = 0;
+				break;
 			}
 		}
-		return false;
+		if (found == 0)
+			return true;
+		else
+			return false;
 
 	}
 
 	public static boolean findPlayer(String playerName) {
 		// Find specified player
+		int found = -1;
 		for (int j = 0; j < players.size(); j++) {
-			// Separate loop for the pitchers???
 			if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
+				found = 0;
 				break;
 			}
 		}
-
-		return true;
+		if (found == 0)
+			return true;
+		else
+			return false;
 	}
 
 	public static String findPOS(String line) {
