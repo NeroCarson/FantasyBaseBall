@@ -2,40 +2,126 @@ package baseball;
 
 import java.util.Scanner;
 import models.League;
+import models.LeagueMember;
+import models.Player;
+import models.Team;
 
 public class FunctionsW extends League {
-	// ODRAFT
+
 	public static Scanner sc = new Scanner(System.in);
+	public static League theLeague = new League();
+	public static Team theTeam = new Team();
 
-	static void odraft() {
-		int i = 0;
-		// System.out.println(
-		// "Draft 13 players(a catcher, a first, second and third baseman, a shortshop,
-		// a left, right and center fieldman, and 5 pitchers : ");
-		System.out.println("choose player ");
-		String playerName = sc.next();
+	static void odraft(String playerName, String member) {
+		LeagueMember.name = member;
+
+		// Find specified player
 		int index = 0;
-		
-		while (i < 2) {
-
-			int j = 0;
-			
-			// finds selected player
-			for (j = 0; j < players.size(); j++) {
-				if (players.getClass().getName() != null && players.getClass().getName().contains(playerName)) {
-					index = j;
-					break;
-
-				}
-
+		for (int j = 0; j < players.size(); j++) {
+			// Separate loop for the pitchers???
+			if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
+				break;
 			}
-			i++;
-
+			index = j + 1;
 		}
-		System.out.println("Team--> " + );
-	}
+		String theLine = players.get(index).toString();
+		// extract position
+		String position = findPOS(theLine);
 
-	// System.out.println(players.get(index));
+		switch (position) {
+		case "C":
+			Player playerObj1 = players.get(index);
+//			if (theTeam.isPositionFilled(position)) {
+//				System.out.println("Position filled");
+//				break;
+//			}
+			System.out.println(playerObj1.toString());
+			Team.c = playerObj1; // add player to the team
+			theTeam = LeagueMember.team; // team is assigned to leagueMember
+			break;
+		case "1B":
+			Player playerObj2 = players.get(index);
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+			System.out.println(playerObj2.toString());
+			Team.b1 = playerObj2;
+			theTeam = LeagueMember.team;
+			break;
+		case "2B":
+			Player playerObj3 = players.get(index);
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+			System.out.println(playerObj3.toString());
+			Team.b2 = playerObj3;
+			theTeam = LeagueMember.team;
+			break;
+		case "3B":
+			Player playerObj4 = players.get(index);
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+			System.out.println(playerObj4.toString());
+			Team.b3 = playerObj4;
+			theTeam = LeagueMember.team;
+			break;
+		case "SS":
+			Player playerObj5 = players.get(index);
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+			System.out.println(playerObj5.toString());
+			Team.ss = playerObj5;
+			theTeam = LeagueMember.team;
+			break;
+		case "LF":
+			Player playerObj6 = players.get(index);
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+			System.out.println(playerObj6.toString());
+			Team.lf = playerObj6;
+			theTeam = LeagueMember.team;
+			break;
+		case "CF":
+			Player playerObj7 = players.get(index);
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+			System.out.println(playerObj7.toString());
+			Team.cf = playerObj7;
+			theTeam = LeagueMember.team;
+			break;
+		case "RF":
+			Player playerObj8 = players.get(index);
+			if (theTeam.isPositionFilled(position)) {
+				System.out.println("Position filled");
+				break;
+			}
+			System.out.println(playerObj8.toString());
+			Team.rf = playerObj8;
+			theTeam = LeagueMember.team;
+			break;
+		case "P":
+//			Player playerObj9 = players.get(index);
+//				if (theTeam.isPositionFilled(position)) {
+//					System.out.println("Position filled");
+//					break;
+//				}
+			// theTeam.p1 = pitcherObject;
+			// theTeam =LeagueMember.team;
+			// break;
+		default:
+			break;
+		}
+	}
 
 	// IDRAFT
 	private static void idraft() {
@@ -53,6 +139,11 @@ public class FunctionsW extends League {
 	private static void stars() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static String findPOS(String line) {
+		String[] tokens = line.split("(\\S*(?:(['\"`]).*?\\2)\\S*)\\s?|\\s");
+		return tokens[2];
 	}
 
 }
