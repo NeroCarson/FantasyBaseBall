@@ -20,24 +20,34 @@ public class FunctionsW extends League {
 		}
 		LeagueMember.name = member;
 
+// if pitcher name found
 		if (findPitchers(playerName)) {
 			{
 				int index_pitcher = 0;
 				int i = 0;
+
 				for (i = 0; i < pitchers.size(); i++) {
 					if (pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase()))
 						break;
 				}
+
 				index_pitcher = i;
 				Pitcher pitcherObj1 = pitchers.get(index_pitcher);
 				System.out.println(pitcherObj1.toString());
 				Team.p1 = pitcherObj1;
 				theTeam = LeagueMember.team;
 			}
-		} else if (findPlayer(playerName)) {
+
+			// pitcher name not found
+			if (!(findPitchers(playerName))) {
+				System.out.println("player not found!");
+			}
+		}
+
+		// player name found
+		else if (findPlayer(playerName)) {
 			int index = 0;
 			for (int j = 0; j < players.size(); j++) {
-				// Separate loop for the pitchers???
 				if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
 					break;
 				}
@@ -139,6 +149,10 @@ public class FunctionsW extends League {
 			default:
 				break;
 			}
+		}
+
+		else if (!(findPlayer(playerName))) {
+			System.out.println("player not found!");
 		}
 	}
 

@@ -39,7 +39,7 @@ public class Main {
 				FunctionsW.odraft("Ramos, W", "A");
 				FunctionsW.odraft("Anderson, T", "A");
 				FunctionsW.odraft("Anderson, B", "A");
-				FunctionsW.odraft("no name", "A");  // player not found
+				FunctionsW.odraft("Lyn, L", "A");  // player not found
 				FunctionsW.odraft("Ryu, H", "A");
 				FunctionsW.odraft("Hudson, D", "A");
 				FunctionsW.odraft("no name, A", "A");  // player not found
