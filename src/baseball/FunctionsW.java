@@ -14,6 +14,7 @@ public class FunctionsW {
 	public static Scanner sc = new Scanner(System.in);
 	public static League theLeague = new League();
 	public static Team theTeam = new Team();
+
 	public static LeagueMember league1 = new LeagueMember("League1");
 
 	static void odraft(String playerName, String member) {
@@ -158,7 +159,17 @@ public class FunctionsW {
 
 	}
 
-	
+	// TEAM
+	private static void team() {
+		// TODO Auto-generated method stub
+
+	}
+
+	// STARS
+	private static void stars() {
+		// TODO Auto-generated method stub
+
+	}
 
 	public static boolean findPitchers(String playerName) {
 		// find specified pitcher
@@ -192,9 +203,7 @@ public class FunctionsW {
 //		}
 //		if (foundPlayer != null) return true;
 //		else return false;
-		
-		
-		
+
 		// Find specified player
 		int found = -1;
 		for (int j = 0; j < theLeague.players.size(); j++) {
