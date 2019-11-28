@@ -22,34 +22,28 @@ public class FunctionsW {
 			System.out.println("LeagueMember was ommited/incorrect, no player was drafted");
 			System.exit(0);
 		}
+
 		league1.name = member;
 
-// if pitcher name found
+		// if pitcher name found
 		if (findPitchers(playerName)) {
-			{
-				int index_pitcher = 0;
-				int i = 0;
 
-				for (i = 0; i < theLeague.pitchers.size(); i++) {
-					if (theLeague.pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase()))
-						break;
-				}
+			int index_pitcher = 0;
+			int i = 0;
 
-				index_pitcher = i;
-				Pitcher pitcherObj1 = theLeague.pitchers.get(index_pitcher);
-				System.out.println(pitcherObj1.toString());
-				theTeam.p1 = pitcherObj1;
-				theTeam = league1.team;
+			for (i = 0; i < theLeague.pitchers.size(); i++) {
+				if (theLeague.pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase()))
+					break;
 			}
 
-//			// pitcher name not found
-//			if (!(findPitchers(playerName))) {
-//				System.out.println("player not found!");
-//			}
+			index_pitcher = i;
+			Pitcher pitcherObj1 = theLeague.pitchers.get(index_pitcher);
+			System.out.println(pitcherObj1.toString());
+			theTeam.p1 = pitcherObj1;
+			theTeam = league1.team;
 		}
-
 		// player name found
-		else if (findPlayer(playerName)) {
+		if (findPlayer(playerName)) {
 			int index = 0;
 			for (int j = 0; j < theLeague.players.size(); j++) {
 				if (theLeague.players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
@@ -144,30 +138,15 @@ public class FunctionsW {
 			default:
 				break;
 			}
+
+		} else {
+			System.out.println("player was not found");
 		}
-
-//		else if (!(findPlayer(playerName))) {
-//			System.out.println("player not found!");
-//		}
 	}
-
-	// extract position
 
 	// IDRAFT
 	private static void idraft() {
 		// // TODO Auto-generated method stub
-
-	}
-
-	// TEAM
-	private static void team() {
-		// TODO Auto-generated method stub
-
-	}
-
-	// STARS
-	private static void stars() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -180,7 +159,6 @@ public class FunctionsW {
 				break;
 			} else {
 				System.out.println("err");
-				break;
 			}
 
 		}
@@ -212,7 +190,6 @@ public class FunctionsW {
 				break;
 			} else {
 				System.out.println("err");
-				break;
 			}
 		}
 		if (found == 0)
