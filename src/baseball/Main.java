@@ -60,11 +60,12 @@ public class Main {
 			} else if (option.equalsIgnoreCase("8")) {
 				// call pevalfun
 			} else if (option.equalsIgnoreCase("9")) {
-				// FunctionsP.save();
+				FunctionsP.save(temp);
 			} else if (option.equalsIgnoreCase("10")) {
 				FunctionsP.restore();
 			} else if (option.equalsIgnoreCase("11")) {
-				// FunctionsP.quit();
+				FunctionsP.quit(temp);
+
 			} else {
 				System.out.println("Not a valid option. Please choose between 1-11 available options.");
 			}

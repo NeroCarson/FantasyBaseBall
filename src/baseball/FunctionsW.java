@@ -155,17 +155,7 @@ public class FunctionsW extends League {
 
 	}
 
-	// TEAM
-	private static void team() {
-		// TODO Auto-generated method stub
-
-	}
-
-	// STARS
-	private static void stars() {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	public static boolean findPitchers(String playerName) {
 		// find specified pitcher
