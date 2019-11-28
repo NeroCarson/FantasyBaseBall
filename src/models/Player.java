@@ -6,7 +6,6 @@ public class Player extends Person {
 	public int ab;
 	public int r;
 	public int h;
-	public int b1; // do we need this?
 	public int b2;
 	public int b3;
 	public int hr;
@@ -28,9 +27,7 @@ public class Player extends Person {
 
 	@Override
 	public String toString() {
-		return this.name + " " + this.team + " " + this.pos + " " + this.g + " " + this.ab + " " + this.r + " "
-				+ this.h + " " + this.b2 + " " + this.b3 + " " + this.hr + " " + this.rbi + " " + this.bb + " "
-				+ this.so + " " + this.sb + " " + this.sb + " " + this.cs + " " + this.avg + " " + this.obp + " "
-				+ this.slg + " " + this.ops;
+		return String.format("%-15s %-5s %-4s %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-6.3f %-6.3f %-6.3f %-6.3f %-6.3f",
+				name, team, pos, g, ab, r, h, b2, b3, hr, rbi, bb, so, sb, cs, avg, obp, slg, ops, rank);
 	}
 }

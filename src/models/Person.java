@@ -4,5 +4,5 @@ public abstract class Person {
 	public String name;
 	public String team;
 	public double rank;
-	public boolean selected;
+	public int selected;
 }

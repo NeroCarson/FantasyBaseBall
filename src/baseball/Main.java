@@ -9,9 +9,10 @@ import models.LeagueMember;
 public class Main {
 
 	static Scanner sc = new Scanner(System.in);
-	//Our League object that should be used to pass into load data to input all the information.
+	// Our League object that should be used to pass into load data to input all the
+	// information.
 	static League temp = new League();
-	
+
 	public static void main(String[] args) throws IOException {
 		loadData.openFile("stats.csv");
 		loadData.openFile("stats_pitcher.csv");
@@ -19,7 +20,6 @@ public class Main {
 		// System.out.println();
 		// League.printPitcher();
 
-	
 		while (true) {
 			System.out.println("Please choose an option by typing the corresponding number:");
 			System.out.println("1:  ODRAFT");
@@ -36,8 +36,15 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
-				FunctionsW.odraft("Ramos, W", "A"); //needs work
+				FunctionsW.odraft("Anderson", "A");
 				FunctionsW.odraft("Anderson, T", "A");
+//				FunctionsW.odraft("Ramos, W", "A");
+//				FunctionsW.odraft("Anderson, T", "A");
+//				FunctionsW.odraft("Anderson, B", "A");
+//				FunctionsW.odraft("Lyn, L", "A");  // player not found
+//				FunctionsW.odraft("Ryu, H", "A");
+//				FunctionsW.odraft("Hudson, D", "A");
+//				FunctionsW.odraft("no name, A", "A");  // player not found
 			} else if (option.equalsIgnoreCase("2")) {
 				// call idraft
 			} else if (option.equalsIgnoreCase("3")) {
@@ -58,7 +65,7 @@ public class Main {
 				FunctionsP.restore();
 			} else if (option.equalsIgnoreCase("11")) {
 				FunctionsP.quit(temp);
-				
+
 			} else {
 				System.out.println("Not a valid option. Please choose between 1-11 available options.");
 			}

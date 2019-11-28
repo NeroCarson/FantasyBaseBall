@@ -25,8 +25,7 @@ public class Pitcher extends Person {
 
 	@Override
 	public String toString() {
-		return this.name + " " + this.team + " " + this.w + " " + this.l + " " + this.era + " " + this.g + " " + this.gs
-				+ " " + this.sv + " " + this.svo + " " + this.ip + " " + this.h + " " + this.er + " " + this.hr + " "
-				+ this.bb + " " + this.so + " " + this.avg + " " + this.whip;
+		return String.format("%-15s %-5s %-4d %-4d %-6.2f %-4d %-4d %-4d %-4d %-6.1f %-4d %-4d %-4d %-4d %-4d %-6.3f %-6.3f %-6.3f",
+				name, team, w, l, era, g, gs, sv, svo, ip, h, er, hr, bb, so, avg, whip, rank);
 	}
 }

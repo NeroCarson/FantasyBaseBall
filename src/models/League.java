@@ -11,16 +11,25 @@ public class League {
 	public LeagueMember memberC;
 	public LeagueMember memberD;
 
-	public static ArrayList<Player> players = new ArrayList<Player>();
-	public static ArrayList<Pitcher> pitchers = new ArrayList<Pitcher>();
+	public ArrayList<Player> players;
+	public ArrayList<Pitcher> pitchers;
 
-	public static void printPlayer() {
+	public League() {
+		memberA = new LeagueMember("A");
+		memberB = new LeagueMember("B");
+		memberC = new LeagueMember("C");
+		memberD = new LeagueMember("D");
+		players = new ArrayList<>();
+		pitchers = new ArrayList<>();
+	}
+	
+	public void printPlayer() {
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println(players.get(i).toString());
 		}
 	}
 
-	public static void printPitcher() {
+	public void printPitcher() {
 		for (int i = 0; i < pitchers.size(); i++) {
 			System.out.println(pitchers.get(i).toString());
 		}
