@@ -36,13 +36,15 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
-				FunctionsW.odraft("Ramos, W", "A");
+				FunctionsW.odraft("Anderson", "A");
 				FunctionsW.odraft("Anderson, T", "A");
-				FunctionsW.odraft("Anderson, B", "A");
-				FunctionsW.odraft("Lyn, L", "A");  // player not found
-				FunctionsW.odraft("Ryu, H", "A");
-				FunctionsW.odraft("Hudson, D", "A");
-				FunctionsW.odraft("no name, A", "A");  // player not found
+//				FunctionsW.odraft("Ramos, W", "A");
+//				FunctionsW.odraft("Anderson, T", "A");
+//				FunctionsW.odraft("Anderson, B", "A");
+//				FunctionsW.odraft("Lyn, L", "A");  // player not found
+//				FunctionsW.odraft("Ryu, H", "A");
+//				FunctionsW.odraft("Hudson, D", "A");
+//				FunctionsW.odraft("no name, A", "A");  // player not found
 			} else if (option.equalsIgnoreCase("2")) {
 				// call idraft
 			} else if (option.equalsIgnoreCase("3")) {

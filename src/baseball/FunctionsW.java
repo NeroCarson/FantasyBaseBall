@@ -137,15 +137,6 @@ public class FunctionsW extends League {
 				Team.rf = playerObj8;
 				theTeam = LeagueMember.team;
 				break;
-			case "P":
-//					Player playerObj9 = players.get(index);
-//						if (theTeam.isPositionFilled(position)) {
-//							System.out.println("Position filled");
-//							break;
-//						}
-				// theTeam.p1 = pitcherObject;
-				// theTeam =LeagueMember.team;
-				// break;
 			default:
 				break;
 			}
@@ -184,6 +175,11 @@ public class FunctionsW extends League {
 				found = 0;
 				break;
 			}
+			else {
+				System.out.println("err");
+				break;
+			}
+
 		}
 		if (found == 0)
 			return true;
@@ -198,6 +194,10 @@ public class FunctionsW extends League {
 		for (int j = 0; j < players.size(); j++) {
 			if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
 				found = 0;
+				break;
+			}
+			else {
+				System.out.println("err");
 				break;
 			}
 		}
