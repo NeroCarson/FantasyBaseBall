@@ -1,24 +1,27 @@
 package baseball;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 import models.League;
 import models.LeagueMember;
 import models.Pitcher;
 import models.Player;
 import models.Team;
 
-public class FunctionsW extends League {
+public class FunctionsW {
 
 	public static Scanner sc = new Scanner(System.in);
 	public static League theLeague = new League();
 	public static Team theTeam = new Team();
+	public static LeagueMember league1 = new LeagueMember("League1");
 
 	static void odraft(String playerName, String member) {
 		if (!(member.equals("A") || member.contentEquals("B") || member.equals("C") || member.equals(("D")))) {
 			System.out.println("LeagueMember was ommited/incorrect, no player was drafted");
 			System.exit(0);
 		}
-		LeagueMember.name = member;
+		league1.name = member;
 
 // if pitcher name found
 		if (findPitchers(playerName)) {
@@ -26,125 +29,125 @@ public class FunctionsW extends League {
 				int index_pitcher = 0;
 				int i = 0;
 
-				for (i = 0; i < pitchers.size(); i++) {
-					if (pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase()))
+				for (i = 0; i < theLeague.pitchers.size(); i++) {
+					if (theLeague.pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase()))
 						break;
 				}
 
 				index_pitcher = i;
-				Pitcher pitcherObj1 = pitchers.get(index_pitcher);
+				Pitcher pitcherObj1 = theLeague.pitchers.get(index_pitcher);
 				System.out.println(pitcherObj1.toString());
-				Team.p1 = pitcherObj1;
-				theTeam = LeagueMember.team;
+				theTeam.p1 = pitcherObj1;
+				theTeam = league1.team;
 			}
 
-			// pitcher name not found
-			if (!(findPitchers(playerName))) {
-				System.out.println("player not found!");
-			}
+//			// pitcher name not found
+//			if (!(findPitchers(playerName))) {
+//				System.out.println("player not found!");
+//			}
 		}
 
 		// player name found
 		else if (findPlayer(playerName)) {
 			int index = 0;
-			for (int j = 0; j < players.size(); j++) {
-				if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
+			for (int j = 0; j < theLeague.players.size(); j++) {
+				if (theLeague.players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
 					break;
 				}
 				index = j + 1;
 			}
-			String theLine = players.get(index).toString();
+			String theLine = theLeague.players.get(index).toString();
 			String position = findPOS(theLine);
 
 			switch (position) {
 			case "C":
-				Player playerObj1 = players.get(index);
+				Player playerObj1 = theLeague.players.get(index);
 //					if (theTeam.isPositionFilled(position)) {
 //						System.out.println("Position filled");
 //						break;
 //					}
 				System.out.println(playerObj1.toString());
-				Team.c = playerObj1; // add player to the team
-				theTeam = LeagueMember.team; // team is assigned to leagueMember
+				theTeam.c = playerObj1; // add player to the team
+				theTeam = league1.team; // team is assigned to leagueMember
 				break;
 			case "1B":
-				Player playerObj2 = players.get(index);
+				Player playerObj2 = theLeague.players.get(index);
 //						if (theTeam.isPositionFilled(position)) {
 //							System.out.println("Position filled");
 //							break;
 //						}
 				System.out.println(playerObj2.toString());
-				Team.b1 = playerObj2;
-				theTeam = LeagueMember.team;
+				theTeam.b1 = playerObj2;
+				theTeam = league1.team;
 				break;
 			case "2B":
-				Player playerObj3 = players.get(index);
+				Player playerObj3 = theLeague.players.get(index);
 //						if (theTeam.isPositionFilled(position)) {
 //							System.out.println("Position filled");
 //							break;
 //						}
 				System.out.println(playerObj3.toString());
-				Team.b2 = playerObj3;
-				theTeam = LeagueMember.team;
+				theTeam.b2 = playerObj3;
+				theTeam = league1.team;
 				break;
 			case "3B":
-				Player playerObj4 = players.get(index);
+				Player playerObj4 = theLeague.players.get(index);
 //						if (theTeam.isPositionFilled(position)) {
 //							System.out.println("Position filled");
 //							break;
 //						}
 				System.out.println(playerObj4.toString());
-				Team.b3 = playerObj4;
-				theTeam = LeagueMember.team;
+				theTeam.b3 = playerObj4;
+				theTeam = league1.team;
 				break;
 			case "SS":
-				Player playerObj5 = players.get(index);
+				Player playerObj5 = theLeague.players.get(index);
 //						if (theTeam.isPositionFilled(position)) {
 //							System.out.println("Position filled");
 //							break;
 //						}
 				System.out.println(playerObj5.toString());
-				Team.ss = playerObj5;
-				theTeam = LeagueMember.team;
+				theTeam.ss = playerObj5;
+				theTeam = league1.team;
 				break;
 			case "LF":
-				Player playerObj6 = players.get(index);
+				Player playerObj6 = theLeague.players.get(index);
 //						if (theTeam.isPositionFilled(position)) {
 //							System.out.println("Position filled");
 //							break;
 //						}
 				System.out.println(playerObj6.toString());
-				Team.lf = playerObj6;
-				theTeam = LeagueMember.team;
+				theTeam.lf = playerObj6;
+				theTeam = league1.team;
 				break;
 			case "CF":
-				Player playerObj7 = players.get(index);
+				Player playerObj7 = theLeague.players.get(index);
 //						if (theTeam.isPositionFilled(position)) {
 //							System.out.println("Position filled");
 //							break;
 //						}
 				System.out.println(playerObj7.toString());
-				Team.cf = playerObj7;
-				theTeam = LeagueMember.team;
+				theTeam.cf = playerObj7;
+				theTeam = league1.team;
 				break;
 			case "RF":
-				Player playerObj8 = players.get(index);
+				Player playerObj8 = theLeague.players.get(index);
 				if (theTeam.isPositionFilled(position)) {
 					System.out.println("Position filled");
 					break;
 				}
 				System.out.println(playerObj8.toString());
-				Team.rf = playerObj8;
-				theTeam = LeagueMember.team;
+				theTeam.rf = playerObj8;
+				theTeam = league1.team;
 				break;
 			default:
 				break;
 			}
 		}
 
-		else if (!(findPlayer(playerName))) {
-			System.out.println("player not found!");
-		}
+//		else if (!(findPlayer(playerName))) {
+//			System.out.println("player not found!");
+//		}
 	}
 
 	// extract position
@@ -170,12 +173,11 @@ public class FunctionsW extends League {
 	public static boolean findPitchers(String playerName) {
 		// find specified pitcher
 		int found = -1;
-		for (int i = 0; i < pitchers.size(); i++) {
-			if (pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase())) {
+		for (int i = 0; i < theLeague.pitchers.size(); i++) {
+			if (theLeague.pitchers.get(i).toString().toLowerCase().contains(playerName.toLowerCase())) {
 				found = 0;
 				break;
-			}
-			else {
+			} else {
 				System.out.println("err");
 				break;
 			}
@@ -189,14 +191,27 @@ public class FunctionsW extends League {
 	}
 
 	public static boolean findPlayer(String playerName) {
+//		Pattern name = Pattern.compile(Pattern.quote(playerName), Pattern.CASE_INSENSITIVE);
+//		Player foundPlayer = null;
+//		for(Player player : theLeague.players) {
+//			if(name.matcher(player.toString()).find()) {
+//				if(foundPlayer != null)
+//					throw new IllegalArgumentException("multiple player matches: " + playerName);
+//				foundPlayer = player;
+//			}
+//		}
+//		if (foundPlayer != null) return true;
+//		else return false;
+		
+		
+		
 		// Find specified player
 		int found = -1;
-		for (int j = 0; j < players.size(); j++) {
-			if (players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
+		for (int j = 0; j < theLeague.players.size(); j++) {
+			if (theLeague.players.get(j).toString().toLowerCase().contains(playerName.toLowerCase())) {
 				found = 0;
 				break;
-			}
-			else {
+			} else {
 				System.out.println("err");
 				break;
 			}

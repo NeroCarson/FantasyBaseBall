@@ -50,14 +50,14 @@ public class loadData {
 					player.slg = Double.parseDouble(parseSLG(line));
 					player.ops = Double.parseDouble(parseOPS(line));
 					// add the players to the league
-					League.players.add(player);
+					league.players.add(player);
 				} else if (fileName.equals("stats_pitcher.csv")) {
 					// create the pitcher objects
 					String pitcherName = parseName(line);
 					String pitcherTeam = parseTeam(line);
 					Pitcher pitcher = new Pitcher(pitcherName, pitcherTeam);
 					// add pitchers to the league
-					League.pitchers.add(pitcher);
+					league.pitchers.add(pitcher);
 					// add the various statistics
 					pitcher.w = Integer.parseInt(parseWins(line));
 					pitcher.l = Integer.parseInt(parseLosses(line));

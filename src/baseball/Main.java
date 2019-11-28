@@ -36,8 +36,8 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
-				FunctionsW.odraft("Anderson", "A");
 				FunctionsW.odraft("Anderson, T", "A");
+//				FunctionsW.odraft("Anderson, T", "A");
 //				FunctionsW.odraft("Ramos, W", "A");
 //				FunctionsW.odraft("Anderson, T", "A");
 //				FunctionsW.odraft("Anderson, B", "A");
