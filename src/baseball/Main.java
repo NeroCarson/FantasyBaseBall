@@ -5,21 +5,40 @@ import java.util.Scanner;
 
 import models.League;
 import models.LeagueMember;
+import models.Player;
 
 public class Main {
 
 	static Scanner sc = new Scanner(System.in);
 	// Our League object that should be used to pass into load data to input all the
 	// information.
-	static League temp = new League();
+	static League league = new League();
 
 	public static void main(String[] args) throws IOException {
-		loadData.openFile("stats.csv");
-		loadData.openFile("stats_pitcher.csv");
+		league = loadData.openFile("stats.csv");
+		//loadData.openFile("stats_pitcher.csv");
 		// League.printPlayer();
 		// System.out.println();
 		// League.printPitcher();
-
+		
+		for (Player player : league.players) {
+			System.out.println(player);
+		}
+		
+		FunctionsW.odraft(league, "znderson, T", "A");
+		FunctionsW.odraft(league, "Santana", "A");
+		FunctionsW.odraft(league, "Anderson, T", "A");
+		FunctionsW.odraft(league, "Newman, ", "A");
+		
+		System.out.println(league.memberA.team.c);
+		System.out.println(league.memberA.team.b1);
+		System.out.println(league.memberA.team.b2);
+		System.out.println(league.memberA.team.b3);
+		System.out.println(league.memberA.team.ss);
+		System.out.println(league.memberA.team.lf);
+		System.out.println(league.memberA.team.cf);
+		System.out.println(league.memberA.team.rf);
+		
 		while (true) {
 			System.out.println("Please choose an option by typing the corresponding number:");
 			System.out.println("1:  ODRAFT");
@@ -36,13 +55,13 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
-				FunctionsW.odraft("Anderson, T", "A");
+				FunctionsW.odraft(league, "Anderson, T", "A");
 //				FunctionsW.odraft("Anderson, T", "A");
 //				FunctionsW.odraft("Ramos, W", "A");
 //				FunctionsW.odraft("Anderson, T", "A");
 //				FunctionsW.odraft("Anderson, B", "A");
 //				FunctionsW.odraft("Lyn, L", "A");  // player not found
-			FunctionsW.odraft("Ryu, H", "A");
+				FunctionsW.odraft(league, "Ryu, H", "A");
 //				FunctionsW.odraft("Hudson, D", "A");
 //				FunctionsW.odraft("no name, A", "A");  // player not found
 			} else if (option.equalsIgnoreCase("2")) {
@@ -60,11 +79,11 @@ public class Main {
 			} else if (option.equalsIgnoreCase("8")) {
 				// call pevalfun
 			} else if (option.equalsIgnoreCase("9")) {
-				FunctionsP.save(temp);
+				//FunctionsP.save(temp);
 			} else if (option.equalsIgnoreCase("10")) {
 				FunctionsP.restore();
 			} else if (option.equalsIgnoreCase("11")) {
-				FunctionsP.quit(temp);
+				//FunctionsP.quit(temp);
 
 			} else {
 				System.out.println("Not a valid option. Please choose between 1-11 available options.");

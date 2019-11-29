@@ -177,7 +177,8 @@ public class loadData {
 
 	public static String parseName(String line) {
 		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-		return tokens[0];
+		String name = tokens[0].replace('"', ' ').trim();
+		return name;
 	}
 
 	public static String parseTeam(String line) {
