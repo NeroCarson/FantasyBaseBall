@@ -72,6 +72,7 @@ public class Main {
 							throw new IllegalArgumentException();
 						}
 						FunctionsP.save(league);
+						// FunctionsP.save(league, command[1]);
 						break;
 					case "quit":
 						break;
@@ -80,6 +81,7 @@ public class Main {
 							throw new IllegalArgumentException();
 						}
 						FunctionsP.restore(league);
+						// FunctionsP.restore(league, command[1]);
 						break;
 					case "evalfun":
 						if (command.length < 2) {
