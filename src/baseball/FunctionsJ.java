@@ -16,10 +16,13 @@ public class FunctionsJ {
 
 	// RANK NON-PITCHERS BY FUNCTION
 	static void evalfun(ArrayList<Player> players, String function) {
-		String[] infix = function.split("\\s");
-		String[] postfix = infixToPostfix(infix);
 
 		try {
+			String[] infix = function.split("\\s");
+			if (!isValidFunction(infix)) {
+				throw new IllegalArgumentException();
+			}
+			String[] postfix = infixToPostfix(infix);
 			for (Player player : players) {
 				String[] replacedStats = convertPlayerStats(player, postfix);
 				player.rank = evaluate(replacedStats);
@@ -36,10 +39,13 @@ public class FunctionsJ {
 
 	// RANK PITCHERS BY FUNCTION
 	static void pevalfun(ArrayList<Pitcher> pitchers, String function) {
-		String[] infix = function.split("\\s");
-		String[] postfix = infixToPostfix(infix);
 
 		try {
+			String[] infix = function.split("\\s");
+			if (!isValidFunction(infix)) {
+				throw new IllegalArgumentException();
+			}
+			String[] postfix = infixToPostfix(infix);
 			for (Pitcher pitcher : pitchers) {
 				String[] replacedStats = convertPitcherStats(pitcher, postfix);
 				pitcher.rank = evaluate(replacedStats);
@@ -59,10 +65,11 @@ public class FunctionsJ {
 		System.out.println();
 		if (position.isEmpty()) {
 			String[] openPositions = member.team.getOpenPositions();
-			
-			System.out.printf("%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n",
-					"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS", "AVG", "OBP", "SLG", "OPS", "RANK");
-			
+
+			System.out.printf(
+					"%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n",
+					"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS",
+					"AVG", "OBP", "SLG", "OPS", "RANK");
 			players.stream().filter(p -> Arrays.stream(openPositions).anyMatch(q -> q.equalsIgnoreCase(p.pos)))
 					.forEach(System.out::println);
 		} else {
@@ -70,6 +77,10 @@ public class FunctionsJ {
 				System.out.println(
 						"You have already filled the position '" + position + "' or this position does not exist.");
 			} else {
+				System.out.printf(
+						"%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n",
+						"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS",
+						"AVG", "OBP", "SLG", "OPS", "RANK");
 				players.stream().filter(p -> position.equalsIgnoreCase(p.pos)).forEach(System.out::println);
 			}
 		}
@@ -81,8 +92,10 @@ public class FunctionsJ {
 		if (member.team.isPositionFilled("p")) {
 			System.out.println("You have selected all pitchers.");
 		} else {
-			System.out.printf("%-15s %-5s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s%n",
-					"Player", "Team", "W", "L", "ERA", "G", "GS", "SV", "SVO", "IP", "H", "ER", "HR", "BB", "SO", "AVG", "WHIP", "RANK");
+			System.out.printf(
+					"%-15s %-5s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s%n",
+					"Player", "Team", "W", "L", "ERA", "G", "GS", "SV", "SVO", "IP", "H", "ER", "HR", "BB", "SO", "AVG",
+					"WHIP", "RANK");
 			pitchers.stream().forEach(System.out::println);
 		}
 	}
@@ -153,6 +166,23 @@ public class FunctionsJ {
 			return 0;
 		}
 	}
+	
+	private static boolean isValidFunction(String[] function) {
+		
+		for (int i = 0; i < function.length; i++) {
+			if (isOperator(function[i])) {
+				if (i % 2 == 0) {
+					return false;
+				}
+			} else {
+				if (i % 2 == 1) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 
 	private static String[] convertPlayerStats(Player player, String[] originalFunction)
 			throws IllegalArgumentException {
@@ -163,10 +193,12 @@ public class FunctionsJ {
 			if (originalFunction[i] == null) {
 				throw new IllegalArgumentException();
 			}
+			
 			if (isOperator(originalFunction[i])) {
 				newFunction[i] = originalFunction[i];
 				continue;
 			}
+			
 			try {
 				Double.parseDouble(originalFunction[i]);
 				newFunction[i] = originalFunction[i];
@@ -201,42 +233,49 @@ public class FunctionsJ {
 
 	private static String[] convertPitcherStats(Pitcher pitcher, String[] originalFunction)
 			throws IllegalArgumentException {
+		
+		String[] newFunction = new String[originalFunction.length];
+		
 		for (int i = 0; i < originalFunction.length; i++) {
 			if (originalFunction[i] == null) {
 				throw new IllegalArgumentException();
 			}
+			
 			if (isOperator(originalFunction[i])) {
+				newFunction[i] = originalFunction[i];
 				continue;
 			}
+
 			try {
 				Double.parseDouble(originalFunction[i]);
+				newFunction[i] = originalFunction[i];
 				continue;
 			} catch (NumberFormatException e) {
 				switch (originalFunction[i].toLowerCase()) {
 				case "w":
-					originalFunction[i] = String.valueOf(pitcher.w);
+					newFunction[i] = String.valueOf(pitcher.w);
 					break;
 				case "l":
-					originalFunction[i] = String.valueOf(pitcher.l);
+					newFunction[i] = String.valueOf(pitcher.l);
 					break;
 				case "era":
-					originalFunction[i] = String.valueOf(pitcher.era);
+					newFunction[i] = String.valueOf(pitcher.era);
 					break;
 				case "er":
-					originalFunction[i] = String.valueOf(pitcher.er);
+					newFunction[i] = String.valueOf(pitcher.er);
 					break;
 				case "avg":
-					originalFunction[i] = String.valueOf(pitcher.avg);
+					newFunction[i] = String.valueOf(pitcher.avg);
 					break;
 				case "whip":
-					originalFunction[i] = String.valueOf(pitcher.whip);
+					newFunction[i] = String.valueOf(pitcher.whip);
 					break;
 				default:
 					throw new IllegalArgumentException();
 				}
 			}
 		}
-		return originalFunction;
+		return newFunction;
 	}
 
 	// SORT PLAYERS BY RANK
@@ -300,7 +339,7 @@ public class FunctionsJ {
 		Pitcher tom = new Pitcher("Tom", "TGR");
 		pitchers.add(smith);
 		pitchers.add(tom);
-		
+
 		Team team = new Team();
 		team.c = bob;
 		// team.cf = joe;
@@ -314,7 +353,7 @@ public class FunctionsJ {
 			System.out.print("Enter function: ");
 			function = scanner.nextLine();
 		}
-		
+
 		evalfun(players, function);
 		overall(players, member, "");
 		poverall(pitchers, member);
