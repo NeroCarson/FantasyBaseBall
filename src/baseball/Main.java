@@ -16,30 +16,8 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
-		league = loadData.openFile("stats.csv", "stats_pitchers.csv");
+		league = loadData.openFile("stats.csv", "stats_pitcher.csv");
 
-		// League.printPlayer();
-		// System.out.println();
-		// League.printPitcher();
-		
-		for (Player player : league.players) {
-			System.out.println(player);
-		}
-		
-		FunctionsW.odraft(league, "znderson, T", "A");
-		FunctionsW.odraft(league, "Santana", "A");
-		FunctionsW.odraft(league, "Anderson, T", "A");
-		FunctionsW.odraft(league, "Newman, ", "A");
-		
-		System.out.println(league.memberA.team.c);
-		System.out.println(league.memberA.team.b1);
-		System.out.println(league.memberA.team.b2);
-		System.out.println(league.memberA.team.b3);
-		System.out.println(league.memberA.team.ss);
-		System.out.println(league.memberA.team.lf);
-		System.out.println(league.memberA.team.cf);
-		System.out.println(league.memberA.team.rf);
-		
 		while (true) {
 			System.out.println("Please choose an option by typing the corresponding number:");
 			System.out.println("1:  ODRAFT");
@@ -56,15 +34,20 @@ public class Main {
 
 			String option = sc.next();
 			if (option.equalsIgnoreCase("1")) {
+				// TESTING ODRAFT
+				FunctionsW.odraft(league, "znderson, T", "A");
+				FunctionsW.odraft(league, "Santana", "A");
 				FunctionsW.odraft(league, "Anderson, T", "A");
-//				FunctionsW.odraft("Anderson, T", "A");
-//				FunctionsW.odraft("Ramos, W", "A");
-//				FunctionsW.odraft("Anderson, T", "A");
-//				FunctionsW.odraft("Anderson, B", "A");
-//				FunctionsW.odraft("Lyn, L", "A");  // player not found
-				FunctionsW.odraft(league, "Ryu, H", "A");
-//				FunctionsW.odraft("Hudson, D", "A");
-//				FunctionsW.odraft("no name, A", "A");  // player not found
+				FunctionsW.odraft(league, "Newman, ", "A");
+				
+				System.out.println(league.memberA.team.c);
+				System.out.println(league.memberA.team.b1);
+				System.out.println(league.memberA.team.b2);
+				System.out.println(league.memberA.team.b3);
+				System.out.println(league.memberA.team.ss);
+				System.out.println(league.memberA.team.lf);
+				System.out.println(league.memberA.team.cf);
+				System.out.println(league.memberA.team.rf);
 			} else if (option.equalsIgnoreCase("2")) {
 				// call idraft
 			} else if (option.equalsIgnoreCase("3")) {
