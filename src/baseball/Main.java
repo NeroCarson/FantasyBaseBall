@@ -15,8 +15,9 @@ public class Main {
 	static League league = new League();
 
 	public static void main(String[] args) throws IOException {
-		league = loadData.openFile("stats.csv");
-		//loadData.openFile("stats_pitcher.csv");
+
+		league = loadData.openFile("stats.csv", "stats_pitchers.csv");
+
 		// League.printPlayer();
 		// System.out.println();
 		// League.printPitcher();
