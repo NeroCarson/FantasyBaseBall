@@ -42,7 +42,7 @@ public class Main {
 //				FunctionsW.odraft("Anderson, T", "A");
 //				FunctionsW.odraft("Anderson, B", "A");
 //				FunctionsW.odraft("Lyn, L", "A");  // player not found
-//				FunctionsW.odraft("Ryu, H", "A");
+			FunctionsW.odraft("Ryu, H", "A");
 //				FunctionsW.odraft("Hudson, D", "A");
 //				FunctionsW.odraft("no name, A", "A");  // player not found
 			} else if (option.equalsIgnoreCase("2")) {

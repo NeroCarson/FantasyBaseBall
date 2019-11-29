@@ -22,7 +22,7 @@ public class League {
 		players = new ArrayList<>();
 		pitchers = new ArrayList<>();
 	}
-	
+
 	public void printPlayer() {
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println(players.get(i).toString());
@@ -33,5 +33,11 @@ public class League {
 		for (int i = 0; i < pitchers.size(); i++) {
 			System.out.println(pitchers.get(i).toString());
 		}
+	}
+	//"Anderson, T",CWS,SS,123,498,81,167,32,0,18,56,15,109,17,5,0.335,0.357,0.508,0.865
+
+	@Overide 
+	public String toString(){
+ return "";
 	}
 }
