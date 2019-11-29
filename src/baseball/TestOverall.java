@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import models.LeagueMember;
 import models.Player;
 
 public class TestOverall {
 	ArrayList<Player> players;
+	LeagueMember memberA;
 	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	
 	@Before
@@ -27,7 +29,7 @@ public class TestOverall {
 		bob.rank = 1;
 		players.add(bob);
 		
-		Player joe = new Player("Joe", "Test", "P");
+		Player joe = new Player("Joe", "Test", "CF");
 		joe.rank = 2;
 		players.add(joe);
 		
@@ -38,13 +40,18 @@ public class TestOverall {
 		Player sue = new Player("Sue", "Test", "SS");
 		sue.rank = 4;
 		players.add(sue);
+		
+		memberA = new LeagueMember("A");
+		memberA.team.c = bob;
+		memberA.team.cf = joe;
+	
 	}
 	
 	@Test
 	public void OverallPrint() {
-//		FunctionsJ.overall(players);
-//		String expected = "Bob Test C 1\nJoe Test P 2\nJane Test 1B 3\nSue Test SS \n";
-//		String actual = outContent.toString();
-//		assertEquals(expected, actual);
+		FunctionsJ.overall(players, memberA, "");
+		String expected = "Bob Test C 1\nJoe Test P 2\nJane Test 1B 3\nSue Test SS \n";
+		String actual = outContent.toString();
+		assertEquals(expected, actual);
 	}
 }

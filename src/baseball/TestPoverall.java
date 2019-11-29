@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import models.LeagueMember;
 import models.Pitcher;
 
 public class TestPoverall {
 	ArrayList<Pitcher> pitchers;
+	LeagueMember memberA;
 	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	
 	@Before
@@ -35,13 +37,17 @@ public class TestPoverall {
 		Pitcher sue = new Pitcher("Sue", "Test");
 		sue.rank = 4;
 		pitchers.add(sue);
+		
+		memberA = new LeagueMember("A");
+		memberA.team.p1 = bob;
+		memberA.team.p2 = joe;
 	}
 	
 	@Test
 	public void OverallPrint() {
-//		FunctionsJ.poverall(pitchers, );
-//		String expected = "Bob Test P 1\nJoe Test P 2\nJane Test P 3\nSue Test P\n";
-//		String actual = outContent.toString();
-//		assertEquals(expected, actual);
+		FunctionsJ.poverall(pitchers, memberA);
+		String expected = "Bob Test P 1\nJoe Test P 2\nJane Test P 3\nSue Test P\n";
+		String actual = outContent.toString();
+		assertEquals(expected, actual);
 	}
 }

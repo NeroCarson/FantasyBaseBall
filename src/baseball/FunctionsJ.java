@@ -30,7 +30,7 @@ public class FunctionsJ {
 			sort(players);
 			System.out.println("Players sorted by function: " + function);
 		} catch (IllegalArgumentException e) {
-			System.out.println("ERROR: Invalid function.\nThe supplied function could not be applied.\n"
+			System.out.println("ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
 					+ "Either a statistic is not supported or the function is invalid.\n"
 					+ "Double check that a space separates each element.\n"
 					+ "Supported statistics include: g, rbi, sb, cs, avg, obp.");
@@ -49,11 +49,11 @@ public class FunctionsJ {
 			for (Pitcher pitcher : pitchers) {
 				String[] replacedStats = convertPitcherStats(pitcher, postfix);
 				pitcher.rank = evaluate(replacedStats);
-				sort(pitchers);
-				System.out.println("Players sorted by function: " + function);
 			}
+			sort(pitchers);
+			System.out.println("Players sorted by function: " + function);
 		} catch (IllegalArgumentException e) {
-			System.out.println("ERROR: Invalid function.\nThe supplied function could not be applied.\n"
+			System.out.println("ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
 					+ "Either a statistic is not supported or the function is invalid.\n"
 					+ "Double check that a space separates each element.\n"
 					+ "Supported statistics include: w, l, era, er, avg, whip.");
@@ -108,7 +108,7 @@ public class FunctionsJ {
 
 		for (String element : infix) {
 			if (isOperator(element)) {
-				if (operators.empty() || compareOperator(element, operators.peek()) > -1) {
+				if (operators.empty() || compareOperator(element, operators.peek()) > 0) {
 					operators.push(element);
 				} else {
 					postfix[index] = operators.pop();
@@ -146,7 +146,7 @@ public class FunctionsJ {
 	}
 
 	// CALCULATE BINARY EXPRESSION
-	private static double calculate(String operator, String strOperand1, String strOperand2) {
+	private static double calculate(String operator, String strOperand2, String strOperand1) {
 		double operand1 = Double.parseDouble(strOperand1);
 		double operand2 = Double.parseDouble(strOperand2);
 
@@ -284,9 +284,9 @@ public class FunctionsJ {
 		people.sort(new Comparator<T>() {
 			public int compare(T person1, T person2) {
 
-				if (person1.rank > person2.rank) {
+				if (person1.rank < person2.rank) {
 					return 1;
-				} else if (person1.rank < person2.rank) {
+				} else if (person1.rank > person2.rank) {
 					return -1;
 				} else {
 					return 0;
