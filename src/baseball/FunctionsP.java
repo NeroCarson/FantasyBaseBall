@@ -195,7 +195,7 @@ public class FunctionsP {
 	
 	
 	// TEAM
-	private static void team(LeagueMember alpha) {
+	public static void team(LeagueMember alpha) {
 			// TODO Auto-generated method stub
 
 			Team tm = alpha.team;
@@ -227,7 +227,7 @@ public class FunctionsP {
 		}
 
 	// STARS
-	private static void stars(LeagueMember beta) {
+	public static void stars(LeagueMember beta) {
 			// TODO Auto-generated method stub
 //			STARS leagueMember
 //

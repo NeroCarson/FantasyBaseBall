@@ -2,8 +2,6 @@ package models;
 
 import java.util.ArrayList;
 
-import baseball.loadData;
-
 public class League {
 
 	public LeagueMember memberA;
@@ -22,22 +20,55 @@ public class League {
 		players = new ArrayList<>();
 		pitchers = new ArrayList<>();
 	}
-
-	public void printPlayer() {
-		for (int i = 0; i < players.size(); i++) {
-			System.out.println(players.get(i).toString());
+	
+	public LeagueMember getMemberFromName(String name) throws IllegalArgumentException {
+		switch (name.toLowerCase()) {
+		case "a":
+			return memberA;
+		case "b":
+			return memberB;
+		case "c":
+			return memberC;
+		case "d":
+			return memberD;
+		default:
+			throw new IllegalArgumentException("ERROR: League member '" + name + "' was not found. No player drafted");
 		}
 	}
-
-	public void printPitcher() {
-		for (int i = 0; i < pitchers.size(); i++) {
-			System.out.println(pitchers.get(i).toString());
+	
+	public Person getPersonFromName(String playerName) throws IllegalArgumentException {
+		
+		Player[] matchingPlayers = players.stream()
+				.filter(p -> p.name.toLowerCase().startsWith(playerName.toLowerCase()))
+				.toArray(Player[]::new);
+		
+		Pitcher[] matchingPitchers = pitchers.stream()
+				.filter(p -> p.name.toLowerCase().startsWith(playerName.toLowerCase()))
+				.toArray(Pitcher[]::new);
+		
+		// No player found
+		if (matchingPlayers.length == 0 && matchingPitchers.length == 0) {
+			throw new IllegalArgumentException("ERROR: A player named '" + playerName + "' was not found. No player drafted");
 		}
-	}
-	//"Anderson, T",CWS,SS,123,498,81,167,32,0,18,56,15,109,17,5,0.335,0.357,0.508,0.865
-
-	@Overide 
-	public String toString(){
- return "";
+		
+		// Multiple players found
+		if (matchingPlayers.length + matchingPitchers.length > 1) {
+			throw new IllegalArgumentException("ERROR: More than one player matched '" + playerName + "'.\n"
+					+ "Please provide a more specific name. No player drafted");
+		}
+		
+		Person foundPlayer;
+		if (matchingPlayers.length == 1) {
+			foundPlayer = matchingPlayers[0];
+		} else {
+			foundPlayer = matchingPitchers[0];
+		}
+		
+		boolean isAvailable = foundPlayer.selected == 0;
+		if (!isAvailable) {
+			throw new IllegalArgumentException("ERROR: Player '" + playerName + "' has already been selected. No player drafted");
+		}
+		
+		return foundPlayer;
 	}
 }

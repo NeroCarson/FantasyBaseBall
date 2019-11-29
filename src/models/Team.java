@@ -17,7 +17,59 @@ public class Team {
 	public Pitcher p4; // pitcher 4
 	public Pitcher p5; // pitcher 5
 	
+	
+	public boolean addPlayer(Player player) {
+		switch (player.pos.toLowerCase()) {
+		case "c":
+			c = player;
+			return true;
+		case "b1":
+			b1 = player;
+			return true;
+		case "b2":
+			b2 = player;
+			return true;
+		case "b3":
+			b3 = player;
+			return true;
+		case "ss":
+			ss = player;
+			return true;
+		case "lf":
+			lf = player;
+			return true;
+		case "cf":
+			cf = player;
+			return true;
+		case "rf":
+			rf = player;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addPitcher(Pitcher pitcher) {
 
+		if (p1 == null) {
+			p1 = pitcher;
+			return true;
+		} else if (p2 == null) {
+			p2 = pitcher;
+			return true;
+		} else if (p3 == null) {
+			p3 = pitcher;
+			return true;
+		} else if (p4 == null) {
+			p4 = pitcher;
+			return true;
+		} else if (p5 == null) {
+			p5 = pitcher;
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public Boolean isPositionFilled(String position) {
 		switch (position.toLowerCase()) {
 		case "c":

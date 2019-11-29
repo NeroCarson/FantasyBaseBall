@@ -53,13 +53,15 @@ public class Main {
 					if (command.length < 2) {
 						throw new IllegalArgumentException();
 					}
-					// Call method
+					LeagueMember memberTeam = league.getMemberFromName(command[1]);
+					FunctionsP.team(memberTeam);
 					break;
 				case "stars":
 					if (command.length < 2) {
 						throw new IllegalArgumentException();
 					}
-					// Call method
+					LeagueMember memberStars = league.getMemberFromName(command[1]);
+					FunctionsP.team(memberStars);
 					break;
 				case "save":
 					if (command.length < 2) {
@@ -73,7 +75,7 @@ public class Main {
 					if (command.length < 2) {
 						throw new IllegalArgumentException();
 					}
-					FunctionsP.restore();
+					FunctionsP.restore(league);
 					break;
 				case "evalfun":
 					if (command.length < 2) {
@@ -92,6 +94,7 @@ public class Main {
 				}
 
 			} while (!"quit".equals(command[0]));
+			
 		} catch (IllegalArgumentException e) {
 			System.out.println("ERROR: Wrong number of arguments provided.");
 		}
