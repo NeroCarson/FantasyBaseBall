@@ -10,54 +10,79 @@ import models.LeagueMember;
 import models.Person;
 import models.Pitcher;
 import models.Player;
+import models.Team;
 
 public class FunctionsJ {
 
 	// RANK NON-PITCHERS BY FUNCTION
 	static void evalfun(ArrayList<Player> players, String function) {
-		String[] inputArray = function.split("\\s");
-		String[] postfix = infixToPostfix(inputArray);
+		String[] infix = function.split("\\s");
+		String[] postfix = infixToPostfix(infix);
 
-		for (String element : postfix)
-			System.out.print(element + " ");
-
-		for (Player player : players)
-			player.rank = evaluate(player, postfix);
-
-		sort(players);
-		System.out.println("Players sorted by function: " + function);
+		try {
+			for (Player player : players) {
+				String[] replacedStats = convertPlayerStats(player, postfix);
+				player.rank = evaluate(replacedStats);
+			}
+			sort(players);
+			System.out.println("Players sorted by function: " + function);
+		} catch (IllegalArgumentException e) {
+			System.out.println("ERROR: Invalid function.\nThe supplied function could not be applied.\n"
+					+ "Either a statistic is not supported or the function is invalid.\n"
+					+ "Double check that a space separates each element.\n"
+					+ "Supported statistics include: g, rbi, sb, cs, avg, obp.");
+		}
 	}
-	
+
 	// RANK PITCHERS BY FUNCTION
 	static void pevalfun(ArrayList<Pitcher> pitchers, String function) {
-		System.out.println("Method not implemented");
+		String[] infix = function.split("\\s");
+		String[] postfix = infixToPostfix(infix);
+
+		try {
+			for (Pitcher pitcher : pitchers) {
+				String[] replacedStats = convertPitcherStats(pitcher, postfix);
+				pitcher.rank = evaluate(replacedStats);
+				sort(pitchers);
+				System.out.println("Players sorted by function: " + function);
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println("ERROR: Invalid function.\nThe supplied function could not be applied.\n"
+					+ "Either a statistic is not supported or the function is invalid.\n"
+					+ "Double check that a space separates each element.\n"
+					+ "Supported statistics include: w, l, era, er, avg, whip.");
+		}
 	}
 
 	// PRINT PLAYERS BY RANK
 	static void overall(ArrayList<Player> players, LeagueMember member, String position) {
+		System.out.println();
 		if (position.isEmpty()) {
 			String[] openPositions = member.team.getOpenPositions();
-			players.stream().filter(p -> Arrays.stream(openPositions).anyMatch(q -> q.equalsIgnoreCase(p.pos))).forEach(System.out::println);
+			players.stream().filter(p -> Arrays.stream(openPositions).anyMatch(q -> q.equalsIgnoreCase(p.pos)))
+					.forEach(System.out::println);
 		} else {
 			if (member.team.isPositionFilled(position)) {
-				System.out.println("You have already filled the position: '" + position +"' or this position does not exist.");
+				System.out.println(
+						"You have already filled the position '" + position + "' or this position does not exist.");
 			} else {
-				players.stream().filter(p -> position.equals(p.pos)).forEach(System.out::println);
+				players.stream().filter(p -> position.equalsIgnoreCase(p.pos)).forEach(System.out::println);
 			}
 		}
 	}
 
 	// PRINT PITCHERS BY RANK
-	static void poverall(ArrayList<Pitcher> pitchers) {
+	static void poverall(ArrayList<Pitcher> pitchers, LeagueMember member) {
 		System.out.println();
-		for (Pitcher pitcher : pitchers) {
-			System.out.println(pitcher);
+		if (member.team.isPositionFilled("p")) {
+			System.out.println("You have selected all pitchers.");
+		} else {
+			pitchers.stream().forEach(System.out::println);
 		}
 	}
-	
 
 	// CONVERT INFIX EXPRESSION TO POSTFIX
-	static String[] infixToPostfix(String[] infix) {
+	private static String[] infixToPostfix(String[] infix) {
 		Stack<String> operators = new Stack<>();
 		String[] postfix = new String[infix.length];
 		int index = 0;
@@ -85,13 +110,13 @@ public class FunctionsJ {
 	}
 
 	// EVALUATE POST FIX EXPRESSION
-	public static double evaluate(Player player, String[] postfix) {
+	private static double evaluate(String[] postfix) {
 		Stack<String> operands = new Stack<>();
 		double answer = 0;
 
 		for (String element : postfix) {
 			if (isOperator(element)) {
-				answer = calculate(player, element, operands.pop(), operands.pop());
+				answer = calculate(element, operands.pop(), operands.pop());
 				operands.push(String.valueOf(answer));
 			} else {
 				operands.push(element);
@@ -102,9 +127,9 @@ public class FunctionsJ {
 	}
 
 	// CALCULATE BINARY EXPRESSION
-	public static double calculate(Player player, String operator, String strOperand1, String strOperand2) {
-		double operand1 = convertOperand(player, strOperand1);
-		double operand2 = convertOperand(player, strOperand2);	
+	private static double calculate(String operator, String strOperand1, String strOperand2) {
+		double operand1 = Double.parseDouble(strOperand1);
+		double operand2 = Double.parseDouble(strOperand2);
 
 		switch (operator) {
 		case "+":
@@ -123,23 +148,93 @@ public class FunctionsJ {
 		}
 	}
 
-	// CONVERT OPERAND FROM STRING/STATISTIC TO DOUBLE
-	public static double convertOperand(Player player, String operand) {
-		try {
-			return Double.parseDouble(operand);
-		} catch (Exception e) {
-			switch (operand) {
-			case "avg":
-				return player.avg;
-			case "obp":
-				return player.obp;
+	private static String[] convertPlayerStats(Player player, String[] originalFunction)
+			throws IllegalArgumentException {
+
+		String[] newFunction = new String[originalFunction.length];
+
+		for (int i = 0; i < originalFunction.length; i++) {
+			if (originalFunction[i] == null) {
+				throw new IllegalArgumentException();
+			}
+			if (isOperator(originalFunction[i])) {
+				newFunction[i] = originalFunction[i];
+				continue;
+			}
+			try {
+				Double.parseDouble(originalFunction[i]);
+				newFunction[i] = originalFunction[i];
+				continue;
+			} catch (NumberFormatException e) {
+				switch (originalFunction[i].toLowerCase()) {
+				case "g":
+					newFunction[i] = String.valueOf(player.g);
+					break;
+				case "rbi":
+					newFunction[i] = String.valueOf(player.rbi);
+					break;
+				case "sb":
+					newFunction[i] = String.valueOf(player.sb);
+					break;
+				case "cs":
+					newFunction[i] = String.valueOf(player.cs);
+					break;
+				case "avg":
+					newFunction[i] = String.valueOf(player.avg);
+					break;
+				case "obp":
+					newFunction[i] = String.valueOf(player.obp);
+					break;
+				default:
+					throw new IllegalArgumentException();
+				}
 			}
 		}
-		return 0;
+		return newFunction;
+	}
+
+	private static String[] convertPitcherStats(Pitcher pitcher, String[] originalFunction)
+			throws IllegalArgumentException {
+		for (int i = 0; i < originalFunction.length; i++) {
+			if (originalFunction[i] == null) {
+				throw new IllegalArgumentException();
+			}
+			if (isOperator(originalFunction[i])) {
+				continue;
+			}
+			try {
+				Double.parseDouble(originalFunction[i]);
+				continue;
+			} catch (NumberFormatException e) {
+				switch (originalFunction[i].toLowerCase()) {
+				case "w":
+					originalFunction[i] = String.valueOf(pitcher.w);
+					break;
+				case "l":
+					originalFunction[i] = String.valueOf(pitcher.l);
+					break;
+				case "era":
+					originalFunction[i] = String.valueOf(pitcher.era);
+					break;
+				case "er":
+					originalFunction[i] = String.valueOf(pitcher.er);
+					break;
+				case "avg":
+					originalFunction[i] = String.valueOf(pitcher.avg);
+					break;
+				case "whip":
+					originalFunction[i] = String.valueOf(pitcher.whip);
+					break;
+				default:
+					throw new IllegalArgumentException();
+				}
+			}
+		}
+		return originalFunction;
 	}
 
 	// SORT PLAYERS BY RANK
-	public static <T extends Person> void sort(ArrayList<T> people) {
+	private static <T extends Person> void sort(ArrayList<T> people) {
 
 		people.sort(new Comparator<T>() {
 			public int compare(T person1, T person2) {
@@ -156,12 +251,12 @@ public class FunctionsJ {
 	}
 
 	// DETERMINE IF A STRING IS AN OPERATOR
-	public static boolean isOperator(String item) {
+	private static boolean isOperator(String item) {
 		return "+".equals(item) || "-".equals(item) || "*".equals(item) || "/".equals(item);
 	}
 
 	// COMPARES TWO OPERATORS BY ORDER OF OPERATION
-	public static int compareOperator(String op1, String op2) {
+	private static int compareOperator(String op1, String op2) {
 		if (("+".equals(op1) || "-".equals(op1)) && ("*".equals(op2) || "/".equals(op2))) {
 			return -1;
 		}
@@ -170,38 +265,53 @@ public class FunctionsJ {
 		}
 		return 0;
 	}
-	
+
 	// FOR TESTING ONLY
-//	public static void main(String[] args) {
-//		ArrayList<Player> players = new ArrayList<>();
-//		Player bob = new Player("Bob", "Test", "C");
-//		bob.avg = 5.5;
-//		bob.obp = 1.5;
-//		players.add(bob);
-//
-//		Player joe = new Player("Joe", "Test", "P");
-//		joe.avg = 5;
-//		joe.obp = 5.5;
-//		players.add(joe);
-//
-//		Player jane = new Player("Jane", "Test", "1B");
-//		jane.avg = 4.5;
-//		jane.obp = 3;
-//		players.add(jane);
-//
-//		Player sue = new Player("Sue", "Test", "SS");
-//		sue.avg = 3.5;
-//		sue.obp = 4;
-//		players.add(sue);
-//
-//		String function;
-//		try (Scanner scanner = new Scanner(System.in)) {
-//			System.out.print("Enter function: ");
-//			function = scanner.nextLine();
-//		}
-//
-//		evalfun(players, function);
-//		overall(players);
-//
-//	}
+	public static void main(String[] args) {
+		ArrayList<Player> players = new ArrayList<>();
+		Player bob = new Player("Bob", "Test", "C");
+		bob.avg = 5.5;
+		bob.obp = 1.5;
+		players.add(bob);
+
+		Player joe = new Player("Joe", "Test", "CF");
+		joe.avg = 5;
+		joe.obp = 5.5;
+		players.add(joe);
+
+		Player jane = new Player("Jane", "Test", "1B");
+		jane.avg = 4.5;
+		jane.obp = 3;
+		players.add(jane);
+
+		Player sue = new Player("Sue", "Test", "SS");
+		sue.avg = 3.5;
+		sue.obp = 4;
+		players.add(sue);
+
+		ArrayList<Pitcher> pitchers = new ArrayList<>();
+		Pitcher smith = new Pitcher("Bob", "Red Sox");
+		Pitcher tom = new Pitcher("Tom", "Tigers");
+		pitchers.add(smith);
+		pitchers.add(tom);
+		
+		Team team = new Team();
+		team.c = bob;
+		// team.cf = joe;
+		team.b1 = jane;
+
+		LeagueMember member = new LeagueMember();
+		member.name = "A";
+		member.team = team;
+
+		String function;
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.print("Enter function: ");
+			function = scanner.nextLine();
+		}
+		//evalfun(players, function);
+		//overall(players, member, "c");
+		poverall(pitchers, member);
+
+	}
 }

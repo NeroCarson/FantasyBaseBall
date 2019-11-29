@@ -31,6 +31,6 @@ public class Player extends Person {
 		return this.name + " " + this.team + " " + this.pos + " " + this.g + " " + this.ab + " " + this.r + " "
 				+ this.h + " " + this.b2 + " " + this.b3 + " " + this.hr + " " + this.rbi + " " + this.bb + " "
 				+ this.so + " " + this.sb + " " + this.sb + " " + this.cs + " " + this.avg + " " + this.obp + " "
-				+ this.slg + " " + this.ops;
+				+ this.slg + " " + this.ops + " " + this.rank;
 	}
 }
