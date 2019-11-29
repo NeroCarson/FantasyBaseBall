@@ -38,8 +38,7 @@ public class FunctionsW {
 						break;
 				}
 				index_pitcher = i + 1;
-			//	Pitcher pitcherObj1 = theLeague.pitchers.get(index_pitcher);
-				Pitcher pitcherObj1 = new Pitcher("sam","ham");
+				Pitcher pitcherObj1 = theLeague.pitchers.get(index_pitcher);
 				System.out.println(pitcherObj1);
 				theTeam.p1 = pitcherObj1;
 				theTeam = league1.team;

@@ -12,47 +12,59 @@ import models.Player;
 
 public class loadData {
 
-	public static League openFile(String fileName) {
+	public static League openFile(String fileName1, String fileName2) {
 		// create league
 		League league = new League();
 		BufferedReader br = null;
+		BufferedReader br_p = null;
 		try {
 			String line;
-			br = new BufferedReader(new FileReader(fileName));
-			// read line by line
+			br = new BufferedReader(new FileReader(fileName1));
+			// read line by line for stats.csv
 			while ((line = br.readLine()) != null) {
-				if (fileName.equals("stats.csv")) {
+				String playerName = parseName(line);
+				String playerTeam = parseTeam(line);
+				String playerPOS = parsePOS(line);
+				// create player object
+				Player player = new Player(playerName, playerTeam, playerPOS);
+//				league.players.add(player);
 
-					// create the player objects
-					String playerName = parseName(line);
-					String playerTeam = parseTeam(line);
-					String playerPOS = parsePOS(line);
-					Player player = new Player(playerName, playerTeam, playerPOS);
+				// add the various statistics
+				player.g = Integer.parseInt(parseG(line));
+				player.ab = Integer.parseInt(parseAB(line));
+				player.r = Integer.parseInt(parseR(line));
+				player.h = Integer.parseInt(parseH(line));
+				// b1????
+				player.b2 = Integer.parseInt(parseB2(line));
+				player.b3 = Integer.parseInt(parseB3(line));
+				player.hr = Integer.parseInt(parseHR(line));
+				player.rbi = Integer.parseInt(parseRBI(line));
+				player.bb = Integer.parseInt(parseBB(line));
+				player.so = Integer.parseInt(parseSO(line));
+				player.sb = Integer.parseInt(parseSB(line));
+				player.cs = Integer.parseInt(parseCS(line));
+				player.avg = Double.parseDouble(parseAVG(line));
+				player.obp = Double.parseDouble(parseOBP(line));
+				player.slg = Double.parseDouble(parseSLG(line));
+				player.ops = Double.parseDouble(parseOPS(line));
+				// add the players to the league
+				league.players.add(player);
 
-//					Player player = new Player(playerName, playerTeam, playerPOS);
-//					League.players.add(player);
-					// add the various statistics
-					player.g = Integer.parseInt(parseG(line));
-					player.ab = Integer.parseInt(parseAB(line));
-					player.r = Integer.parseInt(parseR(line));
-					player.h = Integer.parseInt(parseH(line));
-					// b1????
-					player.b2 = Integer.parseInt(parseB2(line));
-					player.b3 = Integer.parseInt(parseB3(line));
-					player.hr = Integer.parseInt(parseHR(line));
-					player.rbi = Integer.parseInt(parseRBI(line));
-					player.bb = Integer.parseInt(parseBB(line));
-					player.so = Integer.parseInt(parseSO(line));
-					player.sb = Integer.parseInt(parseSB(line));
-					player.cs = Integer.parseInt(parseCS(line));
-					player.avg = Double.parseDouble(parseAVG(line));
-					player.obp = Double.parseDouble(parseOBP(line));
-					player.slg = Double.parseDouble(parseSLG(line));
-					player.ops = Double.parseDouble(parseOPS(line));
-					// add the players to the league
-					league.players.add(player);
-				} else if (fileName.equals("stats_pitcher.csv")) {
-					// create the pitcher objects
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+
+				String line;
+				br_p = new BufferedReader(new FileReader(fileName2));
+				while ((line = br_p.readLine()) != null) {
 					String pitcherName = parseName(line);
 					String pitcherTeam = parseTeam(line);
 					Pitcher pitcher = new Pitcher(pitcherName, pitcherTeam);
@@ -76,24 +88,31 @@ public class loadData {
 					pitcher.avg = Double.parseDouble(parseAVG_pitcher(line));
 					pitcher.whip = Double.parseDouble(parseWHIP(line));
 
-				} else {
-					System.out.println("~~~Error~~~");
 				}
-			}
-			return league;
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (br != null)
-					br.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (br_p != null)
+						br_p.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		return null;
+		return league;
 
 	}
+
+//					} else if (fileName.equals("stats_pitcher.csv")) {
+//						// create the pitcher objects
+
+//
+//					} else {
+//						System.out.println("~~~Error~~~");
+//					}
+//				}
+//				return league;
 
 	public static String parseWHIP(String line) {
 		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
