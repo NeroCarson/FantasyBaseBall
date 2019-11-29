@@ -54,6 +54,10 @@ public class FunctionsW {
 	}
 	
 	
+	public static void idraft(League league, String playerName) {
+		odraft(league, playerName, "A");
+	}
+	
 	private static LeagueMember getMemberFromName(League league, String name) throws IllegalArgumentException {
 		switch (name.toLowerCase()) {
 		case "a":

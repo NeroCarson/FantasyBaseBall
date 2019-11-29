@@ -49,7 +49,20 @@ public class Main {
 				System.out.println(league.memberA.team.cf);
 				System.out.println(league.memberA.team.rf);
 			} else if (option.equalsIgnoreCase("2")) {
-				// call idraft
+				// TESTING ODRAFT
+				FunctionsW.idraft(league, "znderson, T");
+				FunctionsW.idraft(league, "Santana");
+				FunctionsW.idraft(league, "Anderson, T");
+				FunctionsW.idraft(league, "Newman, ");
+				
+				System.out.println(league.memberA.team.c);
+				System.out.println(league.memberA.team.b1);
+				System.out.println(league.memberA.team.b2);
+				System.out.println(league.memberA.team.b3);
+				System.out.println(league.memberA.team.ss);
+				System.out.println(league.memberA.team.lf);
+				System.out.println(league.memberA.team.cf);
+				System.out.println(league.memberA.team.rf);
 			} else if (option.equalsIgnoreCase("3")) {
 				// call overall
 			} else if (option.equalsIgnoreCase("4")) {
