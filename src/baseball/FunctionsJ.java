@@ -3,14 +3,8 @@ package baseball;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Scanner;
 import java.util.Stack;
-
-import models.LeagueMember;
-import models.Person;
-import models.Pitcher;
-import models.Player;
-import models.Team;
+import models.*;
 
 public class FunctionsJ {
 
@@ -309,54 +303,5 @@ public class FunctionsJ {
 			return 1;
 		}
 		return 0;
-	}
-
-	// FOR TESTING ONLY
-	public static void main(String[] args) {
-		ArrayList<Player> players = new ArrayList<>();
-		Player bob = new Player("Bob", "Test", "C");
-		bob.avg = .5;
-		bob.obp = .5;
-		players.add(bob);
-
-		Player joe = new Player("Joe", "Test", "CF");
-		joe.avg = .5;
-		joe.obp = .5;
-		players.add(joe);
-
-		Player jane = new Player("Jane", "Test", "1B");
-		jane.avg = .5;
-		jane.obp = .3;
-		players.add(jane);
-
-		Player sue = new Player("Goldschmidt, P", "RDX", "SS");
-		sue.avg = .5;
-		sue.obp = .4;
-		players.add(sue);
-
-		ArrayList<Pitcher> pitchers = new ArrayList<>();
-		Pitcher smith = new Pitcher("Bob", "Re");
-		Pitcher tom = new Pitcher("Tom", "TGR");
-		pitchers.add(smith);
-		pitchers.add(tom);
-
-		Team team = new Team();
-		team.c = bob;
-		// team.cf = joe;
-		team.b1 = jane;
-
-		LeagueMember member = new LeagueMember("A");
-		member.team = team;
-
-		String function;
-		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.print("Enter function: ");
-			function = scanner.nextLine();
-		}
-
-		evalfun(players, function);
-		overall(players, member, "");
-		poverall(pitchers, member);
-
 	}
 }

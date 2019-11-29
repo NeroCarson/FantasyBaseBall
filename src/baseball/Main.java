@@ -2,91 +2,100 @@ package baseball;
 
 import java.io.IOException;
 import java.util.Scanner;
-
-import models.League;
-import models.LeagueMember;
-import models.Player;
+import models.*;
 
 public class Main {
 
-	static Scanner sc = new Scanner(System.in);
-	// Our League object that should be used to pass into load data to input all the
-	// information.
-	static League league = new League();
-
 	public static void main(String[] args) throws IOException {
 
-		league = loadData.openFile("stats.csv", "stats_pitcher.csv");
+		League league = loadData.openFile("stats.csv", "stats_pitcher.csv");
+		String input;
+		String[] command = null;
 
-		while (true) {
-			System.out.println("Please choose an option by typing the corresponding number:");
-			System.out.println("1:  ODRAFT");
-			System.out.println("2:  IDRAFT");
-			System.out.println("3:  OVERALL");
-			System.out.println("4:  POVERALL");
-			System.out.println("5:  TEAM");
-			System.out.println("6:  STARS");
-			System.out.println("7:  EVALFUN");
-			System.out.println("8:  PEVALFUN");
-			System.out.println("9:  SAVE");
-			System.out.println("10: RESTORE");
-			System.out.println("11: QUIT");
+		try (Scanner scanner = new Scanner(System.in)) {
+			do {
+				System.out.print("Enter command: ");
+				input = scanner.nextLine();
+				command = input.split("(?<!,)[ \"]+");
 
-			String option = sc.next();
-			if (option.equalsIgnoreCase("1")) {
-				// TESTING ODRAFT
-				FunctionsW.odraft(league, "znderson, T", "A");
-				FunctionsW.odraft(league, "Santana", "A");
-				FunctionsW.odraft(league, "Anderson, T", "A");
-				FunctionsW.odraft(league, "Newman, ", "A");
-				
-				System.out.println(league.memberA.team.c);
-				System.out.println(league.memberA.team.b1);
-				System.out.println(league.memberA.team.b2);
-				System.out.println(league.memberA.team.b3);
-				System.out.println(league.memberA.team.ss);
-				System.out.println(league.memberA.team.lf);
-				System.out.println(league.memberA.team.cf);
-				System.out.println(league.memberA.team.rf);
-			} else if (option.equalsIgnoreCase("2")) {
-				// TESTING ODRAFT
-				FunctionsW.idraft(league, "znderson, T");
-				FunctionsW.idraft(league, "Santana");
-				FunctionsW.idraft(league, "Anderson, T");
-				FunctionsW.idraft(league, "Newman, ");
-				
-				System.out.println(league.memberA.team.c);
-				System.out.println(league.memberA.team.b1);
-				System.out.println(league.memberA.team.b2);
-				System.out.println(league.memberA.team.b3);
-				System.out.println(league.memberA.team.ss);
-				System.out.println(league.memberA.team.lf);
-				System.out.println(league.memberA.team.cf);
-				System.out.println(league.memberA.team.rf);
-			} else if (option.equalsIgnoreCase("3")) {
-				// call overall
-			} else if (option.equalsIgnoreCase("4")) {
-				// call poverall
-			} else if (option.equalsIgnoreCase("5")) {
-				// call team
-			} else if (option.equalsIgnoreCase("6")) {
-				// call stars
-			} else if (option.equalsIgnoreCase("7")) {
-				// call evalfun
-			} else if (option.equalsIgnoreCase("8")) {
-				// call pevalfun
-			} else if (option.equalsIgnoreCase("9")) {
-				//FunctionsP.save(temp);
-			} else if (option.equalsIgnoreCase("10")) {
-				FunctionsP.restore();
-			} else if (option.equalsIgnoreCase("11")) {
-				//FunctionsP.quit(temp);
+				if (command == null || command.length == 0) {
+					throw new IllegalArgumentException();
+				}
 
-			} else {
-				System.out.println("Not a valid option. Please choose between 1-11 available options.");
-			}
+				switch (command[0].toLowerCase()) {
+				case "odraft":
+					if (command.length < 3) {
+						throw new IllegalArgumentException();
+					}
+					FunctionsW.odraft(league, command[1], command[2].trim());
+					break;
 
+				case "idraft":
+					if (command.length < 2) {
+						throw new IllegalArgumentException();
+					}
+					FunctionsW.idraft(league, command[1]);
+					break;
+
+				case "overall":
+					String position = "";
+					if (command.length > 1) {
+						position = command[1];
+					}
+					FunctionsJ.overall(league.players, league.memberA, position);
+					break;
+
+				case "poverall":
+					FunctionsJ.poverall(league.pitchers, league.memberA);
+					break;
+
+				case "team":
+					if (command.length < 2) {
+						throw new IllegalArgumentException();
+					}
+					// Call method
+					break;
+				case "stars":
+					if (command.length < 2) {
+						throw new IllegalArgumentException();
+					}
+					// Call method
+					break;
+				case "save":
+					if (command.length < 2) {
+						throw new IllegalArgumentException();
+					}
+					FunctionsP.save(league);
+					break;
+				case "quit":
+					break;
+				case "restore":
+					if (command.length < 2) {
+						throw new IllegalArgumentException();
+					}
+					FunctionsP.restore();
+					break;
+				case "evalfun":
+					if (command.length < 2) {
+						throw new IllegalArgumentException();
+					}
+					FunctionsJ.evalfun(league.players, command[1]);
+					break;
+				case "pevalfun":
+					if (command.length < 2) {
+						throw new IllegalArgumentException();
+					}
+					FunctionsJ.pevalfun(league.pitchers, command[1]);
+					break;
+				default:
+					System.out.println("ERROR: Command '" + command[0] + "' not recognized.");
+				}
+
+			} while (!"quit".equals(command[0]));
+		} catch (IllegalArgumentException e) {
+			System.out.println("ERROR: Wrong number of arguments provided.");
 		}
 
+		System.out.println("\nGoodbye!");
 	}
 }
