@@ -12,32 +12,61 @@ import models.Pitcher;
 
 public class TestPevalFun {
 	ArrayList<Pitcher> pitchers;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 		pitchers = new ArrayList<>();
-		pitchers.add(new Pitcher("Bob", "Test"));
-		pitchers.add(new Pitcher("Joe", "Test"));
-		pitchers.add(new Pitcher("Jane", "Test"));
-		pitchers.add(new Pitcher("Sue", "Test"));
-	}
-	
-	
-	@Test
-	public void pevalfunSimpleFunction() {
-		FunctionsJ.pevalfun(pitchers, "obp * 2");
-		String[] actual  = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
-		String[] expected = {"Joe", "Sue", "Jane", "Bob" };
-		assertArrayEquals("obp * 2 failed", expected, actual);;
-	}
-	
-	@Test
-	public void pevalfunForTwoVariable() {
-		FunctionsJ.pevalfun(pitchers, "avg * 2 + obp");
-		String[] actual  = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
-		String[] expected = {"Joe", "Bob", "Jane", "Sue" };
-		assertArrayEquals("avg * 2 + obp failed", expected, actual);
+		Pitcher bob = new Pitcher("Bob", "Test");
+		bob.era = 2.35;
+		bob.avg = .85;
+		pitchers.add(bob);
+
+		Pitcher joe = new Pitcher("Joe", "Test");
+		joe.era = 4.5;
+		joe.avg = .65;
+		pitchers.add(joe);
+
+		Pitcher jane = new Pitcher("Jane", "Test");
+		jane.era = 3.2;
+		jane.avg = .79;
+		pitchers.add(jane);
+
+		Pitcher sue = new Pitcher("Sue", "Test");
+		sue.era = 4.4;
+		sue.avg = .9;
+		pitchers.add(sue);
 	}
 
+	@Test
+	public void constantFunction() {
+		FunctionsJ.pevalfun(pitchers, "6");
+		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
+		assertArrayEquals("Constant function failed.", expected, actual);
+	}
+
+	@Test
+	public void simpleFunction() {
+		FunctionsJ.pevalfun(pitchers, "era / 2");
+		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Sue", "Bob", "Jane", "Joe" };
+		assertArrayEquals("Simple function failed", expected, actual);
+	}
+
+	@Test
+	public void twoVariableFunction() {
+		FunctionsJ.pevalfun(pitchers, "era - 1 + avg * 5");
+		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Sue", "Joe", "Jane", "Bob" };
+		assertArrayEquals("Two variable function failed", expected, actual);
+	}
+
+	@Test
+	public void invalidFunction() {
+		FunctionsJ.pevalfun(pitchers, "erg * 10");
+		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
+		assertArrayEquals("Invalid function failed", expected, actual);
+	}
 }
