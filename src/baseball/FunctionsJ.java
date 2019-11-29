@@ -59,6 +59,10 @@ public class FunctionsJ {
 		System.out.println();
 		if (position.isEmpty()) {
 			String[] openPositions = member.team.getOpenPositions();
+			
+			System.out.printf("%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n",
+					"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS", "AVG", "OBP", "SLG", "OPS", "RANK");
+			
 			players.stream().filter(p -> Arrays.stream(openPositions).anyMatch(q -> q.equalsIgnoreCase(p.pos)))
 					.forEach(System.out::println);
 		} else {
@@ -77,6 +81,8 @@ public class FunctionsJ {
 		if (member.team.isPositionFilled("p")) {
 			System.out.println("You have selected all pitchers.");
 		} else {
+			System.out.printf("%-15s %-5s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s%n",
+					"Player", "Team", "W", "L", "ERA", "G", "GS", "SV", "SVO", "IP", "H", "ER", "HR", "BB", "SO", "AVG", "WHIP", "RANK");
 			pitchers.stream().forEach(System.out::println);
 		}
 	}
@@ -270,28 +276,28 @@ public class FunctionsJ {
 	public static void main(String[] args) {
 		ArrayList<Player> players = new ArrayList<>();
 		Player bob = new Player("Bob", "Test", "C");
-		bob.avg = 5.5;
-		bob.obp = 1.5;
+		bob.avg = .5;
+		bob.obp = .5;
 		players.add(bob);
 
 		Player joe = new Player("Joe", "Test", "CF");
-		joe.avg = 5;
-		joe.obp = 5.5;
+		joe.avg = .5;
+		joe.obp = .5;
 		players.add(joe);
 
 		Player jane = new Player("Jane", "Test", "1B");
-		jane.avg = 4.5;
-		jane.obp = 3;
+		jane.avg = .5;
+		jane.obp = .3;
 		players.add(jane);
 
-		Player sue = new Player("Sue", "Test", "SS");
-		sue.avg = 3.5;
-		sue.obp = 4;
+		Player sue = new Player("Goldschmidt, P", "RDX", "SS");
+		sue.avg = .5;
+		sue.obp = .4;
 		players.add(sue);
 
 		ArrayList<Pitcher> pitchers = new ArrayList<>();
-		Pitcher smith = new Pitcher("Bob", "Red Sox");
-		Pitcher tom = new Pitcher("Tom", "Tigers");
+		Pitcher smith = new Pitcher("Bob", "Re");
+		Pitcher tom = new Pitcher("Tom", "TGR");
 		pitchers.add(smith);
 		pitchers.add(tom);
 		
@@ -300,8 +306,7 @@ public class FunctionsJ {
 		// team.cf = joe;
 		team.b1 = jane;
 
-		LeagueMember member = new LeagueMember();
-		member.name = "A";
+		LeagueMember member = new LeagueMember("A");
 		member.team = team;
 
 		String function;
@@ -309,8 +314,9 @@ public class FunctionsJ {
 			System.out.print("Enter function: ");
 			function = scanner.nextLine();
 		}
-		//evalfun(players, function);
-		//overall(players, member, "c");
+		
+		evalfun(players, function);
+		overall(players, member, "");
 		poverall(pitchers, member);
 
 	}
