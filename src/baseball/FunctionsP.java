@@ -1,10 +1,10 @@
 package baseball;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 import models.League;
@@ -100,9 +100,71 @@ public class FunctionsP {
 	}
 	
 	// RESTORE
-	static void restore() {
+	//May need to move RESTORE to main to access the League object
+	static void restore(League temp) {
 	// TODO Auto-generated method stub
-		System.out.println("Not yet implemented");
+		
+		try {
+			
+			Scanner sc = new Scanner(System.in);
+			boolean toggle = false; //toggle for file confirmation
+			String fileName = "Default"; //default value for filename
+			//while loop for file name confirmation
+			while(toggle == false) {
+				System.out.println("Enter file name to restore");
+				
+				System.out.println("example: Season1.txt");
+				fileName = sc.next();
+				
+				System.out.println("You entered: "+fileName+" Is this correct? yes or no");
+				String answer = sc.next();
+				if(answer.equalsIgnoreCase("yes")) {
+					toggle = true;
+				}
+			}
+			
+			Scanner red = new Scanner(new FileReader(fileName));
+			String player;
+			int line = 1;
+			while(red.hasNext()) {
+				
+				player = red.next();
+				if(player.equalsIgnoreCase("null")) {
+					line++;
+				}
+				else {
+					
+					System.out.println();
+					System.out.println("Adding: "+ player);
+					//HERE WE NEED ODRAFT TO ADD THE PLAYER
+					if(line <= 13) {
+						//MemberA
+						FunctionsW.odraft(temp, player, "A");
+					}
+					else if(line <= 26) {
+						//MemberB
+						FunctionsW.odraft(temp, player, "B");
+					}
+					else if(line <= 39) {
+						//MemberC
+						FunctionsW.odraft(temp, player, "C");
+					}
+					else {
+						//MemberD
+						FunctionsW.odraft(temp, player, "D");
+					}
+					line++;
+				}
+			}
+			
+			red.close();
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	
@@ -133,7 +195,7 @@ public class FunctionsP {
 	
 	
 	// TEAM
-		private static void team(LeagueMember alpha) {
+	private static void team(LeagueMember alpha) {
 			// TODO Auto-generated method stub
 
 			Team tm = alpha.team;
@@ -164,8 +226,8 @@ public class FunctionsP {
 			}
 		}
 
-		// STARS
-		private static void stars(LeagueMember beta) {
+	// STARS
+	private static void stars(LeagueMember beta) {
 			// TODO Auto-generated method stub
 //			STARS leagueMember
 //
@@ -208,9 +270,6 @@ public class FunctionsP {
 				}
 			}	
 		}
-	
-	
-	
 	
 	
 	//helper functions
