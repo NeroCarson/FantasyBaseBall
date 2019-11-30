@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import models.League;
-import models.Pitcher;
-import models.Player;
+import models.*;
 
 public class loadData {
 

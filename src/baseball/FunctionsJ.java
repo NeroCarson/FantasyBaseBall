@@ -71,10 +71,7 @@ public class FunctionsJ {
 				System.out.println(
 						"You have already filled the position '" + position + "' or this position does not exist.");
 			} else {
-				System.out.printf(
-						"%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n",
-						"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS",
-						"AVG", "OBP", "SLG", "OPS", "RANK");
+				System.out.printf(Player.getHeaderRow());
 				players.stream().filter(p -> position.equalsIgnoreCase(p.pos)).forEach(System.out::println);
 			}
 		}
@@ -86,10 +83,7 @@ public class FunctionsJ {
 		if (member.team.isPositionFilled("p")) {
 			System.out.println("You have selected all pitchers.");
 		} else {
-			System.out.printf(
-					"%-15s %-5s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s%n",
-					"Player", "Team", "W", "L", "ERA", "G", "GS", "SV", "SVO", "IP", "H", "ER", "HR", "BB", "SO", "AVG",
-					"WHIP", "RANK");
+			System.out.printf(Pitcher.getHeaderRow());
 			pitchers.stream().forEach(System.out::println);
 		}
 	}
