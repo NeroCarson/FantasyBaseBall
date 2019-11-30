@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import models.League;
 import models.LeagueMember;
-import models.Order;
 import models.Pitcher;
 import models.Player;
 import models.Team;
@@ -107,7 +106,7 @@ public class FunctionsP {
 			int line = 1;
 			while(red.hasNext()) {
 				
-				player = red.next();
+				player = red.nextLine();
 				if(player.equalsIgnoreCase("null")) {
 					line++;
 				}
@@ -144,7 +143,6 @@ public class FunctionsP {
 		}
 		
 	}
-	
 	
 	// QUIT
 	static void quit() {
