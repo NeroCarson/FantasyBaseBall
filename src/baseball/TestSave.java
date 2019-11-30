@@ -2,7 +2,10 @@ package baseball;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +15,9 @@ import models.Player;
 
 public class TestSave {
 	ArrayList<Player> players;
+	League testLea = loadData.openFile("stats.csv", "stats_pitcher.csv");
 	@Before
 	public void setUp() throws Exception {
-		League testLea = new League();
 		
 		Player bob = new Player("Bob", "Test", "C");
 		bob.avg = 5.5;
@@ -36,5 +39,38 @@ public class TestSave {
 		sue.obp = 4;
 		testLea.players.add(sue);
 	}
-
+	
+	@Test
+	public void saveTest() {
+		FunctionsW.idraft(testLea, "bob");
+		FunctionsP.save(testLea, "test");
+	}
+	
+	@Test
+	public void saveNullTest() throws FileNotFoundException {
+		FunctionsW.idraft(testLea, "bob");
+		FunctionsW.odraft(testLea, "Arcia, O", "B");
+		
+		FunctionsP.save(testLea, "test");
+		
+		String fileName = "test.fantasy.txt";
+			
+		Scanner red = new Scanner(new FileReader(fileName));
+		
+		assertEquals("Bob", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("null", red.nextLine());
+		assertEquals("Member B placement","Arcia, O", red.nextLine());
+		red.close();
+	}
 }
