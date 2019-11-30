@@ -39,13 +39,13 @@ public class FunctionsP {
 			//save file they'll be written in the order they were picked.
 			
 			//team member A
-			Order[] peeps = assignSort(temp.memberA.team);
+			String[] peeps = assignSort(temp.memberA.team);
 			for(int k=0; k< peeps.length; k++) {
 				if(peeps[k] == null) {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].getTitle());
+					record.println(peeps[k]);
 				}
 			}
 			
@@ -56,7 +56,7 @@ public class FunctionsP {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].getTitle());
+					record.println(peeps[k]);
 				}
 			}
 
@@ -67,7 +67,7 @@ public class FunctionsP {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].getTitle());
+					record.println(peeps[k]);
 				}
 			}
 					
@@ -78,7 +78,7 @@ public class FunctionsP {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].getTitle());
+					record.println(peeps[k]);
 				}
 			}
 			
@@ -142,7 +142,6 @@ public class FunctionsP {
 			e.printStackTrace();
 			System.out.println("Error: File Not Found");
 		}
-		
 		
 	}
 	
@@ -244,10 +243,14 @@ public class FunctionsP {
 	
 	
 	//helper functions
-	public static Order[] assignSort(Team tm) {
+	public static String[] assignSort(Team tm) {
 		
-		Order [] ord = new Order[13];
-
+		String[] ord = new String[13];
+		
+		for(String f: ord) {
+			f = "null";
+		}
+		
 		Player [] p = new Player[8];
 		Pitcher [] pi = new Pitcher[5];
 		//players
@@ -270,14 +273,14 @@ public class FunctionsP {
 			for(int j =0; j< p.length; j++) {
 				if(p[j] != null) {
 					if(p[j].selected == i) {
-						ord[i-1].setTitle(p[j].name);
+						ord[i-1]= p[j].name;
 					}
 				} 
 			}
 			for(int j =0; j< pi.length; j++) {
 				if(pi[j] != null) {
 					if(pi[j].selected == i) {
-						ord[i-1].setTitle(pi[j].name);
+						ord[i-1]= pi[j].name;
 					}
 				}
 				
