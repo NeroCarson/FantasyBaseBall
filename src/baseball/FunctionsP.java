@@ -159,28 +159,40 @@ public class FunctionsP {
 	
 	// TEAM
 	public static void team(LeagueMember alpha) {
+		
+		//players
+		Player[] p = new Player[8];
+		Pitcher[] pi = new Pitcher[5];
 		Team tm = alpha.team;
-		Pitcher[] pitch = new Pitcher[5];
+		
+		//players
+		p[0] = tm.c;
+		p[1] = tm.b1;
+		p[2] = tm.b2;
+		p[3] = tm.b3;
+		p[4] = tm.ss;
+		p[5] = tm.lf;
+		p[6] = tm.cf;
+		p[7] = tm.rf;
 		//pitchers
-		pitch[0] = tm.p1;
-		pitch[1] = tm.p2;
-		pitch[2] = tm.p3;
-		pitch[3] = tm.p4;
-		pitch[4] = tm.p5;
+		pi[0] = tm.p1;
+		pi[1] = tm.p2;
+		pi[2] = tm.p3;
+		pi[3] = tm.p4;
+		pi[4] = tm.p5;
 			
-		System.out.println(alpha.team.c.pos +" "+alpha.team.c.name);
-		System.out.println(alpha.team.b1.pos +" "+alpha.team.b1.name);
-		System.out.println(alpha.team.b2.pos +" "+alpha.team.b2.name);
-		System.out.println(alpha.team.b3.pos +" "+alpha.team.b3.name);
-		System.out.println(alpha.team.ss.pos +" "+alpha.team.ss.name);
-		System.out.println(alpha.team.lf.pos +" "+alpha.team.lf.name);
-		System.out.println(alpha.team.cf.pos +" "+alpha.team.cf.name);
-		System.out.println(alpha.team.rf.pos +" "+alpha.team.rf.name);
+		for(int j =0; j< p.length; j++) {
+			if(p[j] != null) {
+				System.out.println(p[j].pos +" "+ p[j].name);	
+			}
+		}
 		
 		for(int i=1; i< 14; i++) {
-			for(int j =0; j< pitch.length; j++) {
-				if(pitch[j].selected == i) {
-					System.out.println("Pitcher "+ pitch[j].name);
+			for(int j =0; j< pi.length; j++) {
+				if(pi[j] != null) {
+					if(pi[j].selected == i) {
+						System.out.println("Pitcher "+ pi[j].name);
+					}
 				}
 			}
 		}
@@ -213,16 +225,20 @@ public class FunctionsP {
 			
 			for(int i=1; i< 14; i++) {
 				for(int j =0; j< p.length; j++) {
-					if(p[j].selected == i) {
-						System.out.println(p[j].pos +" "+ p[j].name);
+					if(p[j] != null) {
+						if(p[j].selected == i) {
+							System.out.println(p[j].pos +" "+ p[j].name);
+						}
 					}
 				}
 			}
 			
 			for(int i=1; i< 14; i++) {
 				for(int j =0; j< pi.length; j++) {
-					if(p[j].selected == i) {
-						System.out.println("Pitcher "+ pi[j].name);
+					if(pi[j] != null) {
+						if(p[j].selected == i) {
+							System.out.println("Pitcher "+ pi[j].name);
+						}
 					}
 				}
 			}	
