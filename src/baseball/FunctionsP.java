@@ -3,14 +3,12 @@ package baseball;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 import models.League;
 import models.LeagueMember;
 import models.Order;
-import models.Person;
 import models.Pitcher;
 import models.Player;
 import models.Team;
@@ -289,20 +287,4 @@ public class FunctionsP {
 		//return people
 		return ord;	
 	}
-
-	
-	@SuppressWarnings("finally")
-	public static boolean isNull(Object str) {
-		try {
-			if(str != null)
-	            return false;
-		}
-        catch(NullPointerException e){
-        	return true;
-        }
-		finally {
-			return true;
-		}
-       
-    }
 }
