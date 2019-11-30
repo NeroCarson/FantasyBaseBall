@@ -71,17 +71,22 @@ public class Main {
 						if (command.length < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsP.save(league);
-						// FunctionsP.save(league, command[1]);
+						FunctionsP.save(league, command[1]);
 						break;
 					case "quit":
-						break;
+						System.out.println("Would you like to save before quiting: yes or no");
+						String saveAnswer = scanner.next();
+						if(saveAnswer.equalsIgnoreCase("yes")) {
+							break;
+						}
+						else {
+							FunctionsP.quit(league);
+						}
 					case "restore":
 						if (command.length < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsP.restore(league);
-						// FunctionsP.restore(league, command[1]);
+						FunctionsP.restore(league, command[1]);
 						break;
 					case "evalfun":
 						if (command.length < 2) {
