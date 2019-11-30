@@ -7,4 +7,11 @@ import org.junit.Test;
 
 public class TestTeam {
 
+	@Test
+	public void testTeam() {
+		
+		
+		
+	}
+
 }

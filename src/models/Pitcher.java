@@ -23,6 +23,13 @@ public class Pitcher extends Person {
 		this.team = team;
 	}
 
+	public static String getHeaderRow() {
+		return String.format(
+				"%-15s %-5s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-6s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s%n",
+				"Player", "Team", "W", "L", "ERA", "G", "GS", "SV", "SVO", "IP", "H", "ER", "HR", "BB", "SO", "AVG",
+				"WHIP", "RANK");
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("%-15s %-5s %-4d %-4d %-6.2f %-4d %-4d %-4d %-4d %-6.1f %-4d %-4d %-4d %-4d %-4d %-6.3f %-6.3f %-6.3f",

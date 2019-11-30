@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import models.League;
 import models.LeagueMember;
+import models.Order;
 import models.Person;
 import models.Pitcher;
 import models.Player;
@@ -40,13 +41,13 @@ public class FunctionsP {
 			//save file they'll be written in the order they were picked.
 			
 			//team member A
-			Person[] peeps = assignSort(temp.memberA.team);
+			Order[] peeps = assignSort(temp.memberA.team);
 			for(int k=0; k< peeps.length; k++) {
 				if(peeps[k] == null) {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].name);
+					record.println(peeps[k].getTitle());
 				}
 			}
 			
@@ -57,7 +58,7 @@ public class FunctionsP {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].name);
+					record.println(peeps[k].getTitle());
 				}
 			}
 
@@ -68,7 +69,7 @@ public class FunctionsP {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].name);
+					record.println(peeps[k].getTitle());
 				}
 			}
 					
@@ -79,7 +80,7 @@ public class FunctionsP {
 					record.println("null");
 				}
 				else {
-					record.println(peeps[k].name);
+					record.println(peeps[k].getTitle());
 				}
 			}
 			
@@ -149,7 +150,7 @@ public class FunctionsP {
 	
 	
 	// QUIT
-	static void quit(League temp) {
+	static void quit() {
 	// TODO Auto-generated method stub
 	System.out.println("Exiting");
 	System.exit(0);	
@@ -229,87 +230,63 @@ public class FunctionsP {
 	
 	
 	//helper functions
-	public static Person[] assignSort(Team tm) {
+	public static Order[] assignSort(Team tm) {
 		
-		Person [] people = new Person [13];
-		Person big;
-		
+		Order [] ord = new Order[13];
+
+		Player [] p = new Player[8];
+		Pitcher [] pi = new Pitcher[5];
 		//players
-		try {
-			isNull(tm.c.name);
-		}
-		catch(NullPointerException e) {
-			people[0].name = "null";
-		}
-		people[0].name = tm.c.name; 
-		people[0].selected = tm.c.selected;
-		
-		people[1].name = tm.b1.name; 
-		people[1].selected = tm.b1.selected;
-		
-		people[2].name = tm.b2.name; 
-		people[2].selected = tm.b2.selected;
-		
-		people[3].name = tm.b3.name; 
-		people[3].selected = tm.b3.selected;
-		
-		people[4].name = tm.ss.name; 
-		people[4].selected = tm.ss.selected;
-		
-		people[5].name = tm.lf.name; 
-		people[5].selected = tm.lf.selected;
-		
-		people[6].name = tm.cf.name; 
-		people[6].selected = tm.cf.selected;
-		
-		people[7].name = tm.rf.name; 
-		people[7].selected = tm.rf.selected;
-		
+		p[0] = tm.c;
+		p[1] = tm.b1;
+		p[2] = tm.b2;
+		p[3] = tm.b3;
+		p[4] = tm.ss;
+		p[5] = tm.lf;
+		p[6] = tm.cf;
+		p[7] = tm.rf;
 		//pitchers
-		people[8].name = tm.p1.name; 
-		people[8].selected = tm.p1.selected;
+		pi[0] = tm.p1;
+		pi[1] = tm.p2;
+		pi[2] = tm.p3;
+		pi[3] = tm.p4;
+		pi[4] = tm.p5;
 		
-		people[9].name = tm.p2.name; 
-		people[9].selected = tm.p2.selected;
-		
-		people[10].name = tm.p3.name; 
-		people[10].selected = tm.p3.selected;
-		
-		people[11].name = tm.p4.name; 
-		people[11].selected = tm.p4.selected;
-		
-		people[12].name = tm.p5.name; 
-		people[12].selected = tm.p5.selected;
-		
-		//sort people by rank
-		for(int i = 0; i< people.length; i++) {
-			for(int j = 0; j< people.length; j++) {
-				if(people[i].name.equalsIgnoreCase("null")) {
-					big = people[people.length -1];
-					people[i] = big;
-					people[people.length -1] = null;
-				}
-				else {
-					
-					if(people[i].selected > people[j].selected) {
-						big = people[j];
-						people[j] = people[i];
-						people[i] = big;
+		for(int i=1; i< 14; i++) {
+			for(int j =0; j< p.length; j++) {
+				if(p[j] != null) {
+					if(p[j].selected == i) {
+						ord[i-1].setTitle(p[j].name);
+					}
+				} 
+			}
+			for(int j =0; j< pi.length; j++) {
+				if(pi[j] != null) {
+					if(pi[j].selected == i) {
+						ord[i-1].setTitle(pi[j].name);
 					}
 				}
+				
 			}
 		}
+		
 		//return people
-		return people;	
+		return ord;	
 	}
-	public static boolean isNull(String str) {
+
+	
+	@SuppressWarnings("finally")
+	public static boolean isNull(Object str) {
 		try {
-			if(str != null && !str.isEmpty())
+			if(str != null)
 	            return false;
 		}
         catch(NullPointerException e){
         	return true;
         }
-        return true;
+		finally {
+			return true;
+		}
+       
     }
 }

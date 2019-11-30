@@ -1,7 +1,11 @@
 package baseball;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import models.*;
 
 public class Main {
@@ -10,7 +14,7 @@ public class Main {
 
 		League league = loadData.openFile("stats.csv", "stats_pitcher.csv");
 		String input;
-		String[] command = null;
+		ArrayList<String> command = new ArrayList<>();
 
 		try (Scanner scanner = new Scanner(System.in)) {
 
@@ -20,31 +24,37 @@ public class Main {
 
 					System.out.print("Enter command: ");
 					input = scanner.nextLine();
-					command = input.split("(?<!,)[ \"]+");
+					
+					Pattern pattern = Pattern.compile("(\\w+)|\"([^\"]+)\"");
+					Matcher matcher = pattern.matcher(input);
+					command.clear();
+					while (matcher.find()) {
+						command.add(matcher.group().replaceAll("\"", ""));
+					}
 
-					if (command == null || command.length == 0) {
+					if (command.size() == 0) {
 						throw new IllegalArgumentException();
 					}
 
-					switch (command[0].toLowerCase()) {
+					switch (command.get(0).toLowerCase()) {
 					case "odraft":
-						if (command.length < 3) {
+						if (command.size() < 3) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsW.odraft(league, command[1], command[2].trim());
+						FunctionsW.odraft(league, command.get(1), command.get(2));
 						break;
 
 					case "idraft":
-						if (command.length < 2) {
+						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsW.idraft(league, command[1]);
+						FunctionsW.idraft(league, command.get(1));
 						break;
 
 					case "overall":
 						String position = "";
-						if (command.length > 1) {
-							position = command[1];
+						if (command.size() > 1) {
+							position = command.get(1);
 						}
 						FunctionsJ.overall(league.players, league.memberA, position);
 						break;
@@ -54,24 +64,24 @@ public class Main {
 						break;
 
 					case "team":
-						if (command.length < 2) {
+						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						LeagueMember memberTeam = league.getMemberFromName(command[1]);
+						LeagueMember memberTeam = league.getMemberFromName(command.get(1));
 						FunctionsP.team(memberTeam);
 						break;
 					case "stars":
-						if (command.length < 2) {
+						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						LeagueMember memberStars = league.getMemberFromName(command[1]);
+						LeagueMember memberStars = league.getMemberFromName(command.get(1));
 						FunctionsP.team(memberStars);
 						break;
 					case "save":
-						if (command.length < 2) {
+						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsP.save(league, command[1]);
+						FunctionsP.save(league, command.get(1));
 						break;
 					case "quit":
 						System.out.println("Would you like to save before quiting: yes or no");
@@ -80,34 +90,34 @@ public class Main {
 							break;
 						}
 						else {
-							FunctionsP.quit(league);
+							FunctionsP.quit();
 						}
 					case "restore":
-						if (command.length < 2) {
+						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsP.restore(league, command[1]);
+						FunctionsP.restore(league, command.get(1));
 						break;
 					case "evalfun":
-						if (command.length < 2) {
+						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsJ.evalfun(league.players, command[1]);
+						FunctionsJ.evalfun(league.players, command.get(1));
 						break;
 					case "pevalfun":
-						if (command.length < 2) {
+						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsJ.pevalfun(league.pitchers, command[1]);
+						FunctionsJ.pevalfun(league.pitchers, command.get(1));
 						break;
 					default:
-						System.out.println("ERROR: Command '" + command[0] + "' not recognized.");
+						System.out.println("ERROR: Command '" + command.get(0) + "' not recognized.");
 					}
 
 				} catch (IllegalArgumentException e) {
 					System.out.println("ERROR: Wrong number of arguments provided.");
 				}
-			} while (!"quit".equals(command[0]));
+			} while (!"quit".equals(command.get(0)));
 		}
 		System.out.println("\nGoodbye!");
 	}

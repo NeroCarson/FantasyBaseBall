@@ -4,14 +4,12 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import models.League;
-import models.Pitcher;
-import models.Player;
+import models.*;
 
 public class loadData {
 
+	public static String delimeter = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
+	
 	public static League openFile(String fileName1, String fileName2) {
 		// create league
 		League league = new League();
@@ -115,93 +113,93 @@ public class loadData {
 //				return league;
 
 	public static String parseWHIP(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[17];
 	}
 
 	public static String parseAVG_pitcher(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[16];
 	}
 
 	public static String parseSO_pitcher(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[15];
 	}
 
 	public static String parseBB_pitcher(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[14];
 	}
 
 	public static String parseHR_pitcher(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[13];
 	}
 
 	public static String parseER(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[12];
 	}
 
 	public static String parseR_pitcher(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[11];
 	}
 
 	public static String parseH_pitcher(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[10];
 	}
 
 	public static String parseIP(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[9];
 	}
 
 	public static String parseSVO(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[8];
 	}
 
 	public static String parseSV(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[7];
 	}
 
 	public static String parseGS(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[6];
 	}
 
 	public static String parseG_pitcher(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[5];
 	}
 
 	public static String parseERA(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[4];
 	}
 
 	public static String parseLosses(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[3];
 	}
 
 	public static String parseWins(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[2];
 	}
 
 	public static String parseName(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		String name = tokens[0].replace('"', ' ').trim();
 		return name;
 	}
 
 	public static String parseTeam(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[1];
 	}
 
@@ -211,95 +209,95 @@ public class loadData {
 	}
 
 	public static String parseG(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[3];
 
 	}
 
 	public static String parseAB(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[4];
 
 	}
 
 	public static String parseR(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[5];
 
 	}
 
 	public static String parseH(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[6];
 
 	}
 
 	public static String parseB2(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[7];
 
 	}
 
 	public static String parseB3(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[8];
 
 	}
 
 	public static String parseHR(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[9];
 
 	}
 
 	public static String parseRBI(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[10];
 
 	}
 
 	public static String parseBB(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[11];
 
 	}
 
 	public static String parseSO(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[12];
 
 	}
 
 	public static String parseSB(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[13];
 
 	}
 
 	public static String parseCS(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[14];
 
 	}
 
 	public static String parseAVG(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[15];
 
 	}
 
 	public static String parseOBP(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[16];
 	}
 
 	public static String parseSLG(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[17];
 	}
 
 	public static String parseOPS(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[18];
 
 	}

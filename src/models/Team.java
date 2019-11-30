@@ -23,13 +23,13 @@ public class Team {
 		case "c":
 			c = player;
 			return true;
-		case "b1":
+		case "1b":
 			b1 = player;
 			return true;
-		case "b2":
+		case "2b":
 			b2 = player;
 			return true;
-		case "b3":
+		case "3b":
 			b3 = player;
 			return true;
 		case "ss":
