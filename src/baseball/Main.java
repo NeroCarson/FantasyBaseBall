@@ -75,6 +75,7 @@ public class Main {
 							throw new IllegalArgumentException();
 						}
 						LeagueMember memberStars = league.getMemberFromName(command.get(1));
+						FunctionsP.team(memberStars);
 						break;
 					case "save":
 						if (command.size() < 2) {
