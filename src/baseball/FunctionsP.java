@@ -245,7 +245,7 @@ public class FunctionsP {
 		
 		String[] ord = new String[13];
 		
-		for(String f: ord) {
+		for(@SuppressWarnings("unused") String f: ord) {
 			f = "null";
 		}
 		
