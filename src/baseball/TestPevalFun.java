@@ -15,7 +15,6 @@ public class TestPevalFun {
 
 	@Before
 	public void setUp() throws Exception {
-
 		pitchers = new ArrayList<>();
 		Pitcher bob = new Pitcher("Bob", "Test");
 		bob.era = 2.35;

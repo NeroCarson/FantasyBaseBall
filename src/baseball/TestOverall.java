@@ -51,13 +51,10 @@ public class TestOverall {
 		
 		headerRow = String.format("%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n", 
 				"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS", "AVG", "OBP", "SLG", "OPS", "RANK");
-		
 		janeRow = String.format("%-15s %-5s %-4s %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-6.3f %-6.3f %-6.3f %-6.3f %-6.3f", 
 				"Jane", "Test", "B1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, 3.0);
-		
 		sueRow = String.format("%-15s %-5s %-4s %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-6.3f %-6.3f %-6.3f %-6.3f %-6.3f", 
 				"Sue", "Test", "SS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, 4.0);
-	
 	}
 	
 	@Test
@@ -117,5 +114,4 @@ public class TestOverall {
 		String expected = output.toString();
 		assertEquals(expected, actual);
 	}
-	
 }

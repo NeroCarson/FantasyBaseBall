@@ -10,25 +10,36 @@ public class FunctionsJ {
 
 	// RANK NON-PITCHERS BY FUNCTION
 	static void evalfun(ArrayList<Player> players, String[] infix) {
+		System.out.println();
 
+		// CONFIRM PARAMETERS ARE PRESENT
 		if (players == null || players.size() == 0 || infix == null) {
 			System.out.println("ERROR: Invalid parameter. Either no players found or function was empty.");
 			return;
 		}
 
+		// FUNCTION STRING USED FOR PRINTING MESSAGES
 		String function = String.join(" ", infix);
 
 		try {
+
+			// CONFIM FUNCTION IS A VALID FUNCTION
 			if (!isValidFunction(infix)) {
 				throw new IllegalArgumentException();
 			}
+
 			String[] postfix = infixToPostfix(infix);
+
+			// CALCULATE RANK FOR EACH PLAYER
 			for (Player player : players) {
 				String[] replacedStats = convertPlayerStats(player, postfix);
 				player.rank = evaluate(replacedStats);
 			}
+
 			sort(players);
+
 			System.out.println("Players sorted by function: " + function);
+
 		} catch (IllegalArgumentException e) {
 			System.out.println(
 					"ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
@@ -40,24 +51,36 @@ public class FunctionsJ {
 
 	// RANK PITCHERS BY FUNCTION
 	static void pevalfun(ArrayList<Pitcher> pitchers, String[] infix) {
+		System.out.println();
 
+		// CONFIRM PARAMETERS ARE PRESENT
 		if (pitchers == null || pitchers.size() == 0 || infix == null) {
 			System.out.println("ERROR: Invalid parameter. Either no pitchers found or function was empty.");
 			return;
 		}
 
+		// FUNCTION STRING USED FOR PRINTING MESSAGES
 		String function = String.join(" ", infix);
+
 		try {
+
+			// CONFIM FUNCTION IS A VALID FUNCTION
 			if (!isValidFunction(infix)) {
 				throw new IllegalArgumentException();
 			}
+
 			String[] postfix = infixToPostfix(infix);
+
+			// CALCULATE RANK FOR EACH PITCHER
 			for (Pitcher pitcher : pitchers) {
 				String[] replacedStats = convertPitcherStats(pitcher, postfix);
 				pitcher.rank = evaluate(replacedStats);
 			}
+
 			sort(pitchers);
+
 			System.out.println("Players sorted by function: " + function);
+
 		} catch (IllegalArgumentException e) {
 			System.out.println(
 					"ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
@@ -70,27 +93,37 @@ public class FunctionsJ {
 	// PRINT PLAYERS BY RANK
 	static void overall(ArrayList<Player> players, LeagueMember member, String position) {
 		System.out.println();
+
+		// CONFIRM PARAMETERS ARE PRESENT
 		if (players == null || players.size() == 0 || member == null) {
 			System.out.println("ERROR: Invalid parameter. Either no players found or member was not found.");
 			return;
 		}
 
+		// IF NO POSITION PRINT ALL OPEN POSITIONS
 		if (position == null || position.isEmpty()) {
-			String[] openPositions = member.team.getOpenPositions();
 
-			System.out.printf(
-					"%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n",
-					"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS",
-					"AVG", "OBP", "SLG", "OPS", "RANK");
-			players.stream().filter(p -> Arrays.stream(openPositions).anyMatch(q -> q.equalsIgnoreCase(p.pos)))
-					.forEach(System.out::println);
+			// GET LIST OF OPEN POSITIONS
+			String[] openPositions = member.team.getOpenPositions();
+			System.out.printf(Player.getShortHeaderRow());
+
+			// PRINT OUT PLAYERS WHOSE POSITION IS IN THE OPEN POSITIONS ARRAY
+			players.stream().filter(p -> Arrays.stream(openPositions)
+					.anyMatch(q -> q.equalsIgnoreCase(p.pos)))
+					.forEach(p -> System.out.println(p.toShortString()));
+		
+		// IF POSITION PARAMETER IS SUPPLIED
 		} else {
+			
+			// CONFIRM LEAGUE MEMBER HAS NOT FILLED POSITION
 			if (member.team.isPositionFilled(position)) {
-				System.out.println(
-						"You have already filled the position '" + position + "' or this position does not exist.");
+				System.out.println("You have already filled the position '" + position + "' or this position does not exist.");
+			
+			// PRINT ALL PLAYERS FOR THE INDICATED POSITION
 			} else {
-				System.out.printf(Player.getHeaderRow());
-				players.stream().filter(p -> position.equalsIgnoreCase(p.pos)).forEach(System.out::println);
+				System.out.printf(Player.getShortHeaderRow());
+				players.stream().filter(p -> position.equalsIgnoreCase(p.pos))
+					.forEach(p -> System.out.println(p.toShortString()));
 			}
 		}
 	}
@@ -99,16 +132,21 @@ public class FunctionsJ {
 	static void poverall(ArrayList<Pitcher> pitchers, LeagueMember member) {
 
 		System.out.println();
+		
+		// CONFIRM PARAMETERS ARE PRESENT
 		if (pitchers == null || pitchers.size() == 0 || member == null) {
 			System.out.println("ERROR: Invalid parameter. Either no pitchers found or member was not found.");
 			return;
 		}
 
+		// CONFIRM LEAGUE MEMBER HAS NOT FILLED ALL PITCHERS
 		if (member.team.isPositionFilled("p")) {
 			System.out.println("You have selected all pitchers.");
+			
+		// PRINT ALL PITCHERS 
 		} else {
-			System.out.printf(Pitcher.getHeaderRow());
-			pitchers.stream().forEach(System.out::println);
+			System.out.printf(Pitcher.getShortHeaderRow());
+			pitchers.stream().forEach(p -> System.out.println(p.toShortString()));
 		}
 	}
 
@@ -140,7 +178,7 @@ public class FunctionsJ {
 		return postfix;
 	}
 
-	// EVALUATE POST FIX EXPRESSION
+	// EVALUATE POSTFIX EXPRESSION
 	private static double evaluate(String[] postfix) {
 		Stack<String> operands = new Stack<>();
 		double answer = 0;
@@ -179,6 +217,7 @@ public class FunctionsJ {
 		}
 	}
 
+	// CONFIRM THAT EVERY OTHER ELEMENT IS AN OPERATOR
 	private static boolean isValidFunction(String[] function) {
 
 		for (int i = 0; i < function.length; i++) {
@@ -196,6 +235,7 @@ public class FunctionsJ {
 		return true;
 	}
 
+	// CONVERT ALL SUPPLIED STATISTICS TO THE PLAYERS STAT
 	private static String[] convertPlayerStats(Player player, String[] originalFunction)
 			throws IllegalArgumentException {
 
@@ -243,6 +283,7 @@ public class FunctionsJ {
 		return newFunction;
 	}
 
+	// CONVERT ALL SUPPLIED STATISTICS TO PITCHERS STAT
 	private static String[] convertPitcherStats(Pitcher pitcher, String[] originalFunction)
 			throws IllegalArgumentException {
 
