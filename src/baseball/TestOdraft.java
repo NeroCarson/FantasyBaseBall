@@ -15,10 +15,16 @@ import models.Pitcher;
 import models.Player;
 
 public class TestOdraft {
+	ByteArrayOutputStream output;
 
 	ArrayList<Player> players;
+	ArrayList<Pitcher> pitchers;
+	
 	LeagueMember memberA;
-	ByteArrayOutputStream output;
+	LeagueMember memberB;
+	LeagueMember memberC;
+	LeagueMember memberD;
+	
 	
 	League testLeague = loadData.openFile("stats.csv", "stats_pitcher.csv");
 	
@@ -32,17 +38,24 @@ public class TestOdraft {
 		memberA = new LeagueMember("A");
 		memberA.team.ss = player1;
 		players.add(player1);
+		
+		pitchers = new ArrayList<>();
+		
 
 	}
-	
 	// failing???
 
 	@Test
 	public void odraft() {
 		FunctionsW.odraft(testLeague, "Yelich, C", "A");
-		String expected = "You've recruited Yelich, C for the position of RF\n";
-		String actual = output.toString()+"";
+		String expected = "You've recruited Yelich, C for the position of RF";
+		// remove whitespace at end of line
+		String actual = output.toString().replaceAll("[\n\r]", "");
+		
+	
+		
 		assertEquals(expected, actual);
+		
 	}
 
 }
