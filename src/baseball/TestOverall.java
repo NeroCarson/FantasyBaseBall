@@ -18,11 +18,15 @@ import models.Player;
 public class TestOverall {
 	ArrayList<Player> players;
 	LeagueMember memberA;
-	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	ByteArrayOutputStream output;
+	String headerRow;
+	String janeRow;
+	String sueRow;
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setOut(new PrintStream(outContent));
+		output = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(output));
 		
 		players = new ArrayList<>();
 		Player bob = new Player("Bob", "Test", "C");
@@ -33,7 +37,7 @@ public class TestOverall {
 		joe.rank = 2;
 		players.add(joe);
 		
-		Player jane = new Player("Jane", "Test", "1B");
+		Player jane = new Player("Jane", "Test", "B1");
 		jane.rank = 3;
 		players.add(jane);
 		
@@ -44,14 +48,70 @@ public class TestOverall {
 		memberA = new LeagueMember("A");
 		memberA.team.c = bob;
 		memberA.team.cf = joe;
-	
+		
+		headerRow = String.format("%-15s %-5s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-4s %-6s %-6s %-6s %-6s %-6s%n", 
+				"Player", "Team", "Pos", "G", "AB", "R", "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS", "AVG", "OBP", "SLG", "OPS", "RANK");
+		janeRow = String.format("%-15s %-5s %-4s %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-6.3f %-6.3f %-6.3f %-6.3f %-6.3f", 
+				"Jane", "Test", "B1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, 3.0);
+		sueRow = String.format("%-15s %-5s %-4s %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-4d %-6.3f %-6.3f %-6.3f %-6.3f %-6.3f", 
+				"Sue", "Test", "SS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, 4.0);
 	}
 	
 	@Test
-	public void OverallPrint() {
+	public void printAll() {
 		FunctionsJ.overall(players, memberA, "");
-		String expected = "Bob Test C 1\nJoe Test P 2\nJane Test 1B 3\nSue Test SS \n";
-		String actual = outContent.toString();
+		
+		String actual = output.toString();
+		String expected = String.format("%n%s%s%n%s%n", headerRow, janeRow, sueRow);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void PrintFirstOnePosition() {
+		FunctionsJ.overall(players, memberA, "B1");
+		String actual = output.toString();
+		String expected = String.format("%n%s%s%n", headerRow, janeRow);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void PrintFilledPosition() {
+		FunctionsJ.overall(players, memberA, "C");
+		String actual = output.toString();		
+		output.reset();
+		System.out.println();
+		System.out.println("You have already filled the position 'C' or this position does not exist.");
+		String expected = output.toString();
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void PrintNullPosition() {
+		FunctionsJ.overall(players, memberA, null);
+		String actual = output.toString();
+		String expected = String.format("%n%s%s%n%s%n", headerRow, janeRow, sueRow);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void PrintNullPlayers() {
+		FunctionsJ.overall(null, memberA, "");
+		String actual = output.toString();
+		output.reset();
+		System.out.println();
+		System.out.println("ERROR: Invalid parameter. Either no players found or member was not found.");
+		String expected = output.toString();
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void PrintNullMember() {
+		FunctionsJ.overall(players, null, "");
+		String actual = output.toString();
+		output.reset();
+		System.out.println();
+		System.out.println("ERROR: Invalid parameter. Either no players found or member was not found.");
+		String expected = output.toString();
 		assertEquals(expected, actual);
 	}
 }

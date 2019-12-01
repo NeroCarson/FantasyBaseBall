@@ -25,7 +25,7 @@ public class Main {
 					System.out.print("Enter command: ");
 					input = scanner.nextLine();
 					
-					Pattern pattern = Pattern.compile("(\\w+)|\"([^\"]+)\"");
+					Pattern pattern = Pattern.compile("([\\w+\\-*\\/]+)|\"([^\"]+)\"");
 					Matcher matcher = pattern.matcher(input);
 					command.clear();
 					while (matcher.find()) {
@@ -75,7 +75,7 @@ public class Main {
 							throw new IllegalArgumentException();
 						}
 						LeagueMember memberStars = league.getMemberFromName(command.get(1));
-						FunctionsP.team(memberStars);
+						FunctionsP.stars(memberStars);
 						break;
 					case "save":
 						if (command.size() < 2) {
@@ -102,13 +102,15 @@ public class Main {
 						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsJ.evalfun(league.players, command.get(1));
+						String[] evalFunction = command.stream().skip(1).toArray(String[]::new);
+						FunctionsJ.evalfun(league.players, evalFunction);
 						break;
 					case "pevalfun":
 						if (command.size() < 2) {
 							throw new IllegalArgumentException();
 						}
-						FunctionsJ.pevalfun(league.pitchers, command.get(1));
+						String[] pevalFunction = command.stream().skip(1).toArray(String[]::new);
+						FunctionsJ.pevalfun(league.pitchers, pevalFunction);
 						break;
 					default:
 						System.out.println("ERROR: Command '" + command.get(0) + "' not recognized.");

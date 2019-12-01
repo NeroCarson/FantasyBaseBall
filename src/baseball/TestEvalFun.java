@@ -34,10 +34,10 @@ public class TestEvalFun {
 		sue.obp = 4;
 		players.add(sue);
 	}
-	
+
 	@Test
 	public void constantFunction() {
-		FunctionsJ.evalfun(players, "2");		
+		FunctionsJ.evalfun(players, new String[] { "2" });
 		String[] actual = players.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
 		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
 		assertArrayEquals("Constant function failed", expected, actual);
@@ -45,7 +45,7 @@ public class TestEvalFun {
 
 	@Test
 	public void simpleFunction() {
-		FunctionsJ.evalfun(players, "obp * 2");		
+		FunctionsJ.evalfun(players, new String[] { "obp", "*", "2" });
 		String[] actual = players.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
 		String[] expected = { "Joe", "Sue", "Jane", "Bob" };
 		assertArrayEquals("Simple function failed", expected, actual);
@@ -53,21 +53,37 @@ public class TestEvalFun {
 
 	@Test
 	public void twoVariableFunction() {
-		FunctionsJ.evalfun(players, "avg * 2 / 3 + obp");
+		FunctionsJ.evalfun(players, new String[] { "avg", "*", "2", "/", "3", "+", "obp" });
 		String[] actual = players.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
 		String[] expected = { "Joe", "Sue", "Jane", "Bob" };
 		assertArrayEquals("Two variable function failed", expected, actual);
 	}
-	
-	
+
 	// Expect no change in order
 	@Test
 	public void invalidFunction() {
-		FunctionsJ.evalfun(players, "avg * 2 / +");
+		FunctionsJ.evalfun(players, new String[] { "avg", "*", "2", "/", "+" });
 		String[] actual = players.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
 		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
 		assertArrayEquals("Invalid function failed", expected, actual);
 	}
 	
+	// Expect no change in order
+	@Test
+	public void nullPlayers() {
+		FunctionsJ.evalfun(null, new String[] { "avg", "*", "2", "/", "+" });
+		String[] actual = players.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
+		assertArrayEquals("Invalid function failed", expected, actual);
+	}
 	
+	// Expect no change in order
+	@Test
+	public void nullFunction() {
+		FunctionsJ.evalfun(players, null);
+		String[] actual = players.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
+		assertArrayEquals("Invalid function failed", expected, actual);
+	}
+
 }

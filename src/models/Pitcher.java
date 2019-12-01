@@ -22,6 +22,14 @@ public class Pitcher extends Person {
 		this.name = name;
 		this.team = team;
 	}
+	
+	public static String getShortHeaderRow() {
+		return String.format("%-15s %-5s %-4s %-6s%n", "Player", "Team", "Pos", "RANK");
+	}
+	
+	public String toShortString() {
+		return String.format("%-15s %-5s %-4s %-6.3f", name, team, "P", rank);
+	}
 
 	public static String getHeaderRow() {
 		return String.format(
