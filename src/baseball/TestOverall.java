@@ -18,11 +18,12 @@ import models.Player;
 public class TestOverall {
 	ArrayList<Player> players;
 	LeagueMember memberA;
-	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	ByteArrayOutputStream output;
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setOut(new PrintStream(outContent));
+		output = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(output));
 		
 		players = new ArrayList<>();
 		Player bob = new Player("Bob", "Test", "C");
@@ -51,7 +52,7 @@ public class TestOverall {
 	public void OverallPrint() {
 		FunctionsJ.overall(players, memberA, "");
 		String expected = "Bob Test C 1\nJoe Test P 2\nJane Test 1B 3\nSue Test SS \n";
-		String actual = outContent.toString();
+		String actual = output.toString();
 		assertEquals(expected, actual);
 	}
 }
