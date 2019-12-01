@@ -40,7 +40,7 @@ public class TestPevalFun {
 
 	@Test
 	public void constantFunction() {
-		FunctionsJ.pevalfun(pitchers, "6");
+		FunctionsJ.pevalfun(pitchers, new String[] { "6" });
 		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
 		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
 		assertArrayEquals("Constant function failed.", expected, actual);
@@ -48,15 +48,15 @@ public class TestPevalFun {
 
 	@Test
 	public void simpleFunction() {
-		FunctionsJ.pevalfun(pitchers, "era / 2");
+		FunctionsJ.pevalfun(pitchers, new String[] { "era", "/", "2" });
 		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
-		String[] expected = { "Sue", "Bob", "Jane", "Joe" };
+		String[] expected = { "Joe", "Sue", "Jane", "Bob" };
 		assertArrayEquals("Simple function failed", expected, actual);
 	}
 
 	@Test
 	public void twoVariableFunction() {
-		FunctionsJ.pevalfun(pitchers, "era - 1 + avg * 5");
+		FunctionsJ.pevalfun(pitchers, new String[] { "era", "-", "1", "+", "avg", "*", "5" });
 		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
 		String[] expected = { "Sue", "Joe", "Jane", "Bob" };
 		assertArrayEquals("Two variable function failed", expected, actual);
@@ -64,7 +64,23 @@ public class TestPevalFun {
 
 	@Test
 	public void invalidFunction() {
-		FunctionsJ.pevalfun(pitchers, "erg * 10");
+		FunctionsJ.pevalfun(pitchers, new String[] { "erg", "*", "10" });
+		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
+		assertArrayEquals("Invalid function failed", expected, actual);
+	}
+	
+	@Test
+	public void nullPitchers() {
+		FunctionsJ.pevalfun(null, new String[] { "erg", "*", "10" });
+		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
+		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
+		assertArrayEquals("Invalid function failed", expected, actual);
+	}
+	
+	@Test
+	public void nullFunction() {
+		FunctionsJ.pevalfun(pitchers, null);
 		String[] actual = pitchers.stream().map(p -> p.name).collect(Collectors.toList()).toArray(new String[0]);
 		String[] expected = { "Bob", "Joe", "Jane", "Sue" };
 		assertArrayEquals("Invalid function failed", expected, actual);

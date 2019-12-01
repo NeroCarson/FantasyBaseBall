@@ -9,10 +9,16 @@ import models.*;
 public class FunctionsJ {
 
 	// RANK NON-PITCHERS BY FUNCTION
-	static void evalfun(ArrayList<Player> players, String function) {
+	static void evalfun(ArrayList<Player> players, String[] infix) {
+
+		if (players == null || players.size() == 0 || infix == null) {
+			System.out.println("ERROR: Invalid parameter. Either no players found or function was empty.");
+			return;
+		}
+
+		String function = String.join(" ", infix);
 
 		try {
-			String[] infix = function.split("\\s");
 			if (!isValidFunction(infix)) {
 				throw new IllegalArgumentException();
 			}
@@ -24,18 +30,24 @@ public class FunctionsJ {
 			sort(players);
 			System.out.println("Players sorted by function: " + function);
 		} catch (IllegalArgumentException e) {
-			System.out.println("ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
-					+ "Either a statistic is not supported or the function is invalid.\n"
-					+ "Double check that a space separates each element.\n"
-					+ "Supported statistics include: g, rbi, sb, cs, avg, obp.");
+			System.out.println(
+					"ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
+							+ "Either a statistic is not supported or the function is invalid.\n"
+							+ "Double check that a space separates each element.\n"
+							+ "Supported statistics include: g, rbi, sb, cs, avg, obp.");
 		}
 	}
 
 	// RANK PITCHERS BY FUNCTION
-	static void pevalfun(ArrayList<Pitcher> pitchers, String function) {
+	static void pevalfun(ArrayList<Pitcher> pitchers, String[] infix) {
 
+		if (pitchers == null || pitchers.size() == 0 || infix == null) {
+			System.out.println("ERROR: Invalid parameter. Either no pitchers found or function was empty.");
+			return;
+		}
+
+		String function = String.join(" ", infix);
 		try {
-			String[] infix = function.split("\\s");
 			if (!isValidFunction(infix)) {
 				throw new IllegalArgumentException();
 			}
@@ -47,17 +59,23 @@ public class FunctionsJ {
 			sort(pitchers);
 			System.out.println("Players sorted by function: " + function);
 		} catch (IllegalArgumentException e) {
-			System.out.println("ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
-					+ "Either a statistic is not supported or the function is invalid.\n"
-					+ "Double check that a space separates each element.\n"
-					+ "Supported statistics include: w, l, era, er, avg, whip.");
+			System.out.println(
+					"ERROR: Invalid function '" + function + "'.\nThe supplied function could not be applied.\n"
+							+ "Either a statistic is not supported or the function is invalid.\n"
+							+ "Double check that a space separates each element.\n"
+							+ "Supported statistics include: w, l, era, er, avg, whip.");
 		}
 	}
 
 	// PRINT PLAYERS BY RANK
 	static void overall(ArrayList<Player> players, LeagueMember member, String position) {
 		System.out.println();
-		if (position.isEmpty()) {
+		if (players == null || players.size() == 0 || member == null) {
+			System.out.println("ERROR: Invalid parameter. Either no players found or member was not found.");
+			return;
+		}
+
+		if (position == null || position.isEmpty()) {
 			String[] openPositions = member.team.getOpenPositions();
 
 			System.out.printf(
@@ -79,7 +97,13 @@ public class FunctionsJ {
 
 	// PRINT PITCHERS BY RANK
 	static void poverall(ArrayList<Pitcher> pitchers, LeagueMember member) {
+
 		System.out.println();
+		if (pitchers == null || pitchers.size() == 0 || member == null) {
+			System.out.println("ERROR: Invalid parameter. Either no pitchers found or member was not found.");
+			return;
+		}
+
 		if (member.team.isPositionFilled("p")) {
 			System.out.println("You have selected all pitchers.");
 		} else {
@@ -154,9 +178,9 @@ public class FunctionsJ {
 			return 0;
 		}
 	}
-	
+
 	private static boolean isValidFunction(String[] function) {
-		
+
 		for (int i = 0; i < function.length; i++) {
 			if (isOperator(function[i])) {
 				if (i % 2 == 0) {
@@ -168,7 +192,7 @@ public class FunctionsJ {
 				}
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -181,12 +205,12 @@ public class FunctionsJ {
 			if (originalFunction[i] == null) {
 				throw new IllegalArgumentException();
 			}
-			
+
 			if (isOperator(originalFunction[i])) {
 				newFunction[i] = originalFunction[i];
 				continue;
 			}
-			
+
 			try {
 				Double.parseDouble(originalFunction[i]);
 				newFunction[i] = originalFunction[i];
@@ -221,14 +245,14 @@ public class FunctionsJ {
 
 	private static String[] convertPitcherStats(Pitcher pitcher, String[] originalFunction)
 			throws IllegalArgumentException {
-		
+
 		String[] newFunction = new String[originalFunction.length];
-		
+
 		for (int i = 0; i < originalFunction.length; i++) {
 			if (originalFunction[i] == null) {
 				throw new IllegalArgumentException();
 			}
-			
+
 			if (isOperator(originalFunction[i])) {
 				newFunction[i] = originalFunction[i];
 				continue;
