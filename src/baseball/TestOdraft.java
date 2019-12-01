@@ -50,6 +50,12 @@ public class TestOdraft {
 		players.add(player4);
 
 		pitchers = new ArrayList<>();
+		Pitcher pitcher1 = new Pitcher("Ryu, H", "LAD");
+		memberA.team.p1 = pitcher1;
+		pitchers.add(pitcher1);
+		Pitcher pitcher2 = new Pitcher("DeGrom, J", "NYM");
+		memberB.team.p1 = pitcher2;
+		pitchers.add(pitcher2);				
 	}
 
 	@Test
@@ -73,6 +79,16 @@ public class TestOdraft {
 		String actual_player4 = output.toString().replaceAll("[\n\r]", "");
 		String expected_player4 = "You've recruited Rendon, A for the position of 3B";
 		assertEquals(expected_player4, actual_player4);
+		output.reset();
+		FunctionsW.odraft(testLeague, "Ryu, H", "A");
+		String actual_pitcher1 = output.toString().replaceAll("[\n\r]", "");
+		String expected_pitcher1 = "You've recruited Ryu, H for the position of pitcher";
+		assertEquals(expected_pitcher1,actual_pitcher1);
+		output.reset();
+		FunctionsW.odraft(testLeague, "DeGrom, J", "B");
+		String actual_pitcher2 = output.toString().replaceAll("[\n\r]", "");
+		String expected_pitcher2 = "You've recruited DeGrom, J for the position of pitcher";
+		assertEquals(expected_pitcher2,actual_pitcher2);
 
 	}
 
