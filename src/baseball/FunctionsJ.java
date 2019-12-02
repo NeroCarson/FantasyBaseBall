@@ -110,6 +110,7 @@ public class FunctionsJ {
 			// PRINT OUT PLAYERS WHOSE POSITION IS IN THE OPEN POSITIONS ARRAY
 			players.stream().filter(p -> Arrays.stream(openPositions)
 					.anyMatch(q -> q.equalsIgnoreCase(p.pos)))
+					.filter(p -> p.selected == 0)
 					.forEach(p -> System.out.println(p.toShortString()));
 		
 		// IF POSITION PARAMETER IS SUPPLIED
@@ -146,7 +147,9 @@ public class FunctionsJ {
 		// PRINT ALL PITCHERS 
 		} else {
 			System.out.printf(Pitcher.getShortHeaderRow());
-			pitchers.stream().forEach(p -> System.out.println(p.toShortString()));
+			pitchers.stream()
+				.filter(p -> p.selected == 0)
+				.forEach(p -> System.out.println(p.toShortString()));
 		}
 	}
 
