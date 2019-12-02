@@ -5,7 +5,6 @@ import models.*;
 public class FunctionsW {
 
 	public static void odraft(League league, String playerName, String memberName) {
-
 		LeagueMember member;
 		Person person;
 
