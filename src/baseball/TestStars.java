@@ -52,18 +52,18 @@ public class TestStars {
 		assertEquals("", actual);
 	}
 	
-//	@Test
-//	public void starsOnePlayer() {
-//		
-//		FunctionsW.idraft(testLea, "Arcia");
-//	
-//		FunctionsP.stars(testLea.memberA);
-//		
-//		String exp = "You've recruited Arcia, O for the position of SS\nSS Arcia, O";
-//				
-//		
-//		
-//	    assertEquals(exp, outContent.toString());
-//	}
+	@Test
+	public void starsOnePlayer() {
+		
+		FunctionsW.idraft(testLea, "Arcia");
+	
+		FunctionsP.stars(testLea.memberA);
+		
+		String exp = "You've recruited Arcia, O for the position of SS\nSS Arcia, O\n";
+				
+		
+		
+	    assertEquals(exp, outContent.toString());
+	}
 	
 }
