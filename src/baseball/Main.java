@@ -25,7 +25,7 @@ public class Main {
 					System.out.print("Enter command: ");
 					input = scanner.nextLine();
 					
-					Pattern pattern = Pattern.compile("([\\w+\\-*\\/]+)|\"([^\"]+)\"");
+					Pattern pattern = Pattern.compile("([\\w+\\-*\\/\\.]+)|\"([^\"]+)\"");
 					Matcher matcher = pattern.matcher(input);
 					command.clear();
 					while (matcher.find()) {
