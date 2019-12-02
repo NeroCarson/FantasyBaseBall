@@ -19,8 +19,6 @@ public class TestTeam {
 	ByteArrayOutputStream output;	
 	Team testTeam = new Team();
 	LeagueMember testLeagueMember = new LeagueMember("a");
-	League testLeague = loadData.openFile("stats.csv", "stats_pitcher.csv");
-	
 
 	@Before
 	public void setUp() {
@@ -36,6 +34,7 @@ public class TestTeam {
 		testTeam.lf = new Player("McNeil, J","NYM","LF");
 		testTeam.cf = new Player("Marte, S","PIT","CF");
 		testTeam.rf = new Player("Betts, M","BOS","RF");
+		// test does not read in pitchers!
 		testTeam.p1 = new Pitcher("Ryu, H", "LAD");
 		testTeam.p2 = new Pitcher("DeGrom, J", "NYM");
 		testTeam.p3 = new Pitcher("Cole, G", "HOU");
@@ -43,13 +42,10 @@ public class TestTeam {
 		testTeam.p5 = new Pitcher("Soroka, M","ATL");
 		//add team to league
 		testLeagueMember.team = testTeam;
-		
-		
 	}
 
 	@Test
 	public void testTeam() {
-		
 		FunctionsP.team(testLeagueMember);
 		String actual = output.toString().replaceAll("[\n\r]", "");
 		String expected = "";
