@@ -10,7 +10,6 @@ import org.junit.runners.*;
 	TestOdraft.class,
 	TestOverall.class,
 	TestPoverall.class,
-	TestQuit.class,
 	TestRestore.class,
 	TestSave.class,
 	TestStars.class,

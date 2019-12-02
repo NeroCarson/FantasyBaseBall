@@ -144,13 +144,6 @@ public class FunctionsP {
 		
 	}
 	
-	// QUIT
-	static void quit() {
-	// TODO Auto-generated method stub
-	System.out.println("Exiting");
-	System.exit(0);	
-	}
-	
 	
 	// TEAM
 	public static void team(LeagueMember alpha) {
