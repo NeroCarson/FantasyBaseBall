@@ -204,7 +204,7 @@ public class loadData {
 	}
 
 	public static String parsePOS(String line) {
-		String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+		String[] tokens = line.split(delimeter);
 		return tokens[2];
 	}
 
@@ -231,7 +231,7 @@ public class loadData {
 		return tokens[6];
 
 	}
-
+	
 	public static String parseB2(String line) {
 		String[] tokens = line.split(delimeter);
 		return tokens[7];
