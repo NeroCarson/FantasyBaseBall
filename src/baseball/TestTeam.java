@@ -50,13 +50,15 @@ public class TestTeam {
 		FunctionsP.team(testLea.memberA);
 		// replaceAll("[\n\r]", "")
 		
-		String exp1 = "You've recruited Arcia, O for the position of SS\n" + 
-				"You've recruited Lopez, R for the position of pitcher\n" + 
-				"SS Arcia, O\n" + 
-				"Pitcher Lopez, R\n";
+		String actual = outContent.toString();
+		outContent.reset();
+		System.out.println("You've recruited Arcia, O for the position of SS");
+		System.out.println("You've recruited Lopez, R for the position of pitcher");
+		System.out.println("SS Arcia, O");
+		System.out.println("Pitcher Lopez, R");
+		String expected = outContent.toString();
 		
-		assertEquals(exp1, outContent.toString());
-
+		assertEquals(expected, actual);
 	}
 
 }

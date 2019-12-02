@@ -56,12 +56,15 @@ public class TestStars {
 	public void starsOnePlayer() {
 		
 		FunctionsW.idraft(testLea, "Arcia");
-	
 		FunctionsP.stars(testLea.memberA);
-		
-		String exp = "You've recruited Arcia, O for the position of SS\nSS Arcia, O\n";
-		
-	    assertEquals(exp, outContent.toString());
+
+		String actual = outContent.toString();
+		outContent.reset();
+		System.out.println("You've recruited Arcia, O for the position of SS");
+		System.out.println("SS Arcia, O");
+		String expected = outContent.toString();
+				
+	    assertEquals(expected, actual);
 	}
 	
 }
