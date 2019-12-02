@@ -24,8 +24,6 @@ public class TestTeam {
 	public void setUp() {
 		output = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(output));
-
-		// populate team
 		testTeam.c = new Player("Ramos, W", "NYM", "C");
 		testTeam.b1 = new Player("Gurriel, Y","HOU","1B");
 		testTeam.b2 = new Player("Altuve, J","HOU","2B");
@@ -40,14 +38,16 @@ public class TestTeam {
 		testTeam.p3 = new Pitcher("Cole, G", "HOU");
 		testTeam.p4 = new Pitcher("Verlander, J", "HOU");
 		testTeam.p5 = new Pitcher("Soroka, M","ATL");
-		//add team to league
+
+		
 		testLeagueMember.team = testTeam;
 	}
 
 	@Test
 	public void testTeam() {
 		FunctionsP.team(testLeagueMember);
-		String actual = output.toString().replaceAll("[\n\r]", "");
+		// replaceAll("[\n\r]", "")
+		String actual = output.toString();
 		String expected = "";
 		
 		assertEquals(expected, actual);
