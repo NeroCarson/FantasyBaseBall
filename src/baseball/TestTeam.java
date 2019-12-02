@@ -16,7 +16,9 @@ import models.Player;
 import models.Team;
 
 public class TestTeam {
-	ByteArrayOutputStream output;	
+	
+	
+	ByteArrayOutputStream output;
 	Team testTeam = new Team();
 	LeagueMember testLeagueMember = new LeagueMember("a");
 
@@ -25,21 +27,20 @@ public class TestTeam {
 		output = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(output));
 		testTeam.c = new Player("Ramos, W", "NYM", "C");
-		testTeam.b1 = new Player("Gurriel, Y","HOU","1B");
-		testTeam.b2 = new Player("Altuve, J","HOU","2B");
-		testTeam.b3 = new Player("Bregman, A","HOU","3B");
-		testTeam.ss = new Player("Polanco, J","MIN","SS");
-		testTeam.lf = new Player("McNeil, J","NYM","LF");
-		testTeam.cf = new Player("Marte, S","PIT","CF");
-		testTeam.rf = new Player("Betts, M","BOS","RF");
-		// test does not read in pitchers!
+		testTeam.b1 = new Player("Gurriel, Y", "HOU", "1B");
+		testTeam.b2 = new Player("Altuve, J", "HOU", "2B");
+		testTeam.b3 = new Player("Bregman, A", "HOU", "3B");
+		testTeam.ss = new Player("Polanco, J", "MIN", "SS");
+		testTeam.lf = new Player("McNeil, J", "NYM", "LF");
+		testTeam.cf = new Player("Marte, S", "PIT", "CF");
+		testTeam.rf = new Player("Betts, M", "BOS", "RF");
+		// test does not read in pitchers!??
 		testTeam.p1 = new Pitcher("Ryu, H", "LAD");
 		testTeam.p2 = new Pitcher("DeGrom, J", "NYM");
 		testTeam.p3 = new Pitcher("Cole, G", "HOU");
 		testTeam.p4 = new Pitcher("Verlander, J", "HOU");
-		testTeam.p5 = new Pitcher("Soroka, M","ATL");
+		testTeam.p5 = new Pitcher("Soroka, M", "ATL");
 
-		
 		testLeagueMember.team = testTeam;
 	}
 
@@ -49,9 +50,8 @@ public class TestTeam {
 		// replaceAll("[\n\r]", "")
 		String actual = output.toString();
 		String expected = "";
-		
-		assertEquals(expected, actual);
 
+		assertEquals(expected, actual);
 	}
 
 }

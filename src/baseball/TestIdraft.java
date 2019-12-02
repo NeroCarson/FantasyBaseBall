@@ -36,8 +36,8 @@ public class TestIdraft {
 		players.add(player4);
 		pitchers = new ArrayList<>();
 		Pitcher pitcher1 = new Pitcher("Ryu, H", "LAD");
-		pitchers.add(pitcher1);
 		Pitcher pitcher2 = new Pitcher("DeGrom, J", "NYM");
+		pitchers.add(pitcher1);
 		pitchers.add(pitcher2);
 	}
 
