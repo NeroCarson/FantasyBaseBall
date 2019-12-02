@@ -88,7 +88,7 @@ public class FunctionsP {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error: No File Found");
+			System.out.println("Error: Could Not Create File");
 		}
 	}
 	
@@ -142,13 +142,6 @@ public class FunctionsP {
 			System.out.println("Error: File Not Found");
 		}
 		
-	}
-	
-	// QUIT
-	static void quit() {
-	// TODO Auto-generated method stub
-	System.out.println("Exiting");
-	System.exit(0);	
 	}
 	
 	

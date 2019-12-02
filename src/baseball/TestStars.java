@@ -60,8 +60,6 @@ public class TestStars {
 		FunctionsP.stars(testLea.memberA);
 		
 		String exp = "You've recruited Arcia, O for the position of SS\nSS Arcia, O\n";
-				
-		
 		
 	    assertEquals(exp, outContent.toString());
 	}

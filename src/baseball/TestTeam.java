@@ -6,12 +6,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import models.League;
 import models.LeagueMember;
-import models.Pitcher;
 import models.Player;
 import models.Team;
 
@@ -22,36 +22,41 @@ public class TestTeam {
 	Team testTeam = new Team();
 	LeagueMember testLeagueMember = new LeagueMember("a");
 
-	@Before
-	public void setUp() {
-		output = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(output));
-		testTeam.c = new Player("Ramos, W", "NYM", "C");
-		testTeam.b1 = new Player("Gurriel, Y", "HOU", "1B");
-		testTeam.b2 = new Player("Altuve, J", "HOU", "2B");
-		testTeam.b3 = new Player("Bregman, A", "HOU", "3B");
-		testTeam.ss = new Player("Polanco, J", "MIN", "SS");
-		testTeam.lf = new Player("McNeil, J", "NYM", "LF");
-		testTeam.cf = new Player("Marte, S", "PIT", "CF");
-		testTeam.rf = new Player("Betts, M", "BOS", "RF");
-		// test does not read in pitchers!??
-		testTeam.p1 = new Pitcher("Ryu, H", "LAD");
-		testTeam.p2 = new Pitcher("DeGrom, J", "NYM");
-		testTeam.p3 = new Pitcher("Cole, G", "HOU");
-		testTeam.p4 = new Pitcher("Verlander, J", "HOU");
-		testTeam.p5 = new Pitcher("Soroka, M", "ATL");
+	ArrayList<Player> players;
+	League testLea = loadData.openFile("stats.csv", "stats_pitcher.csv");
+	League testComp = loadData.openFile("stats.csv", "stats_pitcher.csv");
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+	private final PrintStream originalOut = System.out;
+	private final PrintStream originalErr = System.err;
 
-		testLeagueMember.team = testTeam;
+	@Before
+	public void setUpStreams() {
+		
+	    System.setOut(new PrintStream(outContent));
+	    System.setErr(new PrintStream(errContent));
+	}
+
+	@After
+	public void restoreStreams() {
+	    System.setOut(originalOut);
+	    System.setErr(originalErr);
 	}
 
 	@Test
 	public void testTeam() {
-		FunctionsP.team(testLeagueMember);
+		FunctionsW.idraft(testLea, "Arcia");
+		FunctionsW.idraft(testLea, "Lopez");
+		FunctionsP.team(testLea.memberA);
 		// replaceAll("[\n\r]", "")
-		String actual = output.toString();
-		String expected = "";
+		
+		String exp1 = "You've recruited Arcia, O for the position of SS\n" + 
+				"You've recruited Lopez, R for the position of pitcher\n" + 
+				"SS Arcia, O\n" + 
+				"Pitcher Lopez, R\n";
+		
+		assertEquals(exp1, outContent.toString());
 
-		assertEquals(expected, actual);
 	}
 
 }

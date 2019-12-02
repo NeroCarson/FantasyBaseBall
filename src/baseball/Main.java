@@ -90,7 +90,8 @@ public class Main {
 							break;
 						}
 						else {
-							FunctionsP.quit();
+							System.out.println("Exiting");
+							System.exit(0);	
 						}
 					case "restore":
 						if (command.size() < 2) {
